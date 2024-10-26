@@ -1,0 +1,23 @@
+.c-rating>label:before {
+    margin: 0 2px;
+    font-size: 16px;
+    font-family: FontAwesome;
+    content: "\f005";
+    display: inline-block;
+}
+
+.clearfix::after {
+    display: block;
+    clear: both;
+    content: "";
+}
+
+.c-rating>label {
+    color: #d9dbdc;
+    float: right;
+    margin-bottom: 0;
+}
+
+.reviewStar{
+    color:rgb(231, 131, 0);
+}

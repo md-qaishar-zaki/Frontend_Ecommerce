@@ -1,0 +1,14 @@
+{
+    "image1": {
+        "name": "Image 1",
+        "src": "../Img/1.jpg"
+    },
+    "image2": {
+        "name": "Image 2",
+        "src": "../Img/2.jpg"
+    },
+    "image3": {
+        "name": "Image 3",
+        "src": "../Img/3.jpg"
+    }
+}

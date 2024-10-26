@@ -1,0 +1,141 @@
+/* Main Header Styles */
+.header {
+	background: #ffffffb5;
+    box-shadow: 0px 5px 10px rgba(91, 91, 91, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(20px);
+    border-bottom: 2px solid #5f8b7fdb;
+}
+
+.header__logo {
+	padding: 20px 0;
+}
+
+.canvas__open {
+	display: inline-block;
+	font-size: 24px;
+	cursor: pointer;
+	color: #000;
+	/* Black color for the three-line icon */
+}
+
+/* Sidebar Menu Styles */
+.offcanvas-menu-wrapper {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 0;
+	height: 100vh;
+	background: #ffffff;
+	overflow: hidden;
+	transition: width 0.3s ease-in-out;
+	z-index: 999;
+}
+
+.offcanvas-menu-wrapper.active {
+	width: 30%;
+	box-shadow: -2px 0px 12px 0px #5b5b5b;
+}
+
+.offcanvas__menu {
+	padding: 20px;
+}
+
+.offcanvas__menu ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.offcanvas__menu ul li {
+	margin-bottom: 10px;
+}
+
+.offcanvas__menu ul li a {
+	font-size: 14px;
+	text-transform: uppercase;
+	color: #000;
+	text-decoration: none;
+	display: block;
+	font-weight: 400;
+	padding: 8px 17px;
+	background: #e8e8e8;
+	margin: 6px;
+}
+
+/* Responsive Media Queries */
+@media only screen and (max-width: 767px) {
+	.offcanvas-menu-wrapper.active {
+		width: 70%;
+		/* Full screen on small devices */
+	}
+}
+
+.InputSearch {
+	width: 500px;
+    height: 40px;
+    border-radius: 50px;
+    background: #ffffffc4;
+    border: 2px solid #ffffff;
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    margin-right: 10px;
+    box-shadow: 1px 2px 3px #92c7b870;
+}
+
+.InputSearch select {
+	border: 2px solid #d3f4eb;
+	border-radius: 4px;
+	height: 30px;
+	font-size: 12px;
+	width: 120px;
+}
+
+.InputSearch input {
+	background: none;
+	padding: 15px;
+	font-family: 'Poppins', sans-serif;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	color: #547d72;
+	width: 70%;
+}
+
+.InputSearch {
+	position: relative;
+}
+
+.InputSearch svg {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	cursor: pointer;
+}
+
+.cart,
+.fav {
+	position: relative;
+	margin: 0px 5px;
+	cursor: pointer;
+}
+
+.cart span,
+.fav span {
+	width: 15px;
+	height: 15px;
+	background-color: red;
+	color: #fff;
+	border-radius: 50%;
+	display: block;
+	font-size: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	right: 0;
+	top: -8px;
+}

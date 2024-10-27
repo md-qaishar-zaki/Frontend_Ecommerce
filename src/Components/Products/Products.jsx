@@ -68,7 +68,7 @@ export default function ProductSlider() {
                 }
 
                 return (
-                    <div key={category.id} className="container mx-auto productSlider">
+                    <div key={category.id} className="container-fluid m-auto productSlider">
                         <div className="trend__content">
                             <div className="section-title">
                                 <h4 className="text-xl font-bold">{category.title}</h4>

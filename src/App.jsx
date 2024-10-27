@@ -5,6 +5,8 @@ import ProductDetails from './Pages/Product_Details/Project_Details';
 import Home from './Pages/home/Home.jsx';
 import Header from './Components/Header/Header.jsx';
 import Footer from './Components/Footer/Footer.jsx';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 function App() {
   return (

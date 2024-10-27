@@ -3,10 +3,10 @@ import './Header.css';
 
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [categories, setCategories] = useState([]); 
+    const [categories, setCategories] = useState([]);
     const sidebarRef = useRef(null);
     const apiUrl = import.meta.env.VITE_API_URL;
-    
+
     console.log(apiUrl);
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -18,20 +18,20 @@ export default function Header() {
         }
     };
 
-     
+
     useEffect(() => {
         const fetchCategories = async () => {
             try {
                 const response = await fetch(`${apiUrl}/api/getcategorieslist`);
                 const data = await response.json();
-                setCategories(data.categories); 
+                setCategories(data.categories);
             } catch (error) {
                 console.error('Error fetching categories:', error);
             }
         };
 
         fetchCategories();
-    }, []); 
+    }, []);
 
     useEffect(() => {
         document.addEventListener('mousedown', handleClickOutside);
@@ -42,11 +42,13 @@ export default function Header() {
 
     return (
         <header className="header px-9">
-            <div className="container-fluid">
+            <div className="container m-auto">
                 <div className="flex">
                     <div className="w-1/3 lg:w-3/10 flex items-center ">
                         <div className="canvas__open" onClick={toggleMenu}>
-                            <i className="fa fa-bars"></i>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                            </svg>
                         </div>
                         <div className="header__logo ml-4">
                             <a href="/">
@@ -59,7 +61,7 @@ export default function Header() {
                         <div className="InputSearch">
                             <input type="text" name="" id="" placeholder="Search Products" />
                             <select name="All Categories" id="All Categories">
-                                <option value="">All Categories</option> 
+                                <option value="">All Categories</option>
                                 {categories.map((category) => (
                                     <option key={category.id} value={category.slug}>
                                         {category.title}
@@ -112,12 +114,9 @@ export default function Header() {
             <div ref={sidebarRef} className={`offcanvas-menu-wrapper ${isMenuOpen ? 'active' : ''}`}>
                 <nav className="offcanvas__menu">
                     <ul>
-                        <li><a href="./index.html">Home</a></li>
-                        <li><a href="/">Electric Motors</a></li>
-                        <li><a href="/">Geared Motor</a></li>
-                        <li><a href="/">Shop</a></li>
-                        <li><a href="/">Pages</a></li>
-                        <li><a href="/">Contact</a></li>
+                        {categories.map((category) => (
+                            <li key={category.id} value={category.slug}><a href="./index.html">{category.title}</a></li>
+                        ))}
                     </ul>
                 </nav>
             </div>

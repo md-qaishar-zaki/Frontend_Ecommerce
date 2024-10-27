@@ -115,134 +115,386 @@ export default function Project_Details() {
                                         ))}
                                     </div>
                                     <span className='rw'><span>4,733 Ratings&nbsp;</span><span class="hG7V+4">&amp;</span><span>&nbsp;552 Reviews</span></span>
-                                    <span className="text-green-500">{product.product.stock} stock</span>
+                                    <span className="text-green-500 text-sm">{product.product.stock} stock</span>
                                 </div>
-                                <hr className="my-4" />
                                 <div className="flex items-center mb-3">
-                                    <span className="text-gray-500">Sold by:</span>
-                                    <span className="ml-2 font-semibold">Inhouse product</span>
-                                    <img className="ml-4 h-6" src="https://cdn.freelogovectors.net/wp-content/uploads/2020/09/crompton-logo.png" alt="HONDA" />
+                                    <div class="text-sm"><span>Special price</span></div>
                                 </div>
-                                <hr className="my-4" />
-                                <div className="text-xl text-gray-800 mb-3">
-                                    <table className="table-auto text-sm border-separate border-spacing-2">
-                                        <tbody>
-                                            <tr>
-                                                <td>Price:</td>
-                                                <td><del>₹{product.product.price}</del></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Discount Price:</td>
-                                                <td className='Price'>₹{product.product.purchase_price}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>SKU:</td>
-                                                <td>{product.product.sku}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                <div class="flex flex-col items-start space-y-2">
+                                    <div class="flex items-center space-x-2">
+                                        <div class="text-lg font-medium text-gray-800">₹{product.product.price}</div>
+                                        <div class="line-through text-sm text-gray-400 px-1">₹{product.product.purchase_price}</div>
+                                        <div class="text-green-500 text-xs font-semibold">
+                                            <span>56% off</span>
+                                        </div>
+                                        <span className='px-2 text-sm'>i</span>
+                                    </div>
                                 </div>
-                                <p className="text-gray-600 mb-4">
-                                    {product.Description}
-                                </p>
-                                <div className="grid grid-cols-2 gap-4 mb-4">
-                                    <div className='w-24'>
-                                        <label className="block mb-2 text-gray-600">Quantity</label>
-                                        <div className="flex items-center border bg-white border-gray-300 rounded-md">
-                                            <button className="px-3 py-2 text-gray-600"><i className="fa fa-minus"></i></button>
-                                            <input type="text" className="w-12 text-center border-l border-r border-gray-300" value="1" readOnly />
-                                            <button className="px-3 py-2 text-gray-600"><i className="fa fa-plus"></i></button>
+                                <div class="w-full p-4 border-gray-200">
+                                    <div class="text-lg font-semibold text-gray-800 mb-2">Available offers</div>
+
+                                    <div class="space-y-3">
+                                        <div class="flex items-center space-x-2 text-xs">
+                                            <img src="https://rukminim2.flixcart.com/www/36/36/promos/06/09/2016/c22c9fc4-0555-4460-8401-bf5c28d7ba29.png?q=90" width="18" height="18" alt="icon" class="w-4 h-4" />
+                                            <span class="font-semibold text-gray-700 pr-2 pl-3">Special Price</span>
+                                            <span class="ml-1 text-gray-600 pr-2">Get extra 39% off (price inclusive of cashback/coupon)</span>
+                                            <span class="text-blue-500 text-xs cursor-pointer">T&amp;C</span>
+                                        </div>
+
+                                        <div class="flex items-center space-x-2 text-xs flex-wrap">
+                                            <img src="https://rukminim2.flixcart.com/www/36/36/promos/06/09/2016/c22c9fc4-0555-4460-8401-bf5c28d7ba29.png?q=90" width="18" height="18" alt="icon" class="w-4 h-4" />
+                                            <span class="font-semibold text-gray-700 pr-2 pl-3">Partner Offer</span>
+                                            <span class="ml-1 text-gray-600 pr-2">Make a purchase and enjoy a surprise cashback/ coupon that you can redeem later!</span>
+                                            <span class="text-blue-500 text-xs cursor-pointer mr-4">Know More</span>
+                                        </div>
+
+                                        <div class="flex items-center space-x-2 text-xs">
+                                            <img src="https://rukminim2.flixcart.com/www/36/36/promos/06/09/2016/c22c9fc4-0555-4460-8401-bf5c28d7ba29.png?q=90" width="18" height="18" alt="icon" class="w-4 h-4" />
+                                            <span class="font-semibold text-gray-700 pr-2 pl-3">Bank Offer</span>
+                                            <span class="ml-1 text-gray-600 pr-2">5% Unlimited Cashback on Flipkart Axis Bank Credit Card</span>
+                                            <span class="text-blue-500 text-xs cursor-pointer">T&amp;C</span>
+                                        </div>
+
+                                        <div class="flex items-center space-x-2 text-xs">
+                                            <img src="https://rukminim2.flixcart.com/www/36/36/promos/06/09/2016/c22c9fc4-0555-4460-8401-bf5c28d7ba29.png?q=90" width="18" height="18" alt="icon" class="w-4 h-4" />
+                                            <span class="font-semibold text-gray-700 pr-2 pl-3">Bank Offer</span>
+                                            <span class="ml-1 text-gray-600 pr-2">10% off up to ₹1,500 on SBI Credit Card Transactions of ₹4,990 and above</span>
+                                            <span class="text-blue-500 text-xs cursor-pointer">T&amp;C</span>
                                         </div>
                                     </div>
-                                </div>
-                                <div className="mt-1 flex flex-col md:flex-row mb-3">
-                                    <div className="flex items-center media_box flex-col space-x-2 mb-4 md:mb-0">
-                                        <img src="https://yantratools.com/public/uploads/easy-return.png" className="w-6 h-6" alt="7 Days Returnable" />
-                                        <p className="text-sm text-gray-600">7 Days Returnable</p>
-                                    </div>
-                                    <div className="flex items-center media_box flex-col space-x-2 mb-4 md:mb-0">
-                                        <img src="https://yantratools.com/public/uploads/cod.png" className="w-6 h-6" alt="Pay on Delivery" />
-                                        <p className="text-sm text-gray-600">Pay on Delivery</p>
-                                    </div>
-                                    <div className="flex items-center media_box flex-col space-x-2 mb-4 md:mb-0">
-                                        <img src="https://yantratools.com/public/uploads/delivered.png" className="w-6 h-6" alt="Free Shipping" />
-                                        <p className="text-sm text-gray-600">Free Shipping</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className=" bg-white rounded overflow-hidden ms-0 mx-3">
-                                <div className="tabs">
-                                    <ul className="flex justify-center sticky p-3 border-b-2 bg-white">
-                                        <li className="nav-item">
-                                            <a href="#tab_default_1" className="nav-link text-uppercase font-semibold active show">Description</a>
-                                        </li>
-                                    </ul>
 
-                                    <div className="tab-content pt-0">
-                                        <div className="tab-pane active show" id="tab_default_1">
-                                            <div className="py-2 px-4">
-                                                <div className="flex flex-wrap">
-                                                    <div className="w-full">
-                                                        <div className="overflow-hidden aiz-product-description">
-                                                            <div className="product_content">
-                                                                <p>
-                                                                    <b>
-                                                                        <span className="text-sm" dangerouslySetInnerHTML={{ __html: product.product.description }} />
-                                                                    </b>
-                                                                </p>
-                                                                <p>
-                                                                    <b>
-                                                                        <span className="text-sm" dangerouslySetInnerHTML={{ __html: product.product.meta_title }} />
-                                                                    </b>
-                                                                </p>
-                                                                <ul className="list-disc pl-5">
-                                                                    <li>
-                                                                        <span className="text-sm" dangerouslySetInnerHTML={{ __html: product.product.meta_description }} />
-                                                                    </li>
-                                                                </ul>
-                                                                <p>
-                                                                    <b>
-                                                                        <span className="text-sm">Features:</span>
-                                                                    </b>
-                                                                </p>
-                                                                <ul className="list-disc pl-5">
-                                                                    <li>
-                                                                        <strong>
-                                                                            <span className="text-sm">Three 32-Liter Bins:</span>
-                                                                        </strong>{" "}
-                                                                        Ideal for sorting and collecting different types of bio-medical waste.
-                                                                    </li>
-                                                                    <li>
-                                                                        <strong>
-                                                                            <span className="text-sm">Durable Construction:</span>
-                                                                        </strong>{" "}
-                                                                        Made from high-quality, easy-to-clean materials that resist odors and stains.
-                                                                    </li>
-                                                                    <li>
-                                                                        <strong>
-                                                                            <span className="text-sm">Secure Frame:</span>
-                                                                        </strong>{" "}
-                                                                        Provides stability and makes moving the bins hassle-free, ensuring safe and efficient waste management.
-                                                                    </li>
-                                                                </ul>
-                                                                <p>
-                                                                    <b>
-                                                                        <span className="text-sm">Description:</span>
-                                                                    </b>
-                                                                </p>
-                                                                <p>
-                                                                    <span className="text-sm" dangerouslySetInnerHTML={{ __html: product.product.description }} />
-                                                                </p>
-                                                                <div>
-                                                                    <br />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
+                                    <button class="mt-3 px-4 py-2 text-blue-600 text-sm font-medium rounded">
+                                        View 5 more offers
+                                    </button>
+                                </div>
+                                <div class="w-full flex items-center p-4 border-gray-200">
+                                    <div class="text-lg font-semibold text-gray-800 text-sm">Warranty</div>
+                                    <div class="text-gray-600 text-xs px-6">3 months - Domestic Warranty, 6 months - International Warranty</div>
+                                </div>
+                                <div className="w-full flex p-4 border-b border-gray-200">
+                                    <div className="text-lg font-semibold text-gray-800 mb-2 text-sm">Delivery</div>
+                                    <div className="flex flex-col px-4">
+                                        <div className="flex items-center space-x-2 mb-4">
+                                            <svg width="12" height="12" viewBox="0 0 9 12" xmlns="http://www.w3.org/2000/svg" className='mx-2'>
+                                                <path
+                                                    fill="#2874f0"
+                                                    d="M4.2 5.7c-.828 0-1.5-.672-1.5-1.5 0-.398.158-.78.44-1.06.28-.282.662-.44 1.06-.44.828 0 1.5.672 1.5 1.5 0 .398-.158.78-.44 1.06-.28.282-.662.44-1.06.44zm0-5.7C1.88 0 0 1.88 0 4.2 0 7.35 4.2 12 4.2 12s4.2-4.65 4.2-7.8C8.4 1.88 6.52 0 4.2 0z"
+                                                />
+                                            </svg>
+                                            <form autoComplete="off" className="flex">
+                                                <input
+                                                    className="border rounded-md px-2 py-1"
+                                                    placeholder="Enter Delivery Pincode"
+                                                    type="text"
+                                                    maxLength="6"
+                                                />
+                                            </form>
+                                            <button className="text-blue-500 ml-2 px-2 text-sm font-medium">Check</button>
+                                        </div>
+                                        <div className="text-gray-600 text-left space-y-2 px-4">
+                                            <div className='text-sm font-medium flex items-center'>
+                                                <span className="text-xs">Delivery by:</span> 3 Nov, Sunday <span className="ml-2 flex">| Free <p className='line-through px-1 text-sm font-medium'>₹40</p></span>
+                                            </div>
+                                            <div className='text-sm font-medium'>
+                                                <span className="text-xs">Installation & Demo by:</span> 2 Nov, Saturday | ₹498
                                             </div>
                                         </div>
+                                        <button className="text-blue-500 text-left px-4 mt-2 font-medium text-sm">View Details</button>
+                                    </div>
+                                </div>
+                                <div className="flex flex-wrap py-6">
+                                    <div className="w-full md:w-1/2">
+                                        <div className='flex text-sm'>
+                                            <h2 className="font-semibold mb-2 text-sm text-neutral-800">Highlights</h2>
+                                            <ul className="list-disc list-inside px-4 text-xs leading-6">
+                                                <li>Single-phase Water Pump</li>
+                                                <li>In-built Thermal Overload Protector</li>
+                                                <li>Power Rating: 0.018 kW</li>
+                                                <li>Power Supply: 165V-230V/50HZ</li>
+                                                <li>Motor Power: 1.2 hp</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div className="w-full md:w-1/2">
+                                        <div className='flex text-sm'>
+                                            <h2 className="font-semibold mb-2 text-sm text-neutral-800">Services</h2>
+                                            <ul className="list-disc list-inside px-4 text-xs leading-6">
+                                                <li className="flex items-center">
+                                                    <div className="w-4 h-4 bg-blue-500 mr-2 rounded-full"></div>
+                                                    <span>3 months- Domestic Warranty, 6 months- International Warranty</span>
+                                                </li>
+                                                <li className="flex items-center">
+                                                    <div className="w-4 h-4 bg-green-500 mr-2 rounded-full"></div>
+                                                    <span>Cash on Delivery available <span className="text-blue-500 cursor-pointer ml-1">?</span></span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="flex">
+                                    <div className="lg:w-7/12">
+                                        <h2 className="font-semibold text-sm">Important Note</h2> 
+                                    </div>
+                                    <div className="lg:w-7/12 text-xs">
+                                        <p>For multicolor products, please check the image for colour details before purchasing.</p>
+                                    </div>
+                                </div>
+
+                                <div className="flex my-4">
+                                    <div className="lg:w-7/12">
+                                        <h2 className="font-semibold text-sm">Seller</h2>
+                                    </div>
+                                    <div className="lg:w-7/12 text-xs">
+                                        <p>DelhiRetailShop <span className='bg-blue-600 text-white p-1 rounded text-xs'>3.9</span> </p>
+                                    </div>
+                                </div>
+
+                                <div className="space-y-6">
+
+
+                                    <div className="w-full px-4">
+                                        <div className="text-lg font-semibold mb-2"></div>
+                                        <div>
+                                            <div className="mt-2">
+                                                <ul className="list-none">
+                                                    <li className="flex items-center">
+                                                        <span className="text-sm font-medium">7 days return policy</span>
+                                                        <div className="ml-1 text-gray-500">(?)</div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div className="mt-2">
+                                                <a
+                                                    href="/sellers?pid=WPMFCHEZ768YASJ4"
+                                                    className="text-blue-600 hover:underline text-sm"
+                                                >
+                                                    See other sellers
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="w-full p-4 border rounded-lg bg-gray-100">
+                                        <h2 className="text-lg font-semibold">Description</h2>
+                                        <p className="mt-2 text-sm text-gray-700">
+                                            <span className="text-sm" dangerouslySetInnerHTML={{ __html: product.product.description }} />
+                                        </p>
+                                        <button className="text-blue-600 mt-2 hover:underline">Read More</button>
+                                    </div>
+
+                                    <div className="w-full p-4 border rounded-lg bg-gray-100 space-y-6">
+
+                                        <div className="flex space-x-4">
+                                            <img
+                                                src="https://rukminim2.flixcart.com/image/200/200/xif0q/icons/original-WPMFCHEZ768YASJ4_1.jpg"
+                                                alt="Multipurpose Performance"
+                                                className="w-20 h-20"
+                                            />
+                                            <div>
+                                                <h3 className="text-md font-semibold">Multipurpose Performance</h3>
+                                                <p className="text-sm text-gray-700 mt-1">
+                                                    Built with versatility in mind, this water cooler pump excels in various applications, such as
+                                                    decorative fountains, ponds, aquariums, and hydroponic setups, delivering consistent performance.
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div className="flex space-x-4">
+                                            <img
+                                                src="https://rukminim2.flixcart.com/image/200/200/xif0q/icons/original-WPMFCHEZ768YASJ4_2.jpg"
+                                                alt="High Performance"
+                                                className="w-20 h-20"
+                                            />
+                                            <div>
+                                                <h3 className="text-md font-semibold">High Performance</h3>
+                                                <p className="text-sm text-gray-700 mt-1">
+                                                    This high-performance water cooler pump ensures efficient cooling with a flow rate up to 1.85m and
+                                                    noiseless operation, making it versatile and energy-saving.
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div className="flex space-x-4">
+                                            <img
+                                                src="https://rukminim2.flixcart.com/image/200/200/xif0q/icons/original-WPMFCHEZ768YASJ4_3.jpg"
+                                                alt="Easy Maintenance and Cleaning"
+                                                className="w-20 h-20"
+                                            />
+                                            <div>
+                                                <h3 className="text-md font-semibold">Easy Maintenance and Cleaning</h3>
+                                                <p className="text-sm text-gray-700 mt-1">
+                                                    Designed for user-friendliness, this pump is easy to clean and maintain, ensuring optimal performance
+                                                    with minimal hassle.
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div className="flex space-x-4">
+                                            <img
+                                                src="https://rukminim2.flixcart.com/image/200/200/xif0q/icons/original-WPMFCHEZ768YASJ4_4.jpg"
+                                                alt="Convenient Features"
+                                                className="w-20 h-20"
+                                            />
+                                            <div>
+                                                <h3 className="text-md font-semibold">Convenient Features</h3>
+                                                <p className="text-sm text-gray-700 mt-1">
+                                                    This fully submersible pump is energy-efficient, with a durable ABS body, suitable for various
+                                                    applications and long-lasting performance.
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <button className="text-blue-600 mt-2 hover:underline">View all features</button>
+                                    </div>
+                                </div>
+                                <div class="p-4 w-full">
+                                    <div class="bg-gray-50 shadow-md rounded-lg p-4">
+                                        <div class="text-lg font-semibold text-gray-800">Specifications</div>
+
+                                        <div class="mt-4">
+                                            <div class="bg-white p-4 rounded-md shadow-sm mb-4">
+                                                <div class="text-md font-medium text-gray-700">In The Box</div>
+                                                <table class="w-full mt-2 text-gray-600">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="py-2">
+                                                                <ul class="list-disc pl-5">
+                                                                    <li>1 Water cooler pump & 1 Nozzle</li>
+                                                                </ul>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <div class="bg-white p-4 rounded-md shadow-sm mb-4">
+                                                <div class="text-md font-medium text-gray-700">General</div>
+                                                <table class="w-full mt-2 text-gray-600">
+                                                    <tbody>
+                                                        <tr class="flex">
+                                                            <td class="w-1/4 font-semibold">Brand</td>
+                                                            <td class="w-3/4">
+                                                                <ul class="list-disc pl-5">
+                                                                    <li>Aksha Gold</li>
+                                                                </ul>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="flex">
+                                                            <td class="w-1/4 font-semibold">Model Name</td>
+                                                            <td class="w-3/4">
+                                                                <ul class="list-disc pl-5">
+                                                                    <li>Computer Tested Dynamically Balanced 18 Watt Multipurpose Water Cooler Pump...</li>
+                                                                </ul>
+                                                            </td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <div class="bg-white p-4 rounded-md shadow-sm mb-4">
+                                                <div class="text-md font-medium text-gray-700">Power Features</div>
+                                                <table class="w-full mt-2 text-gray-600">
+                                                    <tbody>
+                                                        <tr class="flex">
+                                                            <td class="w-1/4 font-semibold">Phase</td>
+                                                            <td class="w-3/4">
+                                                                <ul class="list-disc pl-5">
+                                                                    <li>Single-phase</li>
+                                                                </ul>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="flex">
+                                                            <td class="w-1/4 font-semibold">Thermal Over Load Protector</td>
+                                                            <td class="w-3/4">
+                                                                <ul class="list-disc pl-5">
+                                                                    <li>Yes</li>
+                                                                </ul>
+                                                            </td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <div class="bg-white p-4 rounded-md shadow-sm mb-4">
+                                                <div class="text-md font-medium text-gray-700">Additional Features</div>
+                                                <table class="w-full mt-2 text-gray-600">
+                                                    <tbody>
+                                                        <tr class="flex">
+                                                            <td class="w-1/4 font-semibold">Corrosion Resistant</td>
+                                                            <td class="w-3/4">
+                                                                <ul class="list-disc pl-5">
+                                                                    <li>Yes</li>
+                                                                </ul>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="flex">
+                                                            <td class="w-1/4 font-semibold">Other Features</td>
+                                                            <td class="w-3/4">
+                                                                <ul class="list-disc pl-5">
+                                                                    <li>Fully Submersible, No Rusting &amp; No Jamming, Operates Well At Low Voltage...</li>
+                                                                </ul>
+                                                            </td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <div class="bg-white p-4 rounded-md shadow-sm mb-4">
+                                                <div class="text-md font-medium text-gray-700">Dimensions</div>
+                                                <table class="w-full mt-2 text-gray-600">
+                                                    <tbody>
+                                                        <tr class="flex">
+                                                            <td class="w-1/4 font-semibold">Width</td>
+                                                            <td class="w-3/4">
+                                                                <ul class="list-disc pl-5">
+                                                                    <li>7.6 cm</li>
+                                                                </ul>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="flex">
+                                                            <td class="w-1/4 font-semibold">Height</td>
+                                                            <td class="w-3/4">
+                                                                <ul class="list-disc pl-5">
+                                                                    <li>8.2 cm</li>
+                                                                </ul>
+                                                            </td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <div class="bg-white p-4 rounded-md shadow-sm mb-4">
+                                                <div class="text-md font-medium text-gray-700">Warranty</div>
+                                                <table class="w-full mt-2 text-gray-600">
+                                                    <tbody>
+                                                        <tr class="flex">
+                                                            <td class="w-1/4 font-semibold">Warranty Summary</td>
+                                                            <td class="w-3/4">
+                                                                <ul class="list-disc pl-5">
+                                                                    <li>3 months- Domestic Warranty, 6 months- International Warranty</li>
+                                                                </ul>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="flex">
+                                                            <td class="w-1/4 font-semibold">Service Type</td>
+                                                            <td class="w-3/4">
+                                                                <ul class="list-disc pl-5">
+                                                                    <li>Contact To Seller</li>
+                                                                </ul>
+                                                            </td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                        <button class="mt-4 w-full py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600">Read More</button>
                                     </div>
                                 </div>
                             </div>

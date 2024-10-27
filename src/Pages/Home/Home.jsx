@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './Home.css';
 import Products from '../../Components/Products/Products.jsx';
+import FeaturedProduct from '../../Components/Featured_Product/FeaturedProduct.jsx'
 
 export default function Home() {
     const [bannerImg, setBannerImg] = useState([]);
-    const [categoryImg, setCategoryImg] = useState([]);
+    const [categoryDetails, setCategoryDetails] = useState([]);
     const apiUrl = import.meta.env.VITE_API_URL;
 
     useEffect(() => {
@@ -22,17 +23,17 @@ export default function Home() {
     }, []);
 
     useEffect(() => {
-        const fetchCategoryImg = async () => {
+        const fetchCategoryDetails = async () => {
             try {
                 const response = await fetch(`${apiUrl}/api/getcategorieslist`);
                 const data = await response.json();
-                setCategoryImg(data.categories || []); // Ensure categories is set correctly
+                setCategoryDetails(data.categories || []);
             } catch (error) {
                 console.error('Error fetching category images:', error);
             }
         };
 
-        fetchCategoryImg();
+        fetchCategoryDetails();
     }, []);
 
     const getFullImageUrl = (path) => {
@@ -44,7 +45,6 @@ export default function Home() {
             <section className="categories">
                 <div className="container-fluid px-0">
                     <div className="flex flex-wrap">
-                        {/* Banner Section */}
                         <div className="w-full lg:w-1/2 p-0">
                             {bannerImg.length > 0 && (
                                 <div
@@ -59,26 +59,21 @@ export default function Home() {
                                 </div>
                             )}
                         </div>
-
-                        {/* Categories Section */}
                         <div className="w-full lg:w-1/2">
                             <div className="flex flex-wrap">
-                                {categoryImg.map((category, index) => (
+                                {categoryDetails.map((category, index) => (
                                     <div
                                         key={index}
-                                        className={`p-1 ${index < 2 ? 'w-1/2' : 'w-1/4'}`}  // First two items 50% each, next four items 25% each
-                                    >
-                                        <div
-                                            className="categories__item bg-cover bg-center relative overflow-hidden"
+                                        className={` ${index < 2 ? 'w-1/2' : 'w-1/4'}`}>
+                                        <div className="categories__item bg-cover bg-center relative overflow-hidden"
                                             style={{
                                                 backgroundImage: `url(${category.photo})`
-                                            }}
-                                        >
-                                            <div className={`categories__text ${index >= categoryImg.length - 4 ? 'hideText' : ''}`}>
+                                            }}>
+                                            <div className='categories__text'>
                                                 <h4 className="text-xl font-semibold mb-2">
-                                                    {category.title || 'Default Title'}
+                                                    {category.title}
                                                 </h4>
-                                                <p className="mb-2" dangerouslySetInnerHTML={{ __html: category.summary || 'Default Description' }} />
+                                                <span className="line-clamp-1" dangerouslySetInnerHTML={{ __html: category.summary || 'Default Description' }} />
                                                 <a href="#" className="text-base font-semibold text-white bg-black py-2 px-4">
                                                     Shop now
                                                 </a>
@@ -91,6 +86,7 @@ export default function Home() {
                     </div>
                 </div>
             </section>
+            <FeaturedProduct />
             <Products />
         </>
     );

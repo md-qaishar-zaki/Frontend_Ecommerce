@@ -13,6 +13,7 @@ body {
 
 #root {
     padding: 0;
+    max-width: unset !important;
 }
 
 h1,

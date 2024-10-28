@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button.jsx";
 import Trend_Spad from "../Trend_Spad/Trend_Spad.jsx";
+import Slider from "react-slick";
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 export default function ProductSlider() {
     const [categories, setCategories] = useState([]);
@@ -53,7 +56,38 @@ export default function ProductSlider() {
             };
         });
     };
-
+    const settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 5,
+        slidesToScroll: 1,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                    infinite: true,
+                    dots: true,
+                },
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                },
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                },
+            },
+        ],
+    };
     return (
         <>
             {categories.map((category) => {
@@ -74,24 +108,35 @@ export default function ProductSlider() {
                                 <h4 className="text-xl font-bold">{category.title}</h4>
                             </div>
                         </div>
-                        <div className="slider">
-                            {/* <button onClick={() => handlePrevSlide(category.id)} className="slider-button Prev">Prev</button> */}
-                            <div className="slider-container">
-                                {visibleProducts.map((product) => (
-                                    <div key={product.id} onClick={() => handleProductClick(product.id)} className="slider-item">
-                                        <Trend_Spad
-                                            ProductTitle={product.title}
-                                            ImgName={product.photoproduct && product.photoproduct.length > 0 ? product.photoproduct[0].photo_path : 'DEFAULT_IMAGE'}
-                                            Price={product.price}
-                                            stars={product.rating}
-                                        />
-                                    </div>
-                                ))}
+                        <div className="flex flex-wrap">
+                            <div className="carousel-container w-full">
+                                {/* <button onClick={() => handlePrevSlide(category.id)} className="slider-button Prev">Prev</button> */}
+                                <Slider {...settings}>
+                                    {visibleProducts.map((product) => (
+                                        <div className="w-1/5 p-2">
+                                            <div className="product-card">
+                                                <div className="product-card__image">
+                                                    {/* <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="Red Nike Shoes" /> */}
+                                                    <img src={product.photoproduct[0].photo_path} alt="Red Nike Shoes"/>
+                                                </div>
+                                                <div className="product-card__info">
+                                                    <h2 className="product-card__title line-clamp-1">{product.title}</h2>
+                                                    <p className="product-card__description line-clamp-1"
+                                                       dangerouslySetInnerHTML={{__html: product.description}}/>
+                                                    <div className="product-card__price-row">
+                                                        <span className="product-card__price">₹{product.price}.00</span>
+                                                        <button className="product-card__btn">Add to Cart</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </Slider>
+                             {/* <button onClick={() => handleNextSlide(category.id)} className="slider-button">Next</button> */}
                             </div>
-                            {/* <button onClick={() => handleNextSlide(category.id)} className="slider-button">Next</button> */}
                         </div>
                         <div className="flex justify-center mt-4">
-                            <Button Name={"View More"} />
+                            <Button Name={"View More"}/>
                         </div>
                     </div>
                 );

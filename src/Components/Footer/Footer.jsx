@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Footer.css';
 import Razorpay from '../../assets/Img/razorpay.png'
+import footerIcon from'../../assets/Categories Icon/tool.png'
 
 export default function Footer() {
     const [showScroll, setShowScroll] = useState(false);
@@ -66,18 +67,18 @@ export default function Footer() {
                         <div className="px-7 w-full lg:w-1/3 md:w-1/2 sm:w-full mb-8">
                             <div className="mb-4">
                                 <div className="flex justify-between mb-2">
-                                    <div className="flex items-center space-x-2 footerBox">
+                                    <div className="flex items-center space-x-2 footerBox flex-col">
                                         <div className="image">
-                                            <img src="https://yantratools.com/public/uploads/footer/customer.webp" width="60" height="60" alt="Customer" />
+                                            <img src={footerIcon} width="60" height="60" alt="Customer" />
                                         </div>
                                         <div>
                                             <span className="block">80,000 +</span>
                                             <span>Customers</span>
                                         </div>
                                     </div>
-                                    <div className="flex items-center space-x-2 footerBox">
+                                    <div className="flex items-center space-x-2 footerBox flex-col">
                                         <div className="image">
-                                            <img src="https://yantratools.com/public/uploads/footer/Varified.webp" width="60" height="60" alt="Verified" />
+                                        <img src={footerIcon} width="60" height="60" alt="Customer" />
                                         </div>
                                         <div>
                                             <span className="block">Products Quality</span>
@@ -88,18 +89,18 @@ export default function Footer() {
                             </div>
                             <div>
                                 <div className="flex justify-between">
-                                    <div className="flex items-center space-x-2 footerBox">
+                                    <div className="flex items-center space-x-2 footerBox flex-col">
                                         <div className="image">
-                                            <img src="https://yantratools.com/public/uploads/footer/cod.webp" width="60" height="60" alt="Cash on Delivery" />
+                                        <img src={footerIcon} width="60" height="60" alt="Customer" />
                                         </div>
                                         <div>
                                             <span className="block">Cash On</span>
                                             <span>Delivery</span>
                                         </div>
                                     </div>
-                                    <div className="flex items-center space-x-2 footerBox">
+                                    <div className="flex items-center space-x-2 footerBox flex-col">
                                         <div className="image">
-                                            <img src="https://yantratools.com/public/uploads/footer/easy-return.webp" width="60" height="60" alt="Easy Return" />
+                                        <img src={footerIcon} width="60" height="60" alt="Customer" />
                                         </div>
                                         <div>
                                             <span className="block">Easy</span>

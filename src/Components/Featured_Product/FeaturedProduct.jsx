@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './FeaturedProduct.css';
+import Button from "../Button.jsx";
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -65,23 +66,26 @@ export default function FeaturedProduct() {
                     <Slider {...settings}>
                         {featuredProduct.map((product, index) => (
                             <div className="w-1/5 p-2">
-                            <div className="product-card">
-                                <div className="product-card__image">
-                                    {/* <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="Red Nike Shoes" /> */}
-                                    <img src={product.photoproduct[0].photo_path} alt="Red Nike Shoes" />
-                                </div>
-                                <div className="product-card__info">
-                                    <h2 className="product-card__title line-clamp-1">{product.title}</h2>
-                                    <p className="product-card__description line-clamp-1" dangerouslySetInnerHTML={{ __html: product.description }} />
-                                    <div className="product-card__price-row">
-                                        <span className="product-card__price">₹{product.price}.00</span>
-                                        <button className="product-card__btn">Add to Cart</button>
+                                <div className="product-card">
+                                    <div className="product-card__image">
+                                        {/* <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="Red Nike Shoes" /> */}
+                                        <img src={product.photoproduct[0].photo_path} alt="Red Nike Shoes" />
+                                    </div>
+                                    <div className="product-card__info">
+                                        <h2 className="product-card__title line-clamp-1">{product.title}</h2>
+                                        <p className="product-card__description line-clamp-1" dangerouslySetInnerHTML={{ __html: product.description }} />
+                                        <div className="product-card__price-row">
+                                            <span className="product-card__price">₹{product.price}.00</span>
+                                            <button className="product-card__btn">Add to Cart</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         ))}
                     </Slider>
+                </div>
+                <div className="flex justify-center">
+                    <Button Name={"View More"} />
                 </div>
             </div>
         </>

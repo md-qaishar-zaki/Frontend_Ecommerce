@@ -44,20 +44,20 @@ export default function Home() {
     };
     function getClName(count, index) {
         if (count === 6) {
-          return index < 2 ? 'w-1/2' : 'w-1/4';
+            return index < 2 ? 'w-1/2' : 'w-1/4';
         } else if (count === 5) {
-          return index < 2 ? 'w-1/2' : 'w-1/3';
+            return index < 2 ? 'w-1/2' : 'w-1/3';
         } else if (count === 4) {
-          return index < 2 ? 'w-1/2' : 'w-1/2';
-        } 
+            return index < 2 ? 'w-1/2' : 'w-1/2';
+        }
         return '';
-      }
-      const count = categoryDetails.length;
+    }
+    const count = categoryDetails.length;
     const settings = {
         dots: false,
         infinite: true,
         speed: 500,
-        autoplay: true,
+        autoplay: false,
         autoplaySpeed: 3000,
         slidesToShow: 1,
         slidesToScroll: 1,
@@ -77,13 +77,13 @@ export default function Home() {
                                             <div
                                                 key={index}
                                                 className="categories__item categories__large__item bg-cover bg-center">
-                                                <div className="categories__text">
+                                                <div className="title">
                                                     <h1 className="text-3xl font-bold mb-4">{image.title}</h1>
-                                                    <img src={`${getFullImageUrl(image.photo)}`} alt="" />
                                                     <a href="#" className="text-lg font-semibold text-white bg-black py-2 px-4">
                                                         Shop now
                                                     </a>
                                                 </div>
+                                                <img src={`${getFullImageUrl(image.photo)}`} alt="" />
                                             </div>
                                         ))}
                                 </Slider>
@@ -94,18 +94,18 @@ export default function Home() {
                                 {categoryDetails.map((category, index) => (
                                     <div
                                         key={index}
-                                        className={`${index < 2 ? 'w-1/2 p-1' : 'w-1/4 p-1'}`}
+                                        className={`${index < 2 ? 'w-1/2 p-1 relative overflow-hidden' : 'w-1/4 p-1 relative overflow-hidden'}`}
                                     >
                                         <div
-                                            className="categories__item bg-cover bg-center relative overflow-hidden"
+                                            className="categories__item bg-contain bg-center bg-no-repeat relative overflow-hidden"
                                             style={{
                                                 backgroundImage: `url(${getFullImageUrl(category.photo)})`
                                             }}
-                                        >                                            
+                                        >
                                         </div>
                                         <div className="categories__text">
-                                                <h4 className="text-xs font-semibold mb-2">{category.title}</h4>                                                
-                                            </div>
+                                            <h4 className="text-xs font-semibold mb-2">{category.title}</h4>
+                                        </div>
                                     </div>
                                 ))}
                             </div>

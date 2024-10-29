@@ -11,6 +11,10 @@ export default function ProductSlider() {
     const navigate = useNavigate();
     const apiUrl = import.meta.env.VITE_API_URL;
 
+    const handleProductClick = (productId) => {
+        navigate(`product/${productId}`);
+    };
+
     useEffect(() => {
         const fetchCategories = async () => {
             try {
@@ -28,9 +32,7 @@ export default function ProductSlider() {
         fetchCategories();
     }, []);
 
-    const handleProductClick = (slug) => {
-        navigate(`product/${slug}`);
-    };
+
 
     // State for current index of each category
     const [currentIndices, setCurrentIndices] = useState({});
@@ -46,20 +48,12 @@ export default function ProductSlider() {
         });
     };
 
-    const handlePrevSlide = (categoryId) => {
-        setCurrentIndices((prevIndices) => {
-            const currentIndex = prevIndices[categoryId] || 0;
-            const prevIndex = (currentIndex - 1 + categories.find(cat => cat.id === categoryId).products.length) % categories.find(cat => cat.id === categoryId).products.length; // Loop back
-            return {
-                ...prevIndices,
-                [categoryId]: prevIndex,
-            };
-        });
-    };
+
     const settings = {
-        dots: true,
+        dots: false,
         infinite: true,
         speed: 500,
+        autoplay: true,
         slidesToShow: 5,
         slidesToScroll: 1,
         responsive: [
@@ -113,7 +107,7 @@ export default function ProductSlider() {
                                 <Slider {...settings}>
                                     {visibleProducts.map((product) => (
                                         <div className="w-1/5 p-2">
-                                            <div className="product-card">
+                                            <div className="product-card" key={product.id} onClick={() => handleProductClick(product.id)}>
                                                 <div className="product-card__image">
                                                     {/* <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="Red Nike Shoes" /> */}
                                                     <img src={product.photoproduct[0].photo_path} alt="Red Nike Shoes" />

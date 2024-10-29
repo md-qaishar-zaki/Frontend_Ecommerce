@@ -56,7 +56,12 @@
 }
 
 .footer img {
-    filter: brightness(0);
+    filter: grayscale(1);
+    max-width: 35px;
+    transition: 0.2s;
+}
+.footer img:hover{
+    filter: unset !important;
 }
 
 .footer-bottom img {

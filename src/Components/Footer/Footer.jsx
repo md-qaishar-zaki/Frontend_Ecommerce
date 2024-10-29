@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import './Footer.css';
 import Razorpay from '../../assets/Img/razorpay.png'
 import footerIcon from'../../assets/Categories Icon/tool.png'
+import footerIcon2 from'../../assets/Categories Icon/equipment.png'
+import footerIcon3 from'../../assets/Categories Icon/process.png'
+import footerIcon4 from'../../assets/Categories Icon/pump.png'
 
 export default function Footer() {
     const [showScroll, setShowScroll] = useState(false);
@@ -78,7 +81,7 @@ export default function Footer() {
                                     </div>
                                     <div className="flex items-center space-x-2 footerBox flex-col">
                                         <div className="image">
-                                        <img src={footerIcon} width="60" height="60" alt="Customer" />
+                                        <img src={footerIcon2} width="60" height="60" alt="Customer" />
                                         </div>
                                         <div>
                                             <span className="block">Products Quality</span>
@@ -91,7 +94,7 @@ export default function Footer() {
                                 <div className="flex justify-between">
                                     <div className="flex items-center space-x-2 footerBox flex-col">
                                         <div className="image">
-                                        <img src={footerIcon} width="60" height="60" alt="Customer" />
+                                        <img src={footerIcon3} width="60" height="60" alt="Customer" />
                                         </div>
                                         <div>
                                             <span className="block">Cash On</span>
@@ -100,7 +103,7 @@ export default function Footer() {
                                     </div>
                                     <div className="flex items-center space-x-2 footerBox flex-col">
                                         <div className="image">
-                                        <img src={footerIcon} width="60" height="60" alt="Customer" />
+                                        <img src={footerIcon4} width="60" height="60" alt="Customer" />
                                         </div>
                                         <div>
                                             <span className="block">Easy</span>

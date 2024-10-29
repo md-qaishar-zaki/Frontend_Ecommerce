@@ -40,3 +40,58 @@
 .read-the-docs {
   color: #888;
 }
+
+ 
+.button {
+  isolation: isolate;
+  color: #F5F5EB;
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 600;
+  border-radius: 9999rem;
+  background: #E3310D;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 35px;
+  overflow: hidden;
+  transition: 200ms ease-out;
+}
+
+.button > .backdrop {
+  z-index: 1;
+  transition: 150ms ease-out;
+}
+
+.button > .overlay {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: inherit;
+  background: #8F204F; /* murrey */
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  transform: translateY(calc(100% + 1px));
+  transition: 200ms ease-out;
+}
+
+.button:hover,
+.button:focus {
+  background: rgba(227, 219, 13, 0.6); /* color-mix equivalent */
+  transition: 250ms ease-out;
+}
+
+.button:hover > .backdrop,
+.button:focus > .backdrop {
+  transform: scale(0.8);
+  opacity: 0.5;
+}
+
+.button:hover > .overlay,
+.button:focus > .overlay {
+  transform: translateY(0);
+}

@@ -29,6 +29,7 @@
 .product-card__image {
     height: 170px;
     overflow: hidden;
+    position: relative;
 }
 
 .product-card__image img {
@@ -93,7 +94,21 @@
 
 .slick-list {
     padding: 0px 0px 25px 0px;
-    margin-bottom: 20px;
+}
+
+.heart {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.heart {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 25px;
+    z-index: 1;
+    cursor: pointer;
 }
 
 @media (max-width: 480px) {

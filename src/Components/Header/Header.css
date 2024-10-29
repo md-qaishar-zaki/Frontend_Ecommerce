@@ -86,11 +86,11 @@
 }
 
 .InputSearch {
-	width: 500px;
-	height: 40px;
+	width: 70%;
+	height: 48px;
 	border-radius: 50px;
 	background: #ffffffc4;
-	border: 2px solid #ffffff;
+	border: 1px solid #007c5b;
 	display: flex;
 	overflow: hidden;
 	align-items: center;
@@ -99,11 +99,15 @@
 }
 
 .InputSearch select {
-	border: 2px solid #d3f4eb;
+	margin-right: 6px;
+	border: 2px solid #8accba;
 	border-radius: 4px;
-	height: 30px;
-	font-size: 12px;
-	width: 120px;
+	height: 39px;
+	font-size: 14px;
+	width: 36%;
+	font-weight: 500;
+	color: #007c5b;
+	padding: 0px 7px;
 }
 
 .InputSearch input {
@@ -123,9 +127,12 @@
 
 .InputSearch svg {
 	position: absolute;
-	top: 10px;
-	right: 10px;
-	cursor: pointer;
+    top: 9px;
+    right: 10px;
+    cursor: pointer;
+    color: #fff;
+    width: 25px;
+    height: 25px;
 }
 
 .cart,
@@ -169,4 +176,14 @@
 .offcanvas__menu {
 	background: #ffffff;
 	padding: 20px 0;
+}
+
+.op {
+	background: red;
+}
+
+.searchIcon {
+	background: #007c5b;
+	width: 50px;
+	height: 60px;
 }

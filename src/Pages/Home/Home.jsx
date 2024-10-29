@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './Home.css';
 import Products from '../../Components/Products/Products.jsx';
-import FeaturedProduct from '../../Components/Featured_Product/FeaturedProduct.jsx'
+import FeaturedProduct from '../../Components/Featured_Product/FeaturedProduct.jsx';
+import Slider from "react-slick";
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 export default function Home() {
     const [bannerImg, setBannerImg] = useState([]);
@@ -40,40 +43,56 @@ export default function Home() {
         return path.startsWith('http') ? path : `https://siyabling.com/machintools/public${path}`;
     };
 
+    const settings = {
+        dots: false,
+        infinite: true,     
+        speed: 500,
+        autoplay: true,     
+        autoplaySpeed: 3000,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows:false,
+    };
+
     return (
         <>
             <section className="categories">
                 <div className="container-fluid px-0">
                     <div className="flex flex-wrap">
                         <div className="w-full lg:w-1/2 p-0">
-                            {bannerImg.length > 0 && (
-                                <div
-                                    className="categories__item categories__large__item bg-cover bg-center"
-                                    style={{ backgroundImage: `url(${getFullImageUrl(bannerImg[0].photo)})` }}
-                                >
-                                    <div className="categories__text p-8">
-                                        <h1 className="text-3xl font-bold mb-4">{bannerImg[0].title}</h1>
-                                        <p className="mb-4" dangerouslySetInnerHTML={{ __html: bannerImg[0].description }} />
-                                        <a href="#" className="text-lg font-semibold text-white bg-black py-2 px-4">Shop now</a>
-                                    </div>
-                                </div>
-                            )}
+                            <Slider {...settings}>
+                                {bannerImg.length > 0 &&
+                                    bannerImg.map((image, index) => (
+                                        <div
+                                            key={index}
+                                            className="categories__item categories__large__item bg-cover bg-center">
+                                            <div className="categories__text">
+                                                <h1 className="text-3xl font-bold mb-4">{image.title}</h1>
+                                                <img src={`${getFullImageUrl(image.photo)}`} alt="" />
+                                                <a href="#" className="text-lg font-semibold text-white bg-black py-2 px-4">
+                                                    Shop now
+                                                </a>
+                                            </div>
+                                        </div>
+                                    ))}
+                            </Slider>
                         </div>
+
                         <div className="w-full lg:w-1/2">
                             <div className="flex flex-wrap">
                                 {categoryDetails.map((category, index) => (
                                     <div
                                         key={index}
-                                        className={` ${index < 2 ? 'w-1/2' : 'w-1/4'}`}>
-                                        <div className="categories__item bg-cover bg-center relative overflow-hidden"
+                                        className={`${index < 2 ? 'w-1/2' : 'w-1/4'}`}
+                                    >
+                                        <div
+                                            className="categories__item bg-cover bg-center relative overflow-hidden"
                                             style={{
-                                                backgroundImage: `url(${category.photo})`
-                                            }}>
-                                            <div className='categories__text'>
-                                                <h4 className="text-xl font-semibold mb-2">
-                                                    {category.title}
-                                                </h4>
-                                                <span className="line-clamp-1" dangerouslySetInnerHTML={{ __html: category.summary || 'Default Description' }} />
+                                                backgroundImage: `url(${getFullImageUrl(category.photo)})`
+                                            }}
+                                        >
+                                            <div className="categories__text">
+                                                <h4 className="text-xl font-semibold mb-2">{category.title}</h4>
                                                 <a href="#" className="text-base font-semibold text-white bg-black py-2 px-4">
                                                     Shop now
                                                 </a>

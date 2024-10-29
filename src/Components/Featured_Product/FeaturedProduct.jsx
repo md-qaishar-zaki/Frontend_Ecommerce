@@ -60,7 +60,7 @@ export default function FeaturedProduct() {
             <div className="section-title px-4">
                 <h4 className="text-xl font-bold">Feature Product</h4>
             </div>
-            <div className="flex flex-wrap">
+            <div className="container-fluid m-auto productSlider">
                 <div className="carousel-container w-full">
                     <Slider {...settings}>
                         {featuredProduct.map((product, index) => (

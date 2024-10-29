@@ -92,7 +92,7 @@ export default function ProductSlider() {
         <>
             {categories.map((category) => {
                 const currentIndex = currentIndices[category.id] || 0;
-                const itemsToShow = 5; // Number of products to show
+                const itemsToShow = 5;
                 const startIndex = currentIndex;
                 const endIndex = startIndex + itemsToShow;
                 const visibleProducts = category.products.slice(startIndex, endIndex).concat(category.products.slice(0, Math.max(0, endIndex - category.products.length))); // Repeat products if needed
@@ -110,19 +110,18 @@ export default function ProductSlider() {
                         </div>
                         <div className="flex flex-wrap">
                             <div className="carousel-container w-full">
-                                {/* <button onClick={() => handlePrevSlide(category.id)} className="slider-button Prev">Prev</button> */}
                                 <Slider {...settings}>
                                     {visibleProducts.map((product) => (
                                         <div className="w-1/5 p-2">
                                             <div className="product-card">
                                                 <div className="product-card__image">
                                                     {/* <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="Red Nike Shoes" /> */}
-                                                    <img src={product.photoproduct[0].photo_path} alt="Red Nike Shoes"/>
+                                                    <img src={product.photoproduct[0].photo_path} alt="Red Nike Shoes" />
                                                 </div>
                                                 <div className="product-card__info">
                                                     <h2 className="product-card__title line-clamp-1">{product.title}</h2>
                                                     <p className="product-card__description line-clamp-1"
-                                                       dangerouslySetInnerHTML={{__html: product.description}}/>
+                                                        dangerouslySetInnerHTML={{ __html: product.description }} />
                                                     <div className="product-card__price-row">
                                                         <span className="product-card__price">₹{product.price}.00</span>
                                                         <button className="product-card__btn">Add to Cart</button>
@@ -132,11 +131,10 @@ export default function ProductSlider() {
                                         </div>
                                     ))}
                                 </Slider>
-                             {/* <button onClick={() => handleNextSlide(category.id)} className="slider-button">Next</button> */}
                             </div>
                         </div>
                         <div className="flex justify-center mt-4">
-                            <Button Name={"View More"}/>
+                            <Button Name={"View More"} />
                         </div>
                     </div>
                 );

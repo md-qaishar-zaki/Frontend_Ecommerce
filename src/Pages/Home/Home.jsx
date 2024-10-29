@@ -55,20 +55,21 @@ export default function Home() {
       const count = categoryDetails.length;
     const settings = {
         dots: false,
-        infinite: true,     
+        infinite: true,
         speed: 500,
-        autoplay: true,     
+        autoplay: true,
         autoplaySpeed: 3000,
         slidesToShow: 1,
         slidesToScroll: 1,
-        arrows:false,
+        arrows: false,
     };
 
     return (
         <>
             <section className="categories">
-                <div className="container-fluid px-0">
+                <div className="container-fluid px-2">
                     <div className="flex flex-wrap">
+<<<<<<< HEAD
                         <div className="w-full lg:w-1/2 p-0">
                             <Slider {...settings}>
                                 {bannerImg.length > 0 &&
@@ -79,17 +80,38 @@ export default function Home() {
                                             <div className="categories__text">
                                                 <h1 className="text-3xl font-bold mb-4">{image.title}</h1>
                                                 <img src={`${getFullImageUrl(image.photo)}`} alt="" />                                                
+=======
+                        <div className="w-full lg:w-1/2 p-1">
+                            <div className="sliders">
+                                <Slider {...settings}>
+                                    {bannerImg.length > 0 &&
+                                        bannerImg.map((image, index) => (
+                                            <div
+                                                key={index}
+                                                className="categories__item categories__large__item bg-cover bg-center">
+                                                <div className="categories__text">
+                                                    <h1 className="text-3xl font-bold mb-4">{image.title}</h1>
+                                                    <img src={`${getFullImageUrl(image.photo)}`} alt="" />
+                                                    <a href="#" className="text-lg font-semibold text-white bg-black py-2 px-4">
+                                                        Shop now
+                                                    </a>
+                                                </div>
+>>>>>>> 88a727d (.)
                                             </div>
-                                        </div>
-                                    ))}
-                            </Slider>
+                                        ))}
+                                </Slider>
+                            </div>
                         </div>
                         <div className="w-full lg:w-1/2">
                             <div className="flex flex-wrap">
                                 {categoryDetails.map((category, index) => (
                                     <div
                                         key={index}
+<<<<<<< HEAD
                                         className={getClName(count, index)}
+=======
+                                        className={`${index < 2 ? 'w-1/2 p-1' : 'w-1/4 p-1'}`}
+>>>>>>> 88a727d (.)
                                     >
                                         <div
                                             className="categories__item bg-cover bg-center relative overflow-hidden"

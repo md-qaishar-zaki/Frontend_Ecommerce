@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Products from './Components/Products/Products.jsx';
 import ProductDetails from './Pages/Product_Details/Project_Details';
-import Home from './Pages/home/Home.jsx';
+import Home from './Pages/Home/Home.jsx';
 import Header from './Components/Header/Header.jsx';
 import Footer from './Components/Footer/Footer.jsx';
 import 'slick-carousel/slick/slick.css';

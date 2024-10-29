@@ -42,7 +42,17 @@ export default function Home() {
     const getFullImageUrl = (path) => {
         return path.startsWith('http') ? path : `https://siyabling.com/machintools/public${path}`;
     };
-
+    function getClName(count, index) {
+        if (count === 6) {
+          return index < 2 ? 'w-1/2' : 'w-1/4';
+        } else if (count === 5) {
+          return index < 2 ? 'w-1/2' : 'w-1/3';
+        } else if (count === 4) {
+          return index < 2 ? 'w-1/2' : 'w-1/2';
+        } 
+        return '';
+      }
+      const count = categoryDetails.length;
     const settings = {
         dots: false,
         infinite: true,     
@@ -68,36 +78,29 @@ export default function Home() {
                                             className="categories__item categories__large__item bg-cover bg-center">
                                             <div className="categories__text">
                                                 <h1 className="text-3xl font-bold mb-4">{image.title}</h1>
-                                                <img src={`${getFullImageUrl(image.photo)}`} alt="" />
-                                                <a href="#" className="text-lg font-semibold text-white bg-black py-2 px-4">
-                                                    Shop now
-                                                </a>
+                                                <img src={`${getFullImageUrl(image.photo)}`} alt="" />                                                
                                             </div>
                                         </div>
                                     ))}
                             </Slider>
                         </div>
-
                         <div className="w-full lg:w-1/2">
                             <div className="flex flex-wrap">
                                 {categoryDetails.map((category, index) => (
                                     <div
                                         key={index}
-                                        className={`${index < 2 ? 'w-1/2' : 'w-1/4'}`}
+                                        className={getClName(count, index)}
                                     >
                                         <div
                                             className="categories__item bg-cover bg-center relative overflow-hidden"
                                             style={{
                                                 backgroundImage: `url(${getFullImageUrl(category.photo)})`
                                             }}
-                                        >
-                                            <div className="categories__text">
-                                                <h4 className="text-xl font-semibold mb-2">{category.title}</h4>
-                                                <a href="#" className="text-base font-semibold text-white bg-black py-2 px-4">
-                                                    Shop now
-                                                </a>
-                                            </div>
+                                        >                                            
                                         </div>
+                                        <div className="categories__text">
+                                                <h4 className="text-xs font-semibold mb-2">{category.title}</h4>                                                
+                                            </div>
                                     </div>
                                 ))}
                             </div>

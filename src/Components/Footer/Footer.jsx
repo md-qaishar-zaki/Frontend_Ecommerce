@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Footer.css';
+import Razorpay from '../../assets/Img/razorpay.png'
 
 export default function Footer() {
     const [showScroll, setShowScroll] = useState(false);
@@ -159,10 +160,10 @@ export default function Footer() {
                                 <ul className="flex justify-center md:justify-start space-x-4">
                                     <li>© 2024</li>
                                     <li>
-                                        <a href="https://yantratools.com/terms" className="hover:underline">Terms</a>
+                                        <a href="#" className="hover:underline">Terms</a>
                                     </li>
                                     <li>
-                                        <a href="https://yantratools.com/privacypolicy" className="hover:underline">Privacy policy</a>
+                                        <a href="#" className="hover:underline">Privacy policy</a>
                                     </li>
                                 </ul>
                             </div>
@@ -170,22 +171,22 @@ export default function Footer() {
                             <div className="w-full md:w-1/3 flex justify-center mb-4 md:mb-0">
                                 <ul className="flex space-x-4">
                                     <li>
-                                        <a href="https://www.facebook.com/Yantratools-108311474796158" className="text-blue-500 hover:text-blue-700" target="_blank">
+                                        <a href="#" className="text-blue-500 hover:text-blue-700" target="_blank">
                                             <i className="fa fa-facebook"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="https://www.youtube.com/channel/UCt-k8Ug6S_KhiMF7sR_drHg" className="text-red-500 hover:text-red-700" target="_blank">
+                                        <a href="#" className="text-red-500 hover:text-red-700" target="_blank">
                                             <i className="fa fa-youtube"></i>
                                         </a>
                                     </li>
                                 </ul>
                             </div>
  
-                            <div className="w-full md:w-1/3 text-center md:text-right">
+                            <div className="w-full md:w-1/4 text-center md:text-right ">
                                 <ul className="inline-flex space-x-4">
                                     <li>
-                                        <img loading="lazy" alt="razorpay" src="https://yantratools.com/public/frontend/images/icons/cards/rozarpay.png" className="h-8" />
+                                        <img loading="lazy" alt="razorpay" src={Razorpay} className="h-8" />
                                     </li>
                                     <li>
                                         <img loading="lazy" alt="cash on delivery" src="https://yantratools.com/public/frontend/images/icons/cards/cod.png" className="h-8" />

@@ -69,18 +69,6 @@ export default function Home() {
             <section className="categories">
                 <div className="container-fluid px-2">
                     <div className="flex flex-wrap">
-<<<<<<< HEAD
-                        <div className="w-full lg:w-1/2 p-0">
-                            <Slider {...settings}>
-                                {bannerImg.length > 0 &&
-                                    bannerImg.map((image, index) => (
-                                        <div
-                                            key={index}
-                                            className="categories__item categories__large__item bg-cover bg-center">
-                                            <div className="categories__text">
-                                                <h1 className="text-3xl font-bold mb-4">{image.title}</h1>
-                                                <img src={`${getFullImageUrl(image.photo)}`} alt="" />                                                
-=======
                         <div className="w-full lg:w-1/2 p-1">
                             <div className="sliders">
                                 <Slider {...settings}>
@@ -96,7 +84,6 @@ export default function Home() {
                                                         Shop now
                                                     </a>
                                                 </div>
->>>>>>> 88a727d (.)
                                             </div>
                                         ))}
                                 </Slider>
@@ -107,11 +94,7 @@ export default function Home() {
                                 {categoryDetails.map((category, index) => (
                                     <div
                                         key={index}
-<<<<<<< HEAD
-                                        className={getClName(count, index)}
-=======
                                         className={`${index < 2 ? 'w-1/2 p-1' : 'w-1/4 p-1'}`}
->>>>>>> 88a727d (.)
                                     >
                                         <div
                                             className="categories__item bg-cover bg-center relative overflow-hidden"

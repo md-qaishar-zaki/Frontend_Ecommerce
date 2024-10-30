@@ -44,11 +44,11 @@ export default function Home() {
     };
     function getClName(count, index) {
         if (count === 6) {
-            return index < 2 ? 'w-1/2' : 'w-1/4';
+            return index < 2 ? 'w-1/2 p-1 relative overflow-hidden' : 'w-1/4 p-1 relative overflow-hidden';
         } else if (count === 5) {
-            return index < 2 ? 'w-1/2' : 'w-1/3';
+            return index < 2 ? 'w-1/2 p-1 relative overflow-hidden' : 'w-1/3 p-1 relative overflow-hidden';
         } else if (count === 4) {
-            return index < 2 ? 'w-1/2' : 'w-1/2';
+            return index < 2 ? 'w-1/2 p-1 relative overflow-hidden' : 'w-1/2 p-1 relative overflow-hidden';
         }
         return '';
     }
@@ -94,7 +94,7 @@ export default function Home() {
                                 {categoryDetails.map((category, index) => (
                                     <div
                                         key={index}
-                                        className={`${index < 2 ? 'w-1/2 p-1 relative overflow-hidden' : 'w-1/4 p-1 relative overflow-hidden'}`}
+                                        className={getClName(count, index)}
                                     >
                                         <div
                                             className="categories__item bg-contain bg-center bg-no-repeat relative overflow-hidden"

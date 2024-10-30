@@ -69,7 +69,7 @@ export default function Home() {
             <section className="categories">
                 <div className="container-fluid px-2">
                     <div className="flex flex-wrap">
-                        <div className="w-full lg:w-1/2 p-1">
+                        <div className="w-full lg:w-3/5 p-1">
                             <div className="sliders">
                                 <Slider {...settings}>
                                     {bannerImg.length > 0 &&
@@ -89,7 +89,7 @@ export default function Home() {
                                 </Slider>
                             </div>
                         </div>
-                        <div className="w-full lg:w-1/2">
+                        <div className="w-full lg:w-2/5">
                             <div className="flex flex-wrap">
                                 {categoryDetails.map((category, index) => (
                                     <div

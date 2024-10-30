@@ -12,7 +12,7 @@ export default function ProductSlider() {
     const apiUrl = import.meta.env.VITE_API_URL;
 
     const handleProductClick = (productId) => {
-        navigate(`product/${productId}`);
+        navigate(`/product/${productId}`);
     };
 
     useEffect(() => {

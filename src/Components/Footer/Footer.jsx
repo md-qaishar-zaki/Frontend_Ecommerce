@@ -187,7 +187,7 @@ export default function Footer() {
                                 </ul>
                             </div>
  
-                            <div className="w-full md:w-1/4 text-center md:text-right ">
+                            <div className="w-full md:w-1/3 flex justify-center mb-4 md:mb-0 ">
                                 <ul className="inline-flex space-x-4">
                                     <li>
                                         <img loading="lazy" alt="razorpay" src={Razorpay} className="h-8" />

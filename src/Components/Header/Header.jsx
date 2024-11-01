@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './Header.css';
-import icon from '../../assets/Categories Icon/tools.png'
+import icon from '../../assets/Categories Icon/tools.png';
+
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [categories, setCategories] = useState([]);
-    const [selectedCategory, setSelectedCategory] = useState(null); // For displaying selected menu details
+    const [selectedCategory, setSelectedCategory] = useState(null);
     const sidebarRef = useRef(null);
     const apiUrl = import.meta.env.VITE_API_URL;
-
-    console.log(apiUrl);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -23,16 +22,17 @@ export default function Header() {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const response = await fetch(`${apiUrl}/api/getcategorieslist`);
+                const response = await fetch(`${apiUrl}/api/getcatwithsubandsub`);
                 const data = await response.json();
-                setCategories(data.categories);
+                setCategories(data.categories); // Adjust according to your API response structure
             } catch (error) {
                 console.error('Error fetching categories:', error);
             }
         };
 
         fetchCategories();
-    }, []);
+    }, [apiUrl]);
+
 
     useEffect(() => {
         document.addEventListener('mousedown', handleClickOutside);
@@ -79,7 +79,7 @@ export default function Header() {
                                     <option value="">All Categories</option>
                                     {categories.map((category) => (
                                         <option key={category.id} value={category.slug}>
-                                            <div className="op">{category.title}</div>
+                                            {category.title}
                                         </option>
                                     ))}
                                 </select>
@@ -93,7 +93,6 @@ export default function Header() {
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
                                 </svg>
-
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
                                 </svg>
@@ -102,7 +101,7 @@ export default function Header() {
                     </div>
                 </div>
 
-                <div ref={sidebarRef} className={`offcanvas-menu-wrapper ${isMenuOpen ? 'active' : ''}  ${selectedCategory ? 'widthAdd' : ''}`}>
+                <div ref={sidebarRef} className={`offcanvas-menu-wrapper ${isMenuOpen ? 'active' : ''} ${selectedCategory ? 'widthAdd' : ''}`}>
                     <div className="flex justify-between">
                         <nav className="offcanvas__menu">
                             <ul>
@@ -110,30 +109,58 @@ export default function Header() {
                                 {categories.map((category) => (
                                     <li
                                         key={category.id}
-                                        onMouseEnter={() => setSelectedCategory(category)} 
+                                        onMouseEnter={() => setSelectedCategory(category)}
                                     >
-                                        <a><img src={icon} alt="" />
-                                            {category.title}</a>
+                                        <a>
+                                            <img src={icon} alt="" />
+                                            {category.title}
+                                        </a>
                                     </li>
                                 ))}
                             </ul>
                         </nav>
                         {selectedCategory && (
                             <div className="w-4/6"
-                                onMouseEnter={() => setSelectedCategory(category)}
-                                onMouseLeave={() => setSelectedCategory(null)}
+                            onMouseLeave={() => setSelectedCategory(null)}
                             >
-                                <div className="content-section" style={{ width: '70%' }}>
-                                    <div>
-                                        <h2>{selectedCategory.title}</h2>
-                                        <p>{selectedCategory.details || 'Some default details about the category.'}</p>
+                                <div className="content-section" style={{ width: '100%' }}>
+                                    <div className="subcategories-container">
+                                        <div className='flex flex-wrap justify-between'>
+                                            {selectedCategory.sub_categories && selectedCategory.sub_categories.length > 0 ? (
+                                                selectedCategory.sub_categories.map((subCategory) => (
+                                                    <div key={subCategory.id} className="w-full md:w-1/2 lg:w-1/2 p-1">
+                                                        {/* <h4></h4> 
+                                                        <p ></p>
+                                                        <img  /> */}
+
+                                                        <div className="h-full bg-white shadow-lg rounded-lg p-4 text-left">
+                                                            <div className='ImgSection'>
+                                                                <img className="block mx-auto" src={subCategory.photo} alt={subCategory.title} /> 
+                                                            </div>
+                                                            <h4 className="text-base font-semibold text-gray-700 mt-2"> 
+                                                                {subCategory.title}
+                                                            </h4>
+                                                            <p className="text-gray-600 mt-2 block" dangerouslySetInnerHTML={{ __html: subCategory.summary }}></p>
+                                                            <p className="text-blue-500 hover:text-blue-400 mt-2 block">
+                                                                See more
+                                                                <svg className="inline w-4 h-4 ml-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 12H5m14 0-4 4m4-4-4-4"></path>
+                                                                </svg>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                ))
+                                            ) : (
+                                                <p>No subcategories available.</p>
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         )}
                     </div>
                 </div>
-            </header >
+            </header>
         </>
     );
 }

@@ -8,7 +8,7 @@ export default function RatingsReviews() {
             <div className=" bg-white p-3">
                 <div className="section-title-1">
                     <h3 className="heading-5 font-bold mb-0">
-                        <span className="mr-4">Ratings &amp; Reviews</span>
+                        <span className="productTitle">Ratings &amp; Reviews</span>
                     </h3>
                 </div>
                 <div className="product-desc-tab bg-white">

@@ -66,7 +66,7 @@ export default function Project_Details() {
                                             key={index}
                                             src={photo.photo_path}
                                             alt={`${product.product.title} - ${index + 1}`}
-                                            className={`w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-md cursor-pointer opacity-60 hover:opacity-100 transition duration-300 ${selectedImage === photo.photo_path ? 'border-2 border-blue-500 opacity-100' : ''}`}
+                                            className={`w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-md cursor-pointer hover:opacity-100 transition duration-300 ${selectedImage === photo.photo_path ? 'border-2 border-blue-500 opacity-100' : ''}`}
                                             onClick={() => changeImage(photo.photo_path)}
                                         />
                                     ))}
@@ -128,8 +128,8 @@ export default function Project_Details() {
                                 </div>
                                 <div class="flex flex-col items-start space-y-2">
                                     <div class="flex items-center space-x-2">
-                                        <div class="text-lg font-medium text-gray-800">₹{product.product.price}</div>
-                                        <div class="line-through text-sm text-gray-400 px-1">₹{product.product.purchase_price}</div>
+                                        <div class="text-lg font-medium text-gray-800 rupes">₹{product.product.price}</div>
+                                        <div class="line-through text-sm text-gray-400 px-1 rupes">₹{product.product.purchase_price}</div>
                                         <div class="text-green-500 text-xs font-semibold">
                                             <span>56% off</span>
                                         </div>
@@ -169,7 +169,7 @@ export default function Project_Details() {
                                             <img src="https://rukminim2.flixcart.com/www/36/36/promos/06/09/2016/c22c9fc4-0555-4460-8401-bf5c28d7ba29.png?q=90"
                                                 width="18" height="18" alt="icon" class="w-4 h-4" />
                                             <span class="font-semibold text-gray-700 pr-2 pl-3">Bank Offer</span>
-                                            <span class="ml-1 text-gray-600 pr-2">10% off up to ₹1,500 on SBI Credit Card Transactions of ₹4,990
+                                            <span class="ml-1 text-gray-600 pr-2 rupes">10% off up to ₹1,500 on SBI Credit Card Transactions of ₹4,990
                                                 and above</span>
                                             <span class="text-blue-500 text-xs cursor-pointer">T&amp;C</span>
                                         </div>
@@ -182,32 +182,6 @@ export default function Project_Details() {
                                 <div class="w-full flex items-center p-4 border-gray-200">
                                     <div class="text-lg font-semibold text-gray-800 text-sm">Warranty</div>
                                     <div class="text-gray-600 text-xs px-6">3 months - Domestic Warranty, 6 months - International Warranty
-                                    </div>
-                                </div>
-                                <div className="w-full flex p-4 border-b border-gray-200">
-                                    <div className="text-lg font-semibold text-gray-800 mb-2 text-sm">Delivery</div>
-                                    <div className="flex flex-col px-4">
-                                        <div className="flex items-center space-x-2 mb-4">
-                                            <svg width="12" height="12" viewBox="0 0 9 12" xmlns="http://www.w3.org/2000/svg" className='mx-2'>
-                                                <path fill="#2874f0"
-                                                    d="M4.2 5.7c-.828 0-1.5-.672-1.5-1.5 0-.398.158-.78.44-1.06.28-.282.662-.44 1.06-.44.828 0 1.5.672 1.5 1.5 0 .398-.158.78-.44 1.06-.28.282-.662.44-1.06.44zm0-5.7C1.88 0 0 1.88 0 4.2 0 7.35 4.2 12 4.2 12s4.2-4.65 4.2-7.8C8.4 1.88 6.52 0 4.2 0z" />
-                                            </svg>
-                                            <form autoComplete="off" className="flex">
-                                                <input className="border rounded-md px-2 py-1" placeholder="Enter Delivery Pincode" type="text"
-                                                    maxLength="6" />
-                                            </form>
-                                            <button className="text-blue-500 ml-2 px-2 text-sm font-medium">Check</button>
-                                        </div>
-                                        <div className="text-gray-600 text-left space-y-2 px-4">
-                                            <div className='text-sm font-medium flex items-center'>
-                                                <span className="text-xs">Delivery by:</span> 3 Nov, Sunday <span className="ml-2 flex">| Free
-                                                    <p className='line-through px-1 text-sm font-medium'>₹40</p></span>
-                                            </div>
-                                            <div className='text-sm font-medium'>
-                                                <span className="text-xs">Installation & Demo by:</span> 2 Nov, Saturday | ₹498
-                                            </div>
-                                        </div>
-                                        <button className="text-blue-500 text-left px-4 mt-2 font-medium text-sm">View Details</button>
                                     </div>
                                 </div>
                                 <div className="flex flex-wrap py-6">
@@ -230,7 +204,7 @@ export default function Project_Details() {
                                             <ul className="list-disc list-inside px-4 text-xs leading-6">
                                                 <li className="flex items-center">
                                                     <div className="w-4 h-4 bg-blue-500 mr-2 rounded-full"></div>
-                                                    <span>3 months- Domestic Warranty, 6 months- International Warranty</span>
+                                                    <span>3 months- Domestic Warranty, 6 months</span>
                                                 </li>
                                                 <li className="flex items-center">
                                                     <div className="w-4 h-4 bg-green-500 mr-2 rounded-full"></div>
@@ -262,7 +236,7 @@ export default function Project_Details() {
                                 <div className="space-y-6">
 
 
-                                    <div className="w-full px-4">
+                                    <div className="w-full">
                                         <div className="text-lg font-semibold mb-2"></div>
                                         <div>
                                             <div className="mt-2">
@@ -295,8 +269,8 @@ export default function Project_Details() {
                                             <img src="https://rukminim2.flixcart.com/image/200/200/xif0q/icons/original-WPMFCHEZ768YASJ4_1.jpg"
                                                 alt="Multipurpose Performance" className="w-20 h-20" />
                                             <div>
-                                                <h3 className="text-md font-semibold">Multipurpose Performance</h3>
-                                                <p className="text-sm text-gray-700 mt-1">
+                                                <h3 className="text-base font-semibold">Multipurpose Performance</h3>
+                                                <p className="text-xs text-gray-700 mt-1">
                                                     Built with versatility in mind, this water cooler pump excels in various applications, such
                                                     as
                                                     decorative fountains, ponds, aquariums, and hydroponic setups, delivering consistent
@@ -309,8 +283,8 @@ export default function Project_Details() {
                                             <img src="https://rukminim2.flixcart.com/image/200/200/xif0q/icons/original-WPMFCHEZ768YASJ4_2.jpg"
                                                 alt="High Performance" className="w-20 h-20" />
                                             <div>
-                                                <h3 className="text-md font-semibold">High Performance</h3>
-                                                <p className="text-sm text-gray-700 mt-1">
+                                                <h3 className="text-base font-semibold">High Performance</h3>
+                                                <p className="text-xs text-gray-700 mt-1">
                                                     This high-performance water cooler pump ensures efficient cooling with a flow rate up to
                                                     1.85m and
                                                     noiseless operation, making it versatile and energy-saving.
@@ -322,8 +296,8 @@ export default function Project_Details() {
                                             <img src="https://rukminim2.flixcart.com/image/200/200/xif0q/icons/original-WPMFCHEZ768YASJ4_3.jpg"
                                                 alt="Easy Maintenance and Cleaning" className="w-20 h-20" />
                                             <div>
-                                                <h3 className="text-md font-semibold">Easy Maintenance and Cleaning</h3>
-                                                <p className="text-sm text-gray-700 mt-1">
+                                                <h3 className="text-base font-semibold">Easy Maintenance and Cleaning</h3>
+                                                <p className="text-xs text-gray-700 mt-1">
                                                     Designed for user-friendliness, this pump is easy to clean and maintain, ensuring optimal
                                                     performance
                                                     with minimal hassle.
@@ -335,8 +309,8 @@ export default function Project_Details() {
                                             <img src="https://rukminim2.flixcart.com/image/200/200/xif0q/icons/original-WPMFCHEZ768YASJ4_4.jpg"
                                                 alt="Convenient Features" className="w-20 h-20" />
                                             <div>
-                                                <h3 className="text-md font-semibold">Convenient Features</h3>
-                                                <p className="text-sm text-gray-700 mt-1">
+                                                <h3 className="text-base font-semibold">Convenient Features</h3>
+                                                <p className="text-xs text-gray-700 mt-1">
                                                     This fully submersible pump is energy-efficient, with a durable ABS body, suitable for
                                                     various
                                                     applications and long-lasting performance.
@@ -344,160 +318,107 @@ export default function Project_Details() {
                                             </div>
                                         </div>
 
-                                        <button className="text-blue-600 mt-2 hover:underline">View all features</button>
+                                        <button className="text-blue-600 mt-2 hover:underline font-base">View all features</button>
                                     </div>
                                 </div>
-                                <div class="p-4 w-full">
-                                    <div class="bg-gray-50 shadow-md rounded-lg p-4">
-                                        <div class="text-lg font-semibold text-gray-800">Specifications</div>
-
-                                        <div class="mt-4">
-                                            <div class="bg-white p-4 rounded-md shadow-sm mb-4">
-                                                <div class="text-md font-medium text-gray-700">In The Box</div>
-                                                <table class="w-full mt-2 text-gray-600">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td class="py-2">
-                                                                <ul class="list-disc pl-5">
-                                                                    <li>1 Water cooler pump & 1 Nozzle</li>
-                                                                </ul>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-
-                                            <div class="bg-white p-4 rounded-md shadow-sm mb-4">
-                                                <div class="text-md font-medium text-gray-700">General</div>
-                                                <table class="w-full mt-2 text-gray-600">
-                                                    <tbody>
-                                                        <tr class="flex">
-                                                            <td class="w-1/4 font-semibold">Brand</td>
-                                                            <td class="w-3/4">
-                                                                <ul class="list-disc pl-5">
-                                                                    <li>Aksha Gold</li>
-                                                                </ul>
-                                                            </td>
-                                                        </tr>
-                                                        <tr class="flex">
-                                                            <td class="w-1/4 font-semibold">Model Name</td>
-                                                            <td class="w-3/4">
-                                                                <ul class="list-disc pl-5">
-                                                                    <li>Computer Tested Dynamically Balanced 18 Watt Multipurpose Water Cooler
-                                                                        Pump...</li>
-                                                                </ul>
-                                                            </td>
-                                                        </tr>
-
-                                                    </tbody>
-                                                </table>
-                                            </div>
-
-                                            <div class="bg-white p-4 rounded-md shadow-sm mb-4">
-                                                <div class="text-md font-medium text-gray-700">Power Features</div>
-                                                <table class="w-full mt-2 text-gray-600">
-                                                    <tbody>
-                                                        <tr class="flex">
-                                                            <td class="w-1/4 font-semibold">Phase</td>
-                                                            <td class="w-3/4">
-                                                                <ul class="list-disc pl-5">
-                                                                    <li>Single-phase</li>
-                                                                </ul>
-                                                            </td>
-                                                        </tr>
-                                                        <tr class="flex">
-                                                            <td class="w-1/4 font-semibold">Thermal Over Load Protector</td>
-                                                            <td class="w-3/4">
-                                                                <ul class="list-disc pl-5">
-                                                                    <li>Yes</li>
-                                                                </ul>
-                                                            </td>
-                                                        </tr>
-
-                                                    </tbody>
-                                                </table>
-                                            </div>
-
-                                            <div class="bg-white p-4 rounded-md shadow-sm mb-4">
-                                                <div class="text-md font-medium text-gray-700">Additional Features</div>
-                                                <table class="w-full mt-2 text-gray-600">
-                                                    <tbody>
-                                                        <tr class="flex">
-                                                            <td class="w-1/4 font-semibold">Corrosion Resistant</td>
-                                                            <td class="w-3/4">
-                                                                <ul class="list-disc pl-5">
-                                                                    <li>Yes</li>
-                                                                </ul>
-                                                            </td>
-                                                        </tr>
-                                                        <tr class="flex">
-                                                            <td class="w-1/4 font-semibold">Other Features</td>
-                                                            <td class="w-3/4">
-                                                                <ul class="list-disc pl-5">
-                                                                    <li>Fully Submersible, No Rusting &amp; No Jamming, Operates Well At Low
-                                                                        Voltage...</li>
-                                                                </ul>
-                                                            </td>
-                                                        </tr>
-
-                                                    </tbody>
-                                                </table>
-                                            </div>
-
-                                            <div class="bg-white p-4 rounded-md shadow-sm mb-4">
-                                                <div class="text-md font-medium text-gray-700">Dimensions</div>
-                                                <table class="w-full mt-2 text-gray-600">
-                                                    <tbody>
-                                                        <tr class="flex">
-                                                            <td class="w-1/4 font-semibold">Width</td>
-                                                            <td class="w-3/4">
-                                                                <ul class="list-disc pl-5">
-                                                                    <li>7.6 cm</li>
-                                                                </ul>
-                                                            </td>
-                                                        </tr>
-                                                        <tr class="flex">
-                                                            <td class="w-1/4 font-semibold">Height</td>
-                                                            <td class="w-3/4">
-                                                                <ul class="list-disc pl-5">
-                                                                    <li>8.2 cm</li>
-                                                                </ul>
-                                                            </td>
-                                                        </tr>
-
-                                                    </tbody>
-                                                </table>
-                                            </div>
-
-                                            <div class="bg-white p-4 rounded-md shadow-sm mb-4">
-                                                <div class="text-md font-medium text-gray-700">Warranty</div>
-                                                <table class="w-full mt-2 text-gray-600">
-                                                    <tbody>
-                                                        <tr class="flex">
-                                                            <td class="w-1/4 font-semibold">Warranty Summary</td>
-                                                            <td class="w-3/4">
-                                                                <ul class="list-disc pl-5">
-                                                                    <li>3 months- Domestic Warranty, 6 months- International Warranty</li>
-                                                                </ul>
-                                                            </td>
-                                                        </tr>
-                                                        <tr class="flex">
-                                                            <td class="w-1/4 font-semibold">Service Type</td>
-                                                            <td class="w-3/4">
-                                                                <ul class="list-disc pl-5">
-                                                                    <li>Contact To Seller</li>
-                                                                </ul>
-                                                            </td>
-                                                        </tr>
-
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-
-                                        <button class="mt-4 w-full py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600">Read
-                                            More</button>
-                                    </div>
+                                <div className="Specifications">
+                                    <h5>Specifications</h5>
+                                    <h6>In The Box</h6>
+                                    <p>1 Water cooler pump & 1 Nozzle</p>
+                                    <h4>General</h4>
+                                    <table>
+                                        <tr>
+                                            <td>Brand</td>
+                                            <td>Aksha Gold</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Model Name</td>
+                                            <td>Computer Tested Dynamically Balanced 18 Watt Multipurpose Water Cooler Pump Used For Aquarium, Desert Air Cooler, Fountain (1.2HP)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Type</td>
+                                            <td>Submersible</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Usage Type</td>
+                                            <td>Domestic</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Color</td>
+                                            <td>Multicolor</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Body Material</td>
+                                            <td>Plastic</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Applications</td>
+                                            <td>Desert Air Cooler, Aquarium, Water Fountain, For Washing, Hydroponic, Draining Water From Small Ponds</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Adjustable Speed</td>
+                                            <td>No</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Battery Backup</td>
+                                            <td>No</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Flow Rate</td>
+                                            <td>30 Lpm</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Total Head</td>
+                                            <td>1.8 m</td>
+                                        </tr>
+                                    </table>
+                                    <h4>Power Features</h4>
+                                    <table>
+                                        <tr>
+                                            <td>Phase</td>
+                                            <td>Single-phase</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Thermal Over Load Protector</td>
+                                            <td>Yes</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Power Supply</td>
+                                            <td>165V-230V/50HZ</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Power Rating</td>
+                                            <td>0.018 kW</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Motor Power</td>
+                                            <td>1.2 hp</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Body Material</td>
+                                            <td>Plastic</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Applications</td>
+                                            <td>Desert Air Cooler, Aquarium, Water Fountain, For Washing, Hydroponic, Draining Water From Small Ponds</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Adjustable Speed</td>
+                                            <td>No</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Battery Backup</td>
+                                            <td>No</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Flow Rate</td>
+                                            <td>30 Lpm</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Total Head</td>
+                                            <td>1.8 m</td>
+                                        </tr>
+                                    </table>
                                 </div>
                             </div>
                             <div className="mt-3 mb-3 bg-white rounded overflow-hidden ms-0 mx-3">

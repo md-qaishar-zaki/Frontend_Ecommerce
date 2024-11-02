@@ -95,6 +95,10 @@ ol {
     align-items: center;
     justify-content: space-between;
     width: 100%;
+    border-top: 1px solid #63c4aa;
+    border-bottom: 1px solid #63c4aa;
+    padding: 10px 20px;
+    background: #bfe7dc;
 }
 
 .section-title h4 {

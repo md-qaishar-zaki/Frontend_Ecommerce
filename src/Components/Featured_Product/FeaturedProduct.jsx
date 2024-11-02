@@ -66,8 +66,9 @@ export default function FeaturedProduct() {
 
     return (
         <>
-            <div className="section-title px-4">
+            <div className="section-title px-4 flex justify-between">
                 <h4 className="text-xl font-bold">Feature Product</h4>
+                <Button Name={"View More"} />
             </div>
             <div className="container-fluid m-auto productSlider">
                 <div className="carousel-container w-full">
@@ -96,10 +97,7 @@ export default function FeaturedProduct() {
                             </div>
                         ))}
                     </Slider>
-                </div>
-                <div className="flex justify-center">
-                    <Button Name={"View More"} />
-                </div>
+                </div> 
             </div>
         </>
     );

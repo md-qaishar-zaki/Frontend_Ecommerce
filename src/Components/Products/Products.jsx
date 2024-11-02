@@ -96,41 +96,42 @@ export default function ProductSlider() {
                 }
 
                 return (
-                    <div key={category.id} className="container-fluid m-auto productSlider">
+                    <>
                         <div className="trend__content">
-                            <div className="section-title">
+                            <div className="section-title flex justify-between">
                                 <h4 className="text-xl font-bold">{category.title}</h4>
+                                <Button Name={"View More"} />
                             </div>
                         </div>
-                        <div className="flex flex-wrap">
-                            <div className="carousel-container w-full">
-                                <Slider {...settings}>
-                                    {visibleProducts.map((product) => (
-                                        <div className="w-1/5 p-2">
-                                            <div className="product-card" key={product.id} onClick={() => handleProductClick(product.id)}>
-                                                <div className="product-card__image">
-                                                    {/* <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="Red Nike Shoes" /> */}
-                                                    <img src={product.photoproduct[0].photo_path} alt="Red Nike Shoes" />
-                                                </div>
-                                                <div className="product-card__info">
-                                                    <h2 className="product-card__title line-clamp-1">{product.title}</h2>
-                                                    <p className="product-card__description line-clamp-1"
-                                                        dangerouslySetInnerHTML={{ __html: product.description }} />
-                                                    <div className="product-card__price-row">
-                                                        <span className="product-card__price">₹{product.price}.00</span>
-                                                        <button className="product-card__btn">Add to Cart</button>
+                        <div key={category.id} className="container-fluid m-auto productSlider">
+
+                            <div className="flex flex-wrap">
+                                <div className="carousel-container w-full">
+                                    <Slider {...settings}>
+                                        {visibleProducts.map((product) => (
+                                            <div className="w-1/5 p-2">
+                                                <div className="product-card" key={product.id} onClick={() => handleProductClick(product.id)}>
+                                                    <div className="product-card__image">
+                                                        {/* <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="Red Nike Shoes" /> */}
+                                                        <img src={product.photoproduct[0].photo_path} alt="Red Nike Shoes" />
+                                                    </div>
+                                                    <div className="product-card__info">
+                                                        <h2 className="product-card__title line-clamp-1">{product.title}</h2>
+                                                        <p className="product-card__description line-clamp-1"
+                                                            dangerouslySetInnerHTML={{ __html: product.description }} />
+                                                        <div className="product-card__price-row">
+                                                            <span className="product-card__price">₹{product.price}.00</span>
+                                                            <button className="product-card__btn">Add to Cart</button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    ))}
-                                </Slider>
+                                        ))}
+                                    </Slider>
+                                </div>
                             </div>
                         </div>
-                        <div className="flex justify-center mt-4">
-                            <Button Name={"View More"} />
-                        </div>
-                    </div>
+                    </>
                 );
             })}
         </>

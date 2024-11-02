@@ -150,3 +150,35 @@ ol {
 .Price {
     font-family: Inter, -apple-system, Helvetica, Arial, sans-serif;
 }
+
+
+select {
+    padding: 10px;
+    border: 1px solid #8dcbba;
+    border-radius: 3px;
+    width: 100%;
+    color: #007c5b;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.flowIcon {
+    transition: 0.3s;
+    margin-bottom: -45px;
+    background: #00000090;
+    color: #fff;
+    border: 2px solid #fff;
+    backdrop-filter: blur(3px);
+}
+
+.flowIcon svg {
+    cursor: pointer;
+}
+
+.flowIcon svg:hover{
+    color: rgb(81, 255, 0);
+}
+
+.CTPRBOX:hover .flowIcon {
+    margin-bottom: 8px;
+}

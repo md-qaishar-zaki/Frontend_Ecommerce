@@ -6,6 +6,7 @@ export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [categories, setCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState(null);
+    const [OTPModal, setOTPModal] = useState(false);
     const sidebarRef = useRef(null);
     const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -41,6 +42,15 @@ export default function Header() {
         };
     }, []);
 
+    useEffect(() => {
+        if (OTPModal) {
+            document.body.style.overflow = 'hidden';
+        }
+        else {
+            document.body.style.overflow = 'auto';
+        }
+    })
+
     return (
         <>
             <header className="header">
@@ -54,7 +64,8 @@ export default function Header() {
                     <div className="w-full lg:w-5/12 text-right hidden lg:flex justify-end">
                         <ul className="flex space-x-4">
                             <li><a className="top-bar-item text-gray-700">Track Order</a></li>
-                            <li><a className="top-bar-item text-gray-700">Login</a></li>
+                            <li><a className="top-bar-item text-gray-700"
+                                onClick={() => setOTPModal(prev => !prev)}>Login</a></li>
                         </ul>
                     </div>
                 </div>
@@ -121,7 +132,7 @@ export default function Header() {
                         </nav>
                         {selectedCategory && (
                             <div className="w-4/6"
-                            onMouseLeave={() => setSelectedCategory(null)}
+                                onMouseLeave={() => setSelectedCategory(null)}
                             >
                                 <div className="content-section" style={{ width: '100%' }}>
                                     <div className="subcategories-container">
@@ -135,9 +146,9 @@ export default function Header() {
 
                                                         <div className="h-full bg-white shadow-lg rounded-lg p-4 text-left">
                                                             <div className='ImgSection'>
-                                                                <img className="block mx-auto" src={subCategory.photo} alt={subCategory.title} /> 
+                                                                <img className="block mx-auto" src={subCategory.photo} alt={subCategory.title} />
                                                             </div>
-                                                            <h4 className="text-base font-semibold text-gray-700 mt-2"> 
+                                                            <h4 className="text-base font-semibold text-gray-700 mt-2">
                                                                 {subCategory.title}
                                                             </h4>
                                                             <p className="text-gray-600 mt-2 block" dangerouslySetInnerHTML={{ __html: subCategory.summary }}></p>
@@ -161,6 +172,46 @@ export default function Header() {
                     </div>
                 </div>
             </header>
+            {OTPModal &&
+                < div class=" OTPModal min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
+                    <div class="relative py-3 sm:max-w-xl sm:mx-auto">
+                        <div class="absolute inset-0 bg-gradient-to-r from-[#38d0a8] to-[#005f4b] shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl">
+                        </div>
+
+                        <div class="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
+
+                            <div class="max-w-md mx-auto">
+                                <div>
+                                    <h1 class="text-2xl font-semibold">Login</h1>
+                                </div>
+                                <div class="divide-y divide-gray-200">
+                                    <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+                                        <div class="relative">
+                                            <input autocomplete="off" id="email" name="email" type="text" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600" placeholder="Email address" />
+                                            <label for="email" class="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Enter Your Mobile No</label>
+                                        </div>
+                                        <div class="relative">
+                                            <button class="bg-[#007c5b] text-white rounded-md px-4 py-2 hover:bg-[#005f4b] transition">
+                                                Send OTP
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="w-full flex justify-center" onClick={() => setOTPModal(prev => !prev)}>
+                                <button class="flex items-center bg-white border border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                                    <svg class="h-6 w-6 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M4.098 19.902a3.75 3.75 0 0 0 5.304 0l6.401-6.402M6.75 21A3.75 3.75 0 0 1 3 17.25V4.125C3 3.504 3.504 3 4.125 3h5.25c.621 0 1.125.504 1.125 1.125v4.072M6.75 21a3.75 3.75 0 0 0 3.75-3.75V8.197M6.75 21h13.125c.621 0 1.125-.504 1.125-1.125v-5.25c0-.621-.504-1.125-1.125-1.125h-4.072M10.5 8.197l2.88-2.88c.438-.439 1.15-.439 1.59 0l3.712 3.713c.44.44.44 1.152 0 1.59l-2.879 2.88M6.75 17.25h.008v.008H6.75v-.008Z" />
+                                    </svg>
+                                    <span>Stay Without Login</span>
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div >
+            }
         </>
     );
 }

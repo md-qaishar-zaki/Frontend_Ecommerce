@@ -269,3 +269,11 @@ td {
 .subcategories-container::-webkit-scrollbar-thumb:hover {
 	background: #555;
 }
+
+.OTPModal{
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 11;
+	overflow: hidden;
+}

@@ -3,8 +3,10 @@ import './Product_Details.css';
 import { useParams } from 'react-router-dom';
 import RatingsReviews from '../../Components/Ratings_&_Reviews/Ratings_&_Reviews.jsx';
 import QNA from '../../Components/QNA/QNA.jsx';
-import RelatedProducts from '../../Components/RelatedProducts/RelatedProducts.jsx';
-import TopSellignList from '../../Components/Top-Selling-List/Top_Sellign_List.jsx';
+import Returnable from '../../assets/Categories Icon/return.png';
+import Delivery from '../../assets/Categories Icon/fast-delivery.png';
+import Quality from '../../assets/Categories Icon/quality.png';
+import Pay from '../../assets/Categories Icon/indian-rupee.png';
 
 export default function Project_Details() {
     window.scrollTo(0, 0);
@@ -128,124 +130,34 @@ export default function Project_Details() {
                                 </div>
                                 <div class="flex flex-col items-start space-y-2">
                                     <div class="flex items-center space-x-2">
-                                        <div class="text-lg font-medium text-gray-800 rupes">₹{product.product.price}</div>
-                                        <div class="line-through text-sm text-gray-400 px-1 rupes">₹{product.product.purchase_price}</div>
-                                        <div class="text-green-500 text-xs font-semibold">
-                                            <span>56% off</span>
-                                        </div>
-                                        <span className='px-2 text-sm'>i</span>
+                                        <div class="text-lg font-medium text-gray-800 rupes">₹{product.product.purchase_price}</div>
+                                        <div class="line-through text-sm text-gray-400 px-1 rupes">₹{product.product.price}</div>
                                     </div>
                                 </div>
-                                <div class="w-full p-4 border-gray-200">
-                                    <div class="text-lg font-semibold text-gray-800 mb-2">Available offers</div>
-
-                                    <div class="space-y-3">
-                                        <div class="flex items-center space-x-2 text-xs">
-                                            <img src="https://rukminim2.flixcart.com/www/36/36/promos/06/09/2016/c22c9fc4-0555-4460-8401-bf5c28d7ba29.png?q=90"
-                                                width="18" height="18" alt="icon" class="w-4 h-4" />
-                                            <span class="font-semibold text-gray-700 pr-2 pl-3">Special Price</span>
-                                            <span class="ml-1 text-gray-600 pr-2">Get extra 39% off (price inclusive of cashback/coupon)</span>
-                                            <span class="text-blue-500 text-xs cursor-pointer">T&amp;C</span>
-                                        </div>
-
-                                        <div class="flex items-center space-x-2 text-xs flex-wrap">
-                                            <img src="https://rukminim2.flixcart.com/www/36/36/promos/06/09/2016/c22c9fc4-0555-4460-8401-bf5c28d7ba29.png?q=90"
-                                                width="18" height="18" alt="icon" class="w-4 h-4" />
-                                            <span class="font-semibold text-gray-700 pr-2 pl-3">Partner Offer</span>
-                                            <span class="ml-1 text-gray-600 pr-2">Make a purchase and enjoy a surprise cashback/ coupon that you
-                                                can redeem later!</span>
-                                            <span class="text-blue-500 text-xs cursor-pointer mr-4">Know More</span>
-                                        </div>
-
-                                        <div class="flex items-center space-x-2 text-xs">
-                                            <img src="https://rukminim2.flixcart.com/www/36/36/promos/06/09/2016/c22c9fc4-0555-4460-8401-bf5c28d7ba29.png?q=90"
-                                                width="18" height="18" alt="icon" class="w-4 h-4" />
-                                            <span class="font-semibold text-gray-700 pr-2 pl-3">Bank Offer</span>
-                                            <span class="ml-1 text-gray-600 pr-2">5% Unlimited Cashback on Flipkart Axis Bank Credit Card</span>
-                                            <span class="text-blue-500 text-xs cursor-pointer">T&amp;C</span>
-                                        </div>
-
-                                        <div class="flex items-center space-x-2 text-xs">
-                                            <img src="https://rukminim2.flixcart.com/www/36/36/promos/06/09/2016/c22c9fc4-0555-4460-8401-bf5c28d7ba29.png?q=90"
-                                                width="18" height="18" alt="icon" class="w-4 h-4" />
-                                            <span class="font-semibold text-gray-700 pr-2 pl-3">Bank Offer</span>
-                                            <span class="ml-1 text-gray-600 pr-2 rupes">10% off up to ₹1,500 on SBI Credit Card Transactions of ₹4,990
-                                                and above</span>
-                                            <span class="text-blue-500 text-xs cursor-pointer">T&amp;C</span>
-                                        </div>
-                                    </div>
-
-                                    <button class="mt-3 px-4 py-2 text-blue-600 text-sm font-medium rounded">
-                                        View 5 more offers
-                                    </button>
-                                </div>
-                                <div class="w-full flex items-center p-4 border-gray-200">
-                                    <div class="text-lg font-semibold text-gray-800 text-sm">Warranty</div>
-                                    <div class="text-gray-600 text-xs px-6">3 months - Domestic Warranty, 6 months - International Warranty
-                                    </div>
-                                </div>
-                                <div className="flex flex-wrap py-6">
-                                    <div className="w-full md:w-1/2">
-                                        <div className='flex text-sm'>
-                                            <h2 className="font-semibold mb-2 text-sm text-neutral-800">Highlights</h2>
-                                            <ul className="list-disc list-inside px-4 text-xs leading-6">
-                                                <li>Single-phase Water Pump</li>
-                                                <li>In-built Thermal Overload Protector</li>
-                                                <li>Power Rating: 0.018 kW</li>
-                                                <li>Power Supply: 165V-230V/50HZ</li>
-                                                <li>Motor Power: 1.2 hp</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <div className="w-full md:w-1/2">
-                                        <div className='flex text-sm'>
-                                            <h2 className="font-semibold mb-2 text-sm text-neutral-800">Services</h2>
-                                            <ul className="list-disc list-inside px-4 text-xs leading-6">
-                                                <li className="flex items-center">
-                                                    <div className="w-4 h-4 bg-blue-500 mr-2 rounded-full"></div>
-                                                    <span>3 months- Domestic Warranty, 6 months</span>
-                                                </li>
-                                                <li className="flex items-center">
-                                                    <div className="w-4 h-4 bg-green-500 mr-2 rounded-full"></div>
-                                                    <span>Cash on Delivery available <span
-                                                        className="text-blue-500 cursor-pointer ml-1">?</span></span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="flex">
-                                    <div className="lg:w-7/12">
-                                        <h2 className="font-semibold text-sm">Important Note</h2>
-                                    </div>
-                                    <div className="lg:w-7/12 text-xs">
-                                        <p>For multicolor products, please check the image for colour details before purchasing.</p>
-                                    </div>
-                                </div>
-
-                                <div className="flex my-4">
-                                    <div className="lg:w-7/12">
-                                        <h2 className="font-semibold text-sm">Seller</h2>
-                                    </div>
-                                    <div className="lg:w-7/12 text-xs">
-                                        <p>DelhiRetailShop <span className='bg-blue-600 text-white p-1 rounded text-xs'>3.9</span> </p>
-                                    </div>
-                                </div>
-
                                 <div className="space-y-6">
-
-
                                     <div className="w-full">
                                         <div className="text-lg font-semibold mb-2"></div>
                                         <div>
                                             <div className="mt-2">
-                                                <ul className="list-none">
-                                                    <li className="flex items-center">
-                                                        <span className="text-sm font-medium">7 days return policy</span>
-                                                        <div className="ml-1 text-gray-500">(?)</div>
-                                                    </li>
-                                                </ul>
+                                                <div class="mt-1 flex flex-wrap gap-4">
+                                                    <div class="flex flex-col items-center space-x-2 DeliveryDetails">
+                                                        <img src={Returnable} alt="7 Days Returnable" width="26" height="26" />
+                                                            <p class="text-sm font-medium">7 Days Returnable</p>
+                                                    </div>
+                                                    <div class="flex flex-col items-center space-x-2 DeliveryDetails">
+                                                        <img src={Pay} alt="Pay on Delivery" width="26" height="26" />
+                                                            <p class="text-sm font-medium">Pay on Delivery</p>
+                                                    </div>
+                                                    <div class="flex flex-col items-center space-x-2 DeliveryDetails">
+                                                        <img src={Quality} alt="100% Quality Assurance" width="26" height="26" />
+                                                            <p class="text-sm font-medium">100% Quality Assurance</p>
+                                                    </div>
+                                                    <div class="flex flex-col items-center space-x-2 DeliveryDetails">
+                                                        <img src={Delivery} alt="Trusted Delivery" width="26" height="26" />
+                                                            <p class="text-sm font-medium">Trusted Delivery</p>
+                                                    </div>
+                                                </div>
+
                                             </div>
                                             <div className="mt-2">
                                                 <a href="/sellers?pid=WPMFCHEZ768YASJ4" className="text-blue-600 hover:underline text-sm">
@@ -429,16 +341,7 @@ export default function Project_Details() {
                     </div>
                 </div>
             </section>
-            <div className="flex mt-5 flex-wrap product-desc-tab">
-                <div className="w-full md:w-1/3">
-                    <div className="rounded seller-top-products-box bg-white sidebar-box mx-3 p-4 mb-3">
-                        <h6 className='text-xm font-semibold'>Top Selling Products From This Seller</h6>
-                        <TopSellignList />
-                    </div>
-                </div>
-                <div className="w-full md:w-2/3"></div>
-            </div>
-            <RelatedProducts />
+
             {isModalOpen && (
                 <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
                     <div className="ModalImages relative bg-white rounded-lg overflow-hidden w-auto max-w-3xl">

@@ -26,15 +26,10 @@
     padding: 30px;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     background: #fff;
     overflow: hidden;
     border: 1px solid #f0f0f0;
-}
-
-.ProductIMG img {
-    width: 100%;
-    height: 100%;
 }
 
 .ProductsShortIMG img {
@@ -200,4 +195,15 @@
 
 .rupes {
     font-family: Inter, -apple-system, Helvetica, Arial, sans-serif;
+}
+
+.DeliveryDetails {
+    border: 1px solid #a3bbde;
+    border-radius: 3px;
+    padding: 10px;
+    background: #ecf4ff;
+}
+
+.DeliveryDetails p {
+    color: #4c5e78;
 }

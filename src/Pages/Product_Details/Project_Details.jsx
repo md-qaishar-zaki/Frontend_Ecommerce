@@ -16,6 +16,7 @@ export default function Project_Details() {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [selectedImage, setSelectedImage] = useState(null);
     const apiUrl = import.meta.env.VITE_API_URL;
+    const [value, setValue] = useState(1);
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -26,7 +27,7 @@ export default function Project_Details() {
                 }
                 const productData = await response.json();
                 setProduct(productData);
-                setSelectedImage(productData.product.photoproduct[0].photo_path); // Set initial selected image
+                setSelectedImage(productData.product.photoproduct[0].photo_path);
             } catch (error) {
                 console.error('Failed to fetch product:', error);
             }
@@ -40,7 +41,7 @@ export default function Project_Details() {
     }
 
     function changeImage(src) {
-        setSelectedImage(src); // Update the selected image state
+        setSelectedImage(src);
         document.getElementById('mainImage').src = src;
     }
 
@@ -54,6 +55,17 @@ export default function Project_Details() {
     const prevImage = () => {
         setCurrentImageIndex((prevIndex) => (prevIndex - 1 + productImages.length) % productImages.length);
     };
+
+    const onDecrement = () => {
+        if (value > 0) {
+            setValue(value - 1);
+        }
+    };
+
+    const onIncrement = () => {
+        setValue(value + 1);
+    };
+
 
     return (
         <div>
@@ -134,35 +146,38 @@ export default function Project_Details() {
                                         <div class="line-through text-sm text-gray-400 px-1 rupes">₹{product.product.price}</div>
                                     </div>
                                 </div>
+                                <div className="flex items-center w-100 my-4">
+                                    <span>Quantity:</span>
+                                    <div className="qty-box mx-3">
+                                        <span className="dec" onClick={onDecrement} onTouchStart={onDecrement}>–</span>
+                                        <span className="qty">{value}</span>
+                                        <span className="inc" onClick={onIncrement} onTouchStart={onIncrement}>+</span>
+                                    </div>
+                                </div>
                                 <div className="space-y-6">
                                     <div className="w-full">
                                         <div className="text-lg font-semibold mb-2"></div>
                                         <div>
-                                            <div className="mt-2">
+                                            <div className="mt-4">
                                                 <div class="mt-1 flex flex-wrap gap-4">
                                                     <div class="flex flex-col items-center space-x-2 DeliveryDetails">
                                                         <img src={Returnable} alt="7 Days Returnable" width="26" height="26" />
-                                                            <p class="text-sm font-medium">7 Days Returnable</p>
+                                                        <p class="text-sm font-medium">7 Days Returnable</p>
                                                     </div>
                                                     <div class="flex flex-col items-center space-x-2 DeliveryDetails">
                                                         <img src={Pay} alt="Pay on Delivery" width="26" height="26" />
-                                                            <p class="text-sm font-medium">Pay on Delivery</p>
+                                                        <p class="text-sm font-medium">Pay on Delivery</p>
                                                     </div>
                                                     <div class="flex flex-col items-center space-x-2 DeliveryDetails">
                                                         <img src={Quality} alt="100% Quality Assurance" width="26" height="26" />
-                                                            <p class="text-sm font-medium">100% Quality Assurance</p>
+                                                        <p class="text-sm font-medium">100% Quality Assurance</p>
                                                     </div>
                                                     <div class="flex flex-col items-center space-x-2 DeliveryDetails">
                                                         <img src={Delivery} alt="Trusted Delivery" width="26" height="26" />
-                                                            <p class="text-sm font-medium">Trusted Delivery</p>
+                                                        <p class="text-sm font-medium">Trusted Delivery</p>
                                                     </div>
                                                 </div>
 
-                                            </div>
-                                            <div className="mt-2">
-                                                <a href="/sellers?pid=WPMFCHEZ768YASJ4" className="text-blue-600 hover:underline text-sm">
-                                                    See other sellers
-                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -173,65 +188,7 @@ export default function Project_Details() {
                                             <span className="text-sm" dangerouslySetInnerHTML={{ __html: product.product.description }} />
                                         </p>
                                         <button className="text-blue-600 mt-2 hover:underline">Read More</button>
-                                    </div>
-
-                                    <div className="w-full p-4 border rounded-lg bg-gray-100 space-y-6">
-
-                                        <div className="flex space-x-4">
-                                            <img src="https://rukminim2.flixcart.com/image/200/200/xif0q/icons/original-WPMFCHEZ768YASJ4_1.jpg"
-                                                alt="Multipurpose Performance" className="w-20 h-20" />
-                                            <div>
-                                                <h3 className="text-base font-semibold">Multipurpose Performance</h3>
-                                                <p className="text-xs text-gray-700 mt-1">
-                                                    Built with versatility in mind, this water cooler pump excels in various applications, such
-                                                    as
-                                                    decorative fountains, ponds, aquariums, and hydroponic setups, delivering consistent
-                                                    performance.
-                                                </p>
-                                            </div>
-                                        </div>
-
-                                        <div className="flex space-x-4">
-                                            <img src="https://rukminim2.flixcart.com/image/200/200/xif0q/icons/original-WPMFCHEZ768YASJ4_2.jpg"
-                                                alt="High Performance" className="w-20 h-20" />
-                                            <div>
-                                                <h3 className="text-base font-semibold">High Performance</h3>
-                                                <p className="text-xs text-gray-700 mt-1">
-                                                    This high-performance water cooler pump ensures efficient cooling with a flow rate up to
-                                                    1.85m and
-                                                    noiseless operation, making it versatile and energy-saving.
-                                                </p>
-                                            </div>
-                                        </div>
-
-                                        <div className="flex space-x-4">
-                                            <img src="https://rukminim2.flixcart.com/image/200/200/xif0q/icons/original-WPMFCHEZ768YASJ4_3.jpg"
-                                                alt="Easy Maintenance and Cleaning" className="w-20 h-20" />
-                                            <div>
-                                                <h3 className="text-base font-semibold">Easy Maintenance and Cleaning</h3>
-                                                <p className="text-xs text-gray-700 mt-1">
-                                                    Designed for user-friendliness, this pump is easy to clean and maintain, ensuring optimal
-                                                    performance
-                                                    with minimal hassle.
-                                                </p>
-                                            </div>
-                                        </div>
-
-                                        <div className="flex space-x-4">
-                                            <img src="https://rukminim2.flixcart.com/image/200/200/xif0q/icons/original-WPMFCHEZ768YASJ4_4.jpg"
-                                                alt="Convenient Features" className="w-20 h-20" />
-                                            <div>
-                                                <h3 className="text-base font-semibold">Convenient Features</h3>
-                                                <p className="text-xs text-gray-700 mt-1">
-                                                    This fully submersible pump is energy-efficient, with a durable ABS body, suitable for
-                                                    various
-                                                    applications and long-lasting performance.
-                                                </p>
-                                            </div>
-                                        </div>
-
-                                        <button className="text-blue-600 mt-2 hover:underline font-base">View all features</button>
-                                    </div>
+                                    </div> 
                                 </div>
                                 <div className="Specifications">
                                     <h5>Specifications</h5>
@@ -258,53 +215,6 @@ export default function Project_Details() {
                                         <tr>
                                             <td>Color</td>
                                             <td>Multicolor</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Body Material</td>
-                                            <td>Plastic</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Applications</td>
-                                            <td>Desert Air Cooler, Aquarium, Water Fountain, For Washing, Hydroponic, Draining Water From Small Ponds</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Adjustable Speed</td>
-                                            <td>No</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Battery Backup</td>
-                                            <td>No</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Flow Rate</td>
-                                            <td>30 Lpm</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Total Head</td>
-                                            <td>1.8 m</td>
-                                        </tr>
-                                    </table>
-                                    <h4>Power Features</h4>
-                                    <table>
-                                        <tr>
-                                            <td>Phase</td>
-                                            <td>Single-phase</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Thermal Over Load Protector</td>
-                                            <td>Yes</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Power Supply</td>
-                                            <td>165V-230V/50HZ</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Power Rating</td>
-                                            <td>0.018 kW</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Motor Power</td>
-                                            <td>1.2 hp</td>
                                         </tr>
                                         <tr>
                                             <td>Body Material</td>

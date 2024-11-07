@@ -5,7 +5,7 @@ import FeaturedProduct from '../../Components/Featured_Product/FeaturedProduct.j
 import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import CategoriesProductPage from '../../Components/Categories-Product-Pages/Categories_Product_Pages.jsx'
+import CategoriesProductPage from '../Categories-Product-Pages/Categories_Product_Pages.jsx'
 
 export default function Home() {
     const [bannerImg, setBannerImg] = useState([]);

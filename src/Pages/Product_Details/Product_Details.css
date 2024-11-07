@@ -207,3 +207,31 @@
 .DeliveryDetails p {
     color: #4c5e78;
 }
+
+
+.qty-box {
+    border: 1px solid #94c4ec;
+    border-radius: 3px;
+    display: block;
+    height: 40px;  
+}
+
+.qty-box span {
+    color: #62a8e2;
+    font-family: sans-serif;
+    float: left;
+    line-height: 39px;
+    text-align: center;
+    width: 40px;
+    -webkit-font-smoothing: antialiased;
+}
+
+.qty-box .dec,
+.qty-box .inc {
+    height: 100%;
+}
+
+.qty-box .dec:hover,
+.qty-box .inc:hover {
+    cursor: pointer;
+}

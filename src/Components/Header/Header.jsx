@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import './Header.css';
 import icon from '../../assets/Categories Icon/tools.png';
 
+
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [categories, setCategories] = useState([]);
@@ -42,14 +43,14 @@ export default function Header() {
         };
     }, []);
 
-    useEffect(() => {
-        if (OTPModal) {
-            document.body.style.overflow = 'hidden';
-        }
-        else {
-            document.body.style.overflow = 'auto';
-        }
-    })
+    // useEffect(() => {
+    //     if (OTPModal) {
+    //         document.body.style.overflow = 'hidden';
+    //     }
+    //     else {
+    //         document.body.style.overflow = 'auto';
+    //     }
+    // })
 
     return (
         <>
@@ -173,7 +174,7 @@ export default function Header() {
                 </div>
             </header>
             {OTPModal &&
-                < div class=" OTPModal min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
+                < div class=" OTPModal min-h-screen py-6 flex flex-col justify-center sm:py-12">
                     <div class="relative py-3 sm:max-w-xl sm:mx-auto">
                         <div class="absolute inset-0 bg-gradient-to-r from-[#38d0a8] to-[#005f4b] shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl">
                         </div>

@@ -74,7 +74,7 @@ export default function FeaturedProduct() {
                 <div className="carousel-container w-full">
                     <Slider {...settings}>
                         {featuredProduct.map((product, index) => (
-                            <div className="w-1/5 p-2" key={product.id} >
+                            <div className="w-1/5 p-1" key={product.id} >
                                 <div className="product-card" onClick={() => handleProductClick(product.id)}>
                                     <div className="product-card__image">
                                         <div className="heart">

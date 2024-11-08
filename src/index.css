@@ -2,13 +2,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 html,
 body {
     height: 100%;
     font-family: 'Poppins', sans-serif;
     -webkit-font-smoothing: antialiased;
     background-color: #d3f4eb;
+    scroll-behavior: smooth;
 }
 
 #root {

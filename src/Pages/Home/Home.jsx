@@ -70,7 +70,25 @@ export default function Home() {
             <section className="categories">
                 <div className="container-fluid px-2">
                     <div className="flex flex-wrap">
-                        <div className="w-full lg:w-3/5 p-1">
+                        <div className="w-full lg:w-1/4 categoryList">
+                            {categoryDetails.map((list) => (
+                                <>
+                                    <div class="category-container">
+                                        <div class="category-section">
+                                            <div class="category-img" tabindex="0">
+                                                <img alt="trending-categories"
+                                                    src="https://cdn.moglix.com/cms/flyout/Images_2023-12-07_14-51-07_office-stationery-supplies.jpg" />
+                                            </div>
+                                            <div class="category-name" tabindex="0">
+                                                <p>{list.title}</p><span><i class="icon-arrow-right-s-line">
+                                                </i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </>
+                            ))}
+                        </div>
+                        <div className="w-full lg:w-3/4 p-1">
                             <div className="sliders">
                                 <Slider {...settings}>
                                     {bannerImg.length > 0 &&
@@ -88,27 +106,6 @@ export default function Home() {
                                             </div>
                                         ))}
                                 </Slider>
-                            </div>
-                        </div>
-                        <div className="w-full lg:w-2/5">
-                            <div className="flex flex-wrap">
-                                {categoryDetails.map((category, index) => (
-                                    <div
-                                        key={index}
-                                        className={getClName(count, index)}
-                                    >
-                                        <div
-                                            className="categories__item bg-contain bg-center bg-no-repeat relative overflow-hidden"
-                                            style={{
-                                                backgroundImage: `url(${getFullImageUrl(category.photo)})`
-                                            }}
-                                        >
-                                        </div>
-                                        <div className="categories__text">
-                                            <h4 className="text-xs font-semibold mb-2">{category.title}</h4>
-                                        </div>
-                                    </div>
-                                ))}
                             </div>
                         </div>
                     </div>

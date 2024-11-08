@@ -70,10 +70,10 @@
 
 .ProductIMGList img {
     background: #fff;
-    padding: 12px;
+    padding: 0;
     border-radius: 5px;
-    width: 109px;
-    height: 100px;
+    width: 60px;
+    height: 51px;
     box-shadow: 0px 1px 3px #0000004f;
 }
 

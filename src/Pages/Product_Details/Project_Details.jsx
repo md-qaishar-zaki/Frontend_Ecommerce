@@ -74,7 +74,7 @@ export default function Project_Details() {
                     <div className="flex flex-wrap ProductDetails py-5">
                         <aside className="w-full lg:w-5/12 px-4 mb-4 lg:mb-0">
                             <div className="ProductImgSticky flex lg:flex-row">
-                                <div className="flex flex-col gap-4 py-4 justify-start overflow-y-auto ProductIMGList">
+                                <div className="flex flex-col gap-4 py-1 justify-start overflow-y-auto ProductIMGList">
                                     {product.product.photoproduct?.map((photo, index) => (
                                         <img
                                             key={index}
@@ -190,63 +190,11 @@ export default function Project_Details() {
                                         <button className="text-blue-600 mt-2 hover:underline">Read More</button>
                                     </div> 
                                 </div>
-                                <div className="Specifications">
-                                    <h5>Specifications</h5>
-                                    <h6>In The Box</h6>
-                                    <p>1 Water cooler pump & 1 Nozzle</p>
-                                    <h4>General</h4>
-                                    <table>
-                                        <tr>
-                                            <td>Brand</td>
-                                            <td>Aksha Gold</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Model Name</td>
-                                            <td>Computer Tested Dynamically Balanced 18 Watt Multipurpose Water Cooler Pump Used For Aquarium, Desert Air Cooler, Fountain (1.2HP)</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Type</td>
-                                            <td>Submersible</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Usage Type</td>
-                                            <td>Domestic</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Color</td>
-                                            <td>Multicolor</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Body Material</td>
-                                            <td>Plastic</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Applications</td>
-                                            <td>Desert Air Cooler, Aquarium, Water Fountain, For Washing, Hydroponic, Draining Water From Small Ponds</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Adjustable Speed</td>
-                                            <td>No</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Battery Backup</td>
-                                            <td>No</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Flow Rate</td>
-                                            <td>30 Lpm</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Total Head</td>
-                                            <td>1.8 m</td>
-                                        </tr>
-                                    </table>
-                                </div>
                             </div>
                             <div className="mt-3 mb-3 bg-white rounded overflow-hidden ms-0 mx-3">
                                 <RatingsReviews />
                             </div>
-                            <QNA />
+                            {/* <QNA /> */}
                         </main>
                     </div>
                 </div>

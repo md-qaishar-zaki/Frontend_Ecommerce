@@ -270,11 +270,23 @@ td {
 	background: #555;
 }
 
-.OTPModal{
+.OTPModal {
 	position: fixed;
 	top: 0;
 	width: 100%;
 	z-index: 11;
 	overflow: hidden;
 	background: #00000042;
+}
+
+li {
+	display: block;
+	padding: 5px 18px;
+	color: #000;
+	font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+	text-transform: uppercase;
+	transition: color .2s linear, background .2s linear;
+	cursor: pointer;
 }

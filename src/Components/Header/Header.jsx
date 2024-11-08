@@ -73,11 +73,11 @@ export default function Header() {
                 <div className="container m-auto px-9">
                     <div className="flex">
                         <div className="w-1/3 lg:w-3/10 flex items-center">
-                            <div className="canvas__open" onClick={toggleMenu}>
+                            {/* <div className="canvas__open" onClick={toggleMenu}>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                                 </svg>
-                            </div>
+                            </div> */}
                             <div className="header__logo ml-4">
                                 <a href="/">
                                     <h6>Logo</h6>
@@ -112,7 +112,6 @@ export default function Header() {
                         </div>
                     </div>
                 </div>
-
                 <div ref={sidebarRef} className={`offcanvas-menu-wrapper ${isMenuOpen ? 'active' : ''} ${selectedCategory ? 'widthAdd' : ''}`}>
                     <div className="flex justify-between">
                         <nav className="offcanvas__menu">
@@ -173,6 +172,14 @@ export default function Header() {
                     </div>
                 </div>
             </header>
+            <ul class="flex space-x-2 justify-center bg-white p-3">
+                    {categories.map((List) => (
+                        <>
+                        <li>{List.title}</li>
+                        </>
+                    ))}
+                    <li></li>
+                </ul>
             {OTPModal &&
                 < div class=" OTPModal min-h-screen py-6 flex flex-col justify-center sm:py-12">
                     <div class="relative py-3 sm:max-w-xl sm:mx-auto">

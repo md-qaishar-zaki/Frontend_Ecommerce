@@ -86,8 +86,8 @@ export default function FeaturedProduct() {
                                         <img src={product.photoproduct[0].photo_path} alt="Red Nike Shoes" />
                                     </div>
                                     <div className="product-card__info">
-                                        <h2 className="product-card__title line-clamp-1">{product.title}</h2>
-                                        <p className="product-card__description line-clamp-1" dangerouslySetInnerHTML={{ __html: product.description }} />
+                                        <h2 className="product-card__title line-clamp-2">{product.title}</h2>
+                                        {/* <p className="product-card__description line-clamp-1" dangerouslySetInnerHTML={{ __html: product.description }} /> */}
                                         <div className="product-card__price-row">
                                             <span className="product-card__price">₹{product.price}.00</span>
                                             <button className="product-card__btn">Add to Cart</button>

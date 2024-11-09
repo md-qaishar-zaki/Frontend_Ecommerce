@@ -280,12 +280,12 @@ td {
 	background: #00000042;
 }
 
-li {
+.headerMenu li {
 	display: block;
 	padding: 5px 18px;
 	color: #000;
 	font-family: "Open Sans", sans-serif;
-	font-size: 14px;
+	font-size: 12px;
 	font-weight: 500;
 	text-transform: uppercase;
 	transition: color .2s linear, background .2s linear;
@@ -298,27 +298,29 @@ li {
 	background-color: #333;
 	color: white;
 	position: absolute;
-	top: 157px;
+	top: 149px;
 	left: 0;
 	z-index: 99;
 	transform: translateY(-100%);
 	/* Initially hidden (moves out of view) */
 	transition: transform 0.2s ease;
-	/* Smooth transition for slide-in effect */
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
 }
 
 .CategoryFixed {
 	position: fixed;
 	transform: translateY(0);
-	top: 102px;
+	top: 95px;
 	box-shadow: 0px 4px 17px 0px #000000c7;
 }
 
 .dropdown {
 	position: relative;
 	margin-right: 10px;
-	padding: 17px 10px !important;
-}
+	padding: 17px 10px !important; 
+} 
 
 .login-btn {
 	background-color: #444;
@@ -338,7 +340,7 @@ li {
 	color: #333;
 	border-radius: 5px;
 	overflow: hidden;
-	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+	box-shadow: 0px 5px 7px -3px #00000061;
 }
 
 .dropdown-menu a {
@@ -362,6 +364,5 @@ li {
 	display: block;
 	margin-top: -2px;
 	border-radius: 2px !important;
-	background: #fff;
-	box-shadow: unset;
+	background: #fff; 
 }

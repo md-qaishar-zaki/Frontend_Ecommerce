@@ -27,8 +27,7 @@
 }
 
 .product-card__image {
-    min-height: 150px;
-    max-height: 150px;
+    height: 160px;
     overflow: hidden;
     position: relative;
     display: flex;
@@ -37,7 +36,7 @@
 }
 
 .product-card__image img {
-    max-width: 60%;
+    max-width: 50%;
     transition: transform 0.3s ease;
 }
 
@@ -51,7 +50,7 @@
 }
 
 .product-card__title {
-    font-size: 1rem;
+    font-size: 14px;
     font-weight: 700;
     margin-bottom: 0px;
     color: var(--text-color);
@@ -93,6 +92,10 @@
 
 .product-card__info {
     padding: 10px 10px;
+    height: 103px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .slick-list {

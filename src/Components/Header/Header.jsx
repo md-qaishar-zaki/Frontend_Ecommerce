@@ -191,7 +191,7 @@ export default function Header() {
                     </div>
                 </div>
             </header>
-            <ul class={`flex space-x-2 justify-center bg-white headerMenu ${isFixed ? 'CategoryFixed' : ''}`} >
+            <ul class={` bg-white headerMenu ${isFixed ? 'CategoryFixed' : ''}`} >
                 {categories.map((List) => (
                     <>
                         <li class="dropdown">{List.title}
@@ -204,8 +204,7 @@ export default function Header() {
                             </div>
                         </li>
                     </>
-                ))}
-                <li></li>
+                ))} 
             </ul>
             {OTPModal &&
                 < div class=" OTPModal min-h-screen py-6 flex flex-col justify-center sm:py-12">

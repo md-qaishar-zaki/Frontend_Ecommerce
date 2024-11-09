@@ -21,3 +21,19 @@
 .reviewStar{
     color:rgb(231, 131, 0);
 }
+
+.star-rating {
+    display: flex;
+    cursor: pointer;
+}
+
+.star {
+    font-size: 2rem;
+    color: #ccc; /* default color for unfilled stars */
+    transition: color 0.2s;
+    cursor: pointer;
+}
+
+.star.filled {
+    color: #ffcc00; /* color for filled stars */
+}

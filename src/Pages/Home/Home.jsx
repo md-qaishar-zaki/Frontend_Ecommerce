@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './Home.css';
 import Products from '../../Components/Products/Products.jsx';
 import FeaturedProduct from '../../Components/Featured_Product/FeaturedProduct.jsx';
 import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import CategoriesProductPage from '../Categories-Product-Pages/Categories_Product_Pages.jsx'
 
 export default function Home() {
     const [bannerImg, setBannerImg] = useState([]);
     const [categoryDetails, setCategoryDetails] = useState([]);
     const apiUrl = import.meta.env.VITE_API_URL;
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const sidebarRef = useRef(null);
+    const [selectedCategory, setSelectedCategory] = useState(null);
 
     useEffect(() => {
         const fetchBannerImg = async () => {
@@ -27,9 +29,9 @@ export default function Home() {
     }, []);
 
     useEffect(() => {
-        const fetchCategoryDetails = async () => {
+        const fetchCategories = async () => {
             try {
-                const response = await fetch(`${apiUrl}/api/getcategorieslist`);
+                const response = await fetch(`${apiUrl}/api/getcatwithsubandsub`);
                 const data = await response.json();
                 setCategoryDetails(data.categories || []);
             } catch (error) {
@@ -37,23 +39,13 @@ export default function Home() {
             }
         };
 
-        fetchCategoryDetails();
+        fetchCategories();
     }, []);
 
     const getFullImageUrl = (path) => {
         return path.startsWith('http') ? path : `https://siyabling.com/machintools/public${path}`;
     };
-    function getClName(count, index) {
-        if (count === 6) {
-            return index < 2 ? 'w-1/2 p-1 relative overflow-hidden' : 'w-1/4 p-1 relative overflow-hidden';
-        } else if (count === 5) {
-            return index < 2 ? 'w-1/2 p-1 relative overflow-hidden' : 'w-1/3 p-1 relative overflow-hidden';
-        } else if (count === 4) {
-            return index < 2 ? 'w-1/2 p-1 relative overflow-hidden' : 'w-1/2 p-1 relative overflow-hidden';
-        }
-        return '';
-    }
-    const count = categoryDetails.length;
+
     const settings = {
         dots: false,
         infinite: true,
@@ -65,42 +57,47 @@ export default function Home() {
         arrows: false,
     };
 
+    const handleClickOutside = (event) => {
+        if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+            setIsMenuOpen(false);
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+
     return (
         <>
             <section className="categories">
                 <div className="container-fluid">
                     <div className="flex flex-wrap bg-white">
-                        <div className="w-full lg:w-1/4 categoryList">
-                            {categoryDetails.map((list) => (
-                                <>
-                                    <div class="category-container">
-                                        <div class="category-section">
-                                            <div class="category-img" tabindex="0">
-                                                <img alt="trending-categories"
-                                                    src="https://cdn.moglix.com/cms/flyout/Images_2023-12-07_14-51-07_office-stationery-supplies.jpg" />
-                                            </div>
-                                            <div class="category-name" tabindex="0">
-                                                <p>{list.title}</p><span><i class="icon-arrow-right-s-line">
-                                                </i></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </>
-                            ))}
+                        <div ref={sidebarRef} className={`offcanvas-menu-wrapper ${isMenuOpen ? 'active' : ''}`}>
+                            <nav className="offcanvas__menu">
+                                <ul>
+                                    {categoryDetails.map((category) => (
+                                        <li
+                                            key={category.id}
+                                            onMouseEnter={() => setSelectedCategory(category)}
+                                        >
+                                            <a>
+                                                <img src={category.icon} alt="" />
+                                                {category.title}
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </nav>
                         </div>
-                        <div className="w-full lg:w-3/4 px-1">
+                        <div className="w-full lg:w-3/4 px-1 relative">
                             <div className="sliders p-1">
                                 <Slider {...settings}>
                                     {bannerImg.length > 0 &&
                                         bannerImg.map((image, index) => (
-                                            <div key={index}
-                                                className="h-100 categories__item categories__large__item bg-cover bg-center">
-                                                <div className="title h-100">
-                                                    {/* <h1 className="text-3xl font-bold mb-4">{image.title}</h1>
-                                                    <a href="#" className="text-lg font-semibold text-white bg-black py-2 px-4">
-                                                        Shop now
-                                                    </a> */}
-                                                </div>
+                                            <div key={index} className="h-100 categories__item categories__large__item bg-cover bg-center">
                                                 <img src={`${getFullImageUrl(image.photo)}`} alt="" className='h-100' />
                                             </div>
                                         ))}
@@ -139,15 +136,38 @@ export default function Home() {
                                 </div>
 
                             </div>
+                            {selectedCategory && (
+                                <div className="absolute top-0 left-0 w-9/12 h-full bg-white z-10"
+                                    onMouseLeave={() => setSelectedCategory(null)} >
+                                    <div className="content-section" style={{ width: '100%' }}>
+                                        <div className="subcategories-container p-4">
+                                            <div className='flex flex-wrap justify-between'>
+                                                {selectedCategory.sub_categories && selectedCategory.sub_categories.length > 0 ? (
+                                                    selectedCategory.sub_categories.map((subCategory) => (
+                                                        <div key={subCategory.id} className="w-full md:w-1/2 lg:w-1/2 p-1">
+                                                            <div className="h-full bg-white shadow-lg rounded-lg p-4 text-left"> 
+                                                                <h4 className="text-base font-semibold text-gray-700 mt-2">
+                                                                    {subCategory.title}
+                                                                </h4>
+                                                                <p className="text-gray-600 mt-2 block line-clamp-2" dangerouslySetInnerHTML={{ __html: subCategory.summary }}></p>
+                                                                 
+                                                            </div>
+                                                        </div>
+                                                    ))
+                                                ) : (
+                                                    <p>No subcategories available.</p>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
             </section>
             <FeaturedProduct />
             <Products />
-            {/* <CategoriesProductPage /> */}
-
-
         </>
     );
 }

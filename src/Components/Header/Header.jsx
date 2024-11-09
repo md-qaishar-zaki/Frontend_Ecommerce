@@ -131,7 +131,7 @@ export default function Header() {
                         </div>
                     </div>
                 </div>
-                <div ref={sidebarRef} className={`offcanvas-menu-wrapper ${isMenuOpen ? 'active' : ''} ${selectedCategory ? 'widthAdd' : ''}`}>
+                <div ref={sidebarRef} className={`hidden offcanvas-menu-wrapper ${isMenuOpen ? 'active' : ''} ${selectedCategory ? 'widthAdd' : ''}`}>
                     <div className="flex justify-between">
                         <nav className="offcanvas__menu">
                             <ul>

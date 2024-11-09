@@ -17,7 +17,7 @@ export default function Project_Details() {
     const [selectedImage, setSelectedImage] = useState(null);
     const apiUrl = import.meta.env.VITE_API_URL;
     const [value, setValue] = useState(1);
-
+    console.log(product);
     useEffect(() => {
         const fetchProduct = async () => {
             try {
@@ -27,7 +27,7 @@ export default function Project_Details() {
                 }
                 const productData = await response.json();
                 setProduct(productData);
-                setSelectedImage(productData.product.photoproduct[0].photo_path);
+                setSelectedImage(productData.product[0].photoproduct.photo_path);
             } catch (error) {
                 console.error('Failed to fetch product:', error);
             }
@@ -75,7 +75,7 @@ export default function Project_Details() {
                         <aside className="w-full lg:w-5/12 px-4 mb-4 lg:mb-0">
                             <div className="ProductImgSticky flex lg:flex-row">
                                 <div className="flex flex-col gap-4 py-1 justify-start overflow-y-auto ProductIMGList">
-                                    {product.product.photoproduct?.map((photo, index) => (
+                                    {product.product[0].photoproduct?.map((photo, index) => (
                                         <img
                                             key={index}
                                             src={photo.photo_path}
@@ -119,7 +119,7 @@ export default function Project_Details() {
                         <main className="w-full lg:w-7/12 px-4 text-left">
                             <div>
                                 <h4 className='productTitle'>
-                                    {product.product.title}
+                                    {product.product[0].title} 
                                 </h4>
                                 <div className="flex items-center space-x-3 mb-3">
                                     <div className="flex items-center stars">
@@ -135,15 +135,15 @@ export default function Project_Details() {
                                     </div>
                                     <span className='rw'><span>4,733 Ratings&nbsp;</span><span class="hG7V+4">&amp;</span><span>&nbsp;552
                                         Reviews</span></span>
-                                    <span className="text-green-500 text-sm">{product.product.stock} stock</span>
+                                    <span className="text-green-500 text-sm">{product.product[0].stock} stock</span>
                                 </div>
                                 <div className="flex items-center mb-3">
                                     <div class="text-sm"><span>Special price</span></div>
                                 </div>
                                 <div class="flex flex-col items-start space-y-2">
                                     <div class="flex items-center space-x-2">
-                                        <div class="text-lg font-medium text-gray-800 rupes">₹{product.product.purchase_price}</div>
-                                        <div class="line-through text-sm text-gray-400 px-1 rupes">₹{product.product.price}</div>
+                                        <div class="text-lg font-medium text-gray-800 rupes">₹{product.product[0].purchase_price}</div>
+                                        <div class="line-through text-sm text-gray-400 px-1 rupes">₹{product.product[0].price}</div>
                                     </div>
                                 </div>
                                 <div className="flex items-center w-100 my-4">
@@ -185,7 +185,7 @@ export default function Project_Details() {
                                     <div className="w-full p-4 border rounded-lg bg-gray-100">
                                         <h2 className="text-lg font-semibold">Description</h2>
                                         <p className="mt-2 text-sm text-gray-700">
-                                            <span className="text-sm" dangerouslySetInnerHTML={{ __html: product.product.description }} />
+                                            <span className="text-sm line-clamp-4" dangerouslySetInnerHTML={{ __html: product.product[0].description }} />
                                         </p>
                                         <button className="text-blue-600 mt-2 hover:underline">Read More</button>
                                     </div> 

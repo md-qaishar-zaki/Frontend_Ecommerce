@@ -1,4 +1,3 @@
-/* Main Header Styles */
 .header {
 	background: #ffffffb5;
 	box-shadow: 0px 5px 10px rgba(91, 91, 91, 0.1);
@@ -19,20 +18,6 @@
 	font-size: 24px;
 	cursor: pointer;
 	color: #000;
-	/* Black color for the three-line icon */
-}
-
-/* Sidebar Menu Styles */
-.offcanvas-menu-wrapper {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 0;
-	height: 100vh;
-	background: #ffffff;
-	overflow: hidden;
-	transition: width 0.3s ease-in-out;
-	z-index: 999;
 }
 
 .offcanvas-menu-wrapper.active {
@@ -78,11 +63,10 @@
 	color: #fff;
 }
 
-/* Responsive Media Queries */
 @media only screen and (max-width: 767px) {
 	.offcanvas-menu-wrapper.active {
 		width: 70%;
-		/* Full screen on small devices */
+
 	}
 }
 
@@ -176,7 +160,7 @@
 
 .offcanvas__menu {
 	background: #ffffff;
-	padding: 20px 0;
+	padding: 0px 0;
 }
 
 .op {
@@ -191,43 +175,36 @@
 
 .subcategories-container {
 	max-height: 600px;
-	/* Adjust height as needed */
 	overflow-y: auto;
-	/* Enables vertical scrolling */
-	border: 1px solid #ddd;
-	/* Add a border for better visibility */
-	border-radius: 8px;
-	/* Rounded corners */
+	border: 1px solid #f9f9f9;
+	border-radius: 0px;
 	padding: 10px;
-	/* Spacing inside the box */
-	background-color: #f9f9f9;
-	/* Light background color */
 }
 
 .subcategory-item {
 	margin-bottom: 15px;
-	/* Space between subcategory items */
+}
+
+.line-clamp-2 p {
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
 }
 
 .subcategory-item h4 {
 	margin: 0;
-	/* Remove default margin */
 	font-size: 1.1em;
-	/* Slightly larger title */
 }
 
 .subcategory-item p {
 	margin: 5px 0;
-	/* Space around summary */
 }
 
 .subcategory-item img {
 	max-width: 100%;
-	/* Responsive image */
 	height: auto;
-	/* Maintain aspect ratio */
 	border-radius: 5px;
-	/* Slight rounding of images */
 }
 
 .table {
@@ -251,22 +228,18 @@ td {
 	margin: 0 0 0 0;
 }
 
-/* width */
 .subcategories-container::-webkit-scrollbar {
 	width: 10px;
 }
 
-/* Track */
 .subcategories-container::-webkit-scrollbar-track {
 	background: #f1f1f1;
 }
 
-/* Handle */
 .subcategories-container::-webkit-scrollbar-thumb {
 	background: #888;
 }
 
-/* Handle on hover */
 .subcategories-container::-webkit-scrollbar-thumb:hover {
 	background: #555;
 }
@@ -277,7 +250,9 @@ td {
 	width: 100%;
 	z-index: 11;
 	overflow: hidden;
-	background: #00000042;
+	background: #0000005d;
+	z-index: 999;
+	backdrop-filter: blur(1px);
 }
 
 .headerMenu li {
@@ -302,7 +277,6 @@ td {
 	left: 0;
 	z-index: 99;
 	transform: translateY(-100%);
-	/* Initially hidden (moves out of view) */
 	transition: transform 0.2s ease;
 	display: flex;
 	justify-content: space-evenly;
@@ -319,8 +293,8 @@ td {
 .dropdown {
 	position: relative;
 	margin-right: 10px;
-	padding: 17px 10px !important; 
-} 
+	padding: 17px 10px !important;
+}
 
 .login-btn {
 	background-color: #444;
@@ -358,11 +332,10 @@ td {
 	color: #007c5b;
 }
 
-/* Show dropdown menu on hover */
 .dropdown:hover .dropdown-menu {
 	width: 190px;
 	display: block;
 	margin-top: -2px;
 	border-radius: 2px !important;
-	background: #fff; 
+	background: #fff;
 }

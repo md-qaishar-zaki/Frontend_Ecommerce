@@ -75,7 +75,7 @@ export default function FeaturedProduct() {
                     <Slider {...settings}>
                         {featuredProduct.map((product, index) => (
                             <div className="w-1/5 p-1" key={product.id} >
-                                <div className="product-card" onClick={() => handleProductClick(product.id)}>
+                                <div className="product-card" onClick={() => handleProductClick(product.slug)}>
                                     <div className="product-card__image">
                                         <div className="heart">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">

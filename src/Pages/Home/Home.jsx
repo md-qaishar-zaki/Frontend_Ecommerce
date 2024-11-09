@@ -68,8 +68,8 @@ export default function Home() {
     return (
         <>
             <section className="categories">
-                <div className="container-fluid px-2">
-                    <div className="flex flex-wrap">
+                <div className="container-fluid">
+                    <div className="flex flex-wrap bg-white">
                         <div className="w-full lg:w-1/4 categoryList">
                             {categoryDetails.map((list) => (
                                 <>
@@ -93,19 +93,35 @@ export default function Home() {
                                 <Slider {...settings}>
                                     {bannerImg.length > 0 &&
                                         bannerImg.map((image, index) => (
-                                            <div
-                                                key={index}
-                                                className="categories__item categories__large__item bg-cover bg-center">
-                                                <div className="title">
+                                            <div key={index}
+                                                className="h-100 categories__item categories__large__item bg-cover bg-center">
+                                                <div className="title h-100">
                                                     <h1 className="text-3xl font-bold mb-4">{image.title}</h1>
                                                     <a href="#" className="text-lg font-semibold text-white bg-black py-2 px-4">
                                                         Shop now
                                                     </a>
                                                 </div>
-                                                <img src={`${getFullImageUrl(image.photo)}`} alt="" />
+                                                <img src={`${getFullImageUrl(image.photo)}`} alt="" className='h-100' />
                                             </div>
                                         ))}
                                 </Slider>
+                            </div>
+                            <div className="flex flex-wrap justify-center">
+                                <div className="flex-1 min-w-[100px] p-2 CompanyLogo">
+                                    <img src="https://m.media-amazon.com/images/G/31/img24/BAUheadphone/1-Boat._CB543806970_.png" alt="" />
+                                </div>
+                                <div className="flex-1 min-w-[100px] p-2 CompanyLogo">
+                                    <img src="https://m.media-amazon.com/images/G/31/img24/BAUheadphone/7-Noise._CB543806970_.png" alt="" />
+                                </div>
+                                <div className="flex-1 min-w-[100px] p-2 CompanyLogo">
+                                    <img src="https://m.media-amazon.com/images/G/31/img24/BAUheadphone/5-Boult._CB543806970_.png" alt="" />
+                                </div>
+                                <div className="flex-1 min-w-[100px] p-2 CompanyLogo">
+                                    <img src="https://m.media-amazon.com/images/G/31/img24/BAUheadphone/16-Zebronics._CB543806970_.png" alt="" />
+                                </div>
+                                <div className="flex-1 min-w-[100px] p-2 CompanyLogo">
+                                    <img src="https://m.media-amazon.com/images/G/31/img24/BAUheadphone/1-Boat._CB543806970_.png" alt="" />
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -113,7 +129,9 @@ export default function Home() {
             </section>
             <FeaturedProduct />
             <Products />
-            <CategoriesProductPage />
+            {/* <CategoriesProductPage /> */}
+
+            
         </>
     );
 }

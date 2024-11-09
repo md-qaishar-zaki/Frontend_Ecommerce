@@ -10,6 +10,7 @@ export default function Header() {
     const [OTPModal, setOTPModal] = useState(false);
     const sidebarRef = useRef(null);
     const apiUrl = import.meta.env.VITE_API_URL;
+    const [isFixed, setIsFixed] = useState(false);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -51,6 +52,24 @@ export default function Header() {
     //         document.body.style.overflow = 'auto';
     //     }
     // })
+
+    useEffect(() => {
+        const handleScroll = () => {
+            // 100 pixels scroll hone par class lagaye
+            if (window.scrollY > 100) {
+                setIsFixed(true);
+            } else {
+                setIsFixed(false);
+            }
+        };
+
+        // Scroll event listener add karein
+        window.addEventListener('scroll', handleScroll);
+
+        // Clean up function mein listener ko remove karein
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
 
     return (
         <>
@@ -172,14 +191,22 @@ export default function Header() {
                     </div>
                 </div>
             </header>
-            <ul class="flex space-x-2 justify-center bg-white p-3">
-                    {categories.map((List) => (
-                        <>
-                        <li>{List.title}</li>
-                        </>
-                    ))}
-                    <li></li>
-                </ul>
+            <ul class={`flex space-x-2 justify-center bg-white headerMenu ${isFixed ? 'CategoryFixed' : ''}`} >
+                {categories.map((List) => (
+                    <>
+                        <li class="dropdown">{List.title}
+                            <div class="dropdown-menu">
+                                <a>Domestic Pumps</a>
+                                <a>Monoblock Pump</a>
+                                <a>Open Well Pump</a>
+                                <a>Booster Pump</a>
+                                <a>Industrial Pumps</a>
+                            </div>
+                        </li>
+                    </>
+                ))}
+                <li></li>
+            </ul>
             {OTPModal &&
                 < div class=" OTPModal min-h-screen py-6 flex flex-col justify-center sm:py-12">
                     <div class="relative py-3 sm:max-w-xl sm:mx-auto">

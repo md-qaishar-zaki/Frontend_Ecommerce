@@ -18,18 +18,26 @@ export default function Project_Details() {
     const apiUrl = import.meta.env.VITE_API_URL;
     const [value, setValue] = useState(1);
     console.log(product);
+    function changeImage(src) {
+        setSelectedImage(src);
+        document.getElementById('mainImage').src = src;
+    }
+
     useEffect(() => {
+        // Fetch product data once `id` is available, and reset selected image
         const fetchProduct = async () => {
             try {
                 const response = await fetch(`${apiUrl}/api/getproductbyid/${id}`);
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
+                if (!response.ok) throw new Error('Failed to fetch product');
                 const productData = await response.json();
                 setProduct(productData);
-                setSelectedImage(productData.product[0].photoproduct.photo_path);
+                if (productData.product.length > 0) {
+                    const initialImage = productData.product[0]?.photoproduct[0]?.photo_path || '';
+                    setSelectedImage(initialImage);
+                    setCurrentImageIndex(0);
+                }
             } catch (error) {
-                console.error('Failed to fetch product:', error);
+                console.error('Error:', error);
             }
         };
 
@@ -74,15 +82,16 @@ export default function Project_Details() {
                     <div className="flex flex-wrap ProductDetails py-5">
                         <aside className="w-full lg:w-5/12 px-4 mb-4 lg:mb-0">
                             <div className="ProductImgSticky flex lg:flex-row">
-                                <div className="flex flex-col gap-4 py-1 justify-start overflow-y-auto ProductIMGList">
+                                <div className="flex flex-col">
                                     {product.product[0].photoproduct?.map((photo, index) => (
-                                        <img
-                                            key={index}
-                                            src={photo.photo_path}
-                                            alt={`${product.product.title} - ${index + 1}`}
-                                            className={`w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-md cursor-pointer hover:opacity-100 transition duration-300 ${selectedImage === photo.photo_path ? 'border-2 border-blue-500 opacity-100' : ''}`}
-                                            onClick={() => changeImage(photo.photo_path)}
-                                        />
+                                        <div className={`ProductIMGList w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-md cursor-pointer hover:opacity-100 transition duration-300 ${selectedImage === photo.photo_path ? 'border-2 border-blue-500 opacity-100' : ''}`}>
+                                            <img
+                                                key={index}
+                                                src={photo.photo_path}
+                                                alt={`${product.product.title} - ${index + 1}`} 
+                                                onClick={() => changeImage(photo.photo_path)}
+                                            />
+                                        </div>
                                     ))}
                                 </div>
                                 <div className="d-flex w-full">
@@ -92,7 +101,7 @@ export default function Project_Details() {
                                             src={selectedImage}
                                             alt={product.product.title}
                                             onClick={openModal}
-                                            className="cursor-pointer zoom-effect" // Add zoom-effect class here
+                                            className="cursor-pointer zoom-effect"
                                         />
                                     </div>
                                     <ul className="flex flex-wrap">
@@ -119,7 +128,7 @@ export default function Project_Details() {
                         <main className="w-full lg:w-7/12 px-4 text-left">
                             <div>
                                 <h4 className='productTitle'>
-                                    {product.product[0].title} 
+                                    {product.product[0].title}
                                 </h4>
                                 <div className="flex items-center space-x-3 mb-3">
                                     <div className="flex items-center stars">
@@ -188,7 +197,7 @@ export default function Project_Details() {
                                             <span className="text-sm line-clamp-4" dangerouslySetInnerHTML={{ __html: product.product[0].description }} />
                                         </p>
                                         <button className="text-blue-600 mt-2 hover:underline">Read More</button>
-                                    </div> 
+                                    </div>
                                 </div>
                             </div>
                             <div className="mt-3 mb-3 bg-white rounded overflow-hidden ms-0 mx-3">

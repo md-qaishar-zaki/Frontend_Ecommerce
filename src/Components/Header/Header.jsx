@@ -192,19 +192,23 @@ export default function Header() {
                 </div>
             </header>
             <ul class={` bg-white headerMenu ${isFixed ? 'CategoryFixed' : ''}`} >
-                {categories.map((List) => (
-                    <>
-                        <li class="dropdown">{List.title}
-                            <div class="dropdown-menu">
-                                <a>Domestic Pumps</a>
-                                <a>Monoblock Pump</a>
-                                <a>Open Well Pump</a>
-                                <a>Booster Pump</a>
-                                <a>Industrial Pumps</a>
-                            </div>
-                        </li>
-                    </>
-                ))} 
+                {categories.map((category) => (
+                    <li className="dropdown" key={category.id}>
+                        {category.title}
+                        <div className="dropdown-menu">
+                            {category.sub_categories.map((subCategory) => (
+                                <div className="dropdown-item" key={subCategory.id}>
+                                    <a className="sub-category-link">{subCategory.title}</a>
+
+                                    {/* Nested dropdown for subcategory summary */}
+                                    <div className="nested-dropdown"> 
+                                        <a href="" className="subcategory-slug" dangerouslySetInnerHTML={{ __html: subCategory.summary }}></a>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </li>
+                ))}
             </ul>
             {OTPModal &&
                 < div class=" OTPModal min-h-screen py-6 flex flex-col justify-center sm:py-12">

@@ -6,7 +6,7 @@
 	z-index: 100;
 	backdrop-filter: blur(20px);
 	border-bottom: 2px solid #5f8b7fdb;
-	margin-bottom: 56px;
+	margin-bottom: 0px;
 }
 
 .header__logo {
@@ -273,10 +273,10 @@ td {
 	background-color: #333;
 	color: white;
 	position: absolute;
-	top: 149px;
+	top: 150px;
 	left: 0;
 	z-index: 99;
-	transform: translateY(-100%);
+	transform: translateY(-226%);
 	transition: transform 0.2s ease;
 	display: flex;
 	justify-content: space-evenly;
@@ -305,6 +305,17 @@ td {
 	border-radius: 5px;
 }
 
+.subcategory-slug {
+	padding: 9px 0px !important;
+    height: 100%;
+}
+
+/* Main dropdown styles */
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+
 .dropdown-menu {
 	display: none;
 	position: absolute;
@@ -313,29 +324,66 @@ td {
 	background-color: #fff;
 	color: #333;
 	border-radius: 5px;
-	overflow: hidden;
 	box-shadow: 0px 5px 7px -3px #00000061;
+	min-width: 160px;
+	z-index: 1;
 }
 
+/* Show the main dropdown on hover */
+.dropdown:hover .dropdown-menu {
+	display: block;
+	width: 190px;
+	margin-top: -2px;
+	border-radius: 2px;
+	background: #fff;
+}
+
+/* Style for dropdown links */
 .dropdown-menu a {
 	display: block;
 	padding: 10px;
 	text-decoration: none;
 	color: #333;
 	font-size: 12px;
-	border-bottom: 1px solid #000;
-	border-style: dotted;
 	font-weight: 500;
+	border-bottom: 1px dotted #000;
 }
 
 .dropdown-menu a:hover {
 	color: #007c5b;
 }
 
-.dropdown:hover .dropdown-menu {
-	width: 190px;
-	display: block;
-	margin-top: -2px;
-	border-radius: 2px !important;
-	background: #fff;
+/* Style for nested dropdown */
+.dropdown-item {
+	position: relative;
+}
+
+/* Hide the nested dropdown by default */
+.nested-dropdown {
+	display: none;
+	position: absolute;
+	left: 100%;
+	top: 2px;
+	background-color: #ffffff;
+	min-width: 160px;
+	z-index: 1;
+	border-radius: 0px;
+	box-shadow: 0px 5px 7px -3px #00000061;
+	height: 35px;
+	overflow: hidden;
+}
+
+/* Show only the specific nested dropdown on hover */
+.dropdown-item:hover .nested-dropdown {
+	display: flex;
+	align-items: center;
+}
+
+.nested-dropdown a p {
+	line-height: 1.5;
+	font-size: 12px;
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 1;
 }

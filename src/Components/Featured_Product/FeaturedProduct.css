@@ -27,7 +27,8 @@
 }
 
 .product-card__image {
-    height: 160px;
+    height: 180px;
+    width: 300px;
     overflow: hidden;
     position: relative;
     display: flex;
@@ -36,7 +37,8 @@
 }
 
 .product-card__image img {
-    max-width: 50%;
+    height: 180px;
+    width: 300px;
     transition: transform 0.3s ease;
 }
 

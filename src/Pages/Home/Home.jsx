@@ -50,7 +50,7 @@ export default function Home() {
         dots: false,
         infinite: true,
         speed: 500,
-        autoplay: true,
+        autoplay: false,
         autoplaySpeed: 3000,
         slidesToShow: 1,
         slidesToScroll: 1,
@@ -75,7 +75,7 @@ export default function Home() {
             <section className="categories">
                 <div className="container-fluid">
                     <div className="flex flex-wrap bg-white">
-                        <div ref={sidebarRef} className={`offcanvas-menu-wrapper ${isMenuOpen ? 'active' : ''}`}>
+                        <div ref={sidebarRef} className={`lg:w-1/4 offcanvas-menu-wrapper ${isMenuOpen ? 'active' : ''}`}>
                             <nav className="offcanvas__menu">
                                 <ul>
                                     {categoryDetails.map((category) => (
@@ -97,7 +97,7 @@ export default function Home() {
                                 <Slider {...settings}>
                                     {bannerImg.length > 0 &&
                                         bannerImg.map((image, index) => (
-                                            <div key={index} className="h-100 categories__item categories__large__item bg-cover bg-center">
+                                            <div key={index} className="h-100 object-cover categories__item categories__large__item bg-cover bg-center">
                                                 <img src={`${getFullImageUrl(image.photo)}`} alt="" className='h-100' />
                                             </div>
                                         ))}

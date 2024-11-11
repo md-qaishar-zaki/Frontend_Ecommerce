@@ -21,15 +21,14 @@
 }
 
 .ProductIMG {
-    height: 405px;
-    width: 100%;
-    padding: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 505px;
     background: #fff;
     overflow: hidden;
     border: 1px solid #f0f0f0;
+}
+.ProductIMG img{
+    width: 100%;
+    height: 100%;
 }
 
 .ProductsShortIMG img {
@@ -68,15 +67,20 @@
     overflow: hidden;
 }
 
-.ProductIMGList img {
+.ProductIMGList {
     background: #fff;
     padding: 0;
     border-radius: 5px;
     width: 60px;
-    height: 51px;
+    height: 60px;
     box-shadow: 0px 1px 3px #0000004f;
+    margin-bottom: 10px;
 }
 
+.ProductIMGList img {
+    width: 100%;
+    height: 100%;
+}
 
 .cta-section a {
     color: #000 !important;
@@ -213,7 +217,7 @@
     border: 1px solid #94c4ec;
     border-radius: 3px;
     display: block;
-    height: 40px;  
+    height: 40px;
 }
 
 .qty-box span {

@@ -3,12 +3,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 html,
 body {
     height: 100%;
     font-family: 'Poppins', sans-serif;
     -webkit-font-smoothing: antialiased;
-    background-color: #d3f4eb;
+    background-color: #e6e86b;
     scroll-behavior: smooth;
 }
 
@@ -91,15 +92,15 @@ ol {
 -----------------------*/
 
 .section-title {
-    margin-bottom: 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    border-top: 1px solid #63c4aa;
-    border-bottom: 1px solid #63c4aa;
+    border-top: 1px solid #000000;
+    border-bottom: 1px solid #000000;
     padding: 10px 20px;
-    background: #bfe7dc;
+    background: #ffffff82;
+    margin: 1rem 0;
 }
 
 .section-title h4 {
@@ -176,7 +177,7 @@ select {
     cursor: pointer;
 }
 
-.flowIcon svg:hover{
+.flowIcon svg:hover {
     color: rgb(81, 255, 0);
 }
 

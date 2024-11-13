@@ -1,7 +1,6 @@
 .categories {
 	overflow: hidden;
-	margin-top: 0px;
-	padding-bottom: 30px;
+	margin-top: 0px; 
 }
 
 .categories__item {
@@ -15,7 +14,7 @@
 }
 
 .categories__item.categories__large__item {
-	height: 400px;
+	height: 280px;
 	margin: unset;
 }
 
@@ -288,9 +287,8 @@
 }
 
 .sliders {
-	height: 400px;
+	height: 280px;
 	overflow: hidden;
-	border-radius: 3px;
 }
 
 .sliders .categories__item img {
@@ -344,14 +342,15 @@
 }
 
 .CompanyLogo {
-	background: #0000001f;
+	background: #efefef1f;
 	height: 70px;
 	width: 100%;
-	border-radius: 4px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	padding: 0px 30px;
+	border-right: 1px solid #06060682;
+	border-style: dashed;
 }
 
 .CompanyLogo img {
@@ -360,5 +359,9 @@
 }
 
 .CompanyLogo:hover {
-	background: #00000046;
+	background: #00000018;
+}
+
+.selectedCategory {
+	left: -20px !important;
 }

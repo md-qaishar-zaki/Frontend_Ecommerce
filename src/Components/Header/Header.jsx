@@ -24,6 +24,10 @@ export default function Header() {
     };
 
     useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
         const fetchCategories = async () => {
             try {
                 const response = await fetch(`${apiUrl}/api/getcatwithsubandsub`);
@@ -78,15 +82,32 @@ export default function Header() {
                 <div className="flex flex-wrap topHeader">
                     <div className="w-full lg:w-7/12 flex justify-between lg:justify-start">
                         <ul className="flex w-full lg:w-auto space-x-4">
-                            <li><a className="top-bar-item text-gray-700">Info@gmail.com</a></li>
-                            <li><strong><a className="top-bar-item text-gray-700">+91 1290123091</a></strong></li>
+                            <li className='flex items-center'>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                                </svg>
+                                <a className="top-bar-item text-gray-700">Info@gmail.com</a></li>
+                            <li className='flex items-center'>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
+                                </svg>
+                                <a className="top-bar-item text-gray-700">+91 1290123091</a></li>
                         </ul>
                     </div>
                     <div className="w-full lg:w-5/12 text-right hidden lg:flex justify-end">
                         <ul className="flex space-x-4">
-                            <li><a className="top-bar-item text-gray-700">Track Order</a></li>
-                            <li><a className="top-bar-item text-gray-700"
-                                onClick={() => setOTPModal(prev => !prev)}>Login</a></li>
+                            <li className='flex items-center'>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                                </svg>
+                                <a className="top-bar-item text-gray-700">Track Order</a></li>
+                            <li className='flex items-center'>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                </svg>
+                                <a className="top-bar-item text-gray-700"
+                                    onClick={() => setOTPModal(prev => !prev)}>Login</a></li>
                         </ul>
                     </div>
                 </div>
@@ -99,13 +120,13 @@ export default function Header() {
                                 </svg>
                             </div> */}
                             <div className="header__logo ml-4">
-                                <a href="/">
-                                    <h6>Logo</h6>
-                                </a>
+                                <Link to="/">
+                                <img src="https://logovectorseek.com/wp-content/uploads/2020/02/demos-logo-vector.png" alt="" className='logo' />
+                                </Link>
                             </div>
                         </div>
-                        <div className="w-2/3 lg:w-7/10 flex justify-between items-center">
-                            <div className="InputSearch">
+                        <div className="w-2/3 lg:w-7/10 flex justify-end items-center">
+                            <div className="InputSearch mr-8">
                                 <input type="text" placeholder="Search Products" />
                                 <select name="All Categories">
                                     <option value="">All Categories</option>

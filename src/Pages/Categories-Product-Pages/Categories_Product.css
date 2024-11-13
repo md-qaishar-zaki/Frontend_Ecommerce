@@ -4,6 +4,7 @@
     border: 1px solid #eee;
     border-radius: 4px;
     margin-bottom: 30px;
+    text-align: left;
 }
 
 .product-sidebar .single-widget h3 {
@@ -192,10 +193,13 @@
 }
 
 .single-product .product-image .button .btn {
-    padding: 12px 20px;
+    padding: 12px 17px;
     font-size: 13px;
     font-weight: 600;
     width: 140px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .single-product .product-image .button .btn i {
@@ -207,6 +211,7 @@
 .single-product .product-info {
     padding: 20px;
     background-color: #fff;
+    text-align: left;
 }
 
 .single-product .product-info .category {
@@ -318,6 +323,45 @@ ul {
     margin: 0 !important;
 }
 
-li{
+li {
     list-style: none;
+}
+
+.form-check {
+    display: block;
+    min-height: 1.5rem;
+    padding-left: 1.5em;
+    margin-bottom: .125rem;
+}
+
+.form-check-input[type=checkbox] {
+    border-radius: .25em;
+}
+
+.form-check .form-check-input {
+    float: left;
+    margin-left: -1.5em;
+}
+
+.form-check-input {
+    width: 1em;
+    height: 1em;
+    margin-top: .25em;
+    vertical-align: top;
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: 1px solid rgba(0, 0, 0, .25);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+}
+
+.review {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }

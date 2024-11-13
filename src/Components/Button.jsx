@@ -3,7 +3,7 @@ import '../App.css'
 
 export default function Button({ Name }) {
     return (
-        <button class="button">
+        <button class="buttons">
             <div class="backdrop">
                 <span>{Name}</span>
             </div>

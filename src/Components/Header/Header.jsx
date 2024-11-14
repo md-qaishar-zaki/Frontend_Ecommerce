@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import './Header.css';
 import icon from '../../assets/Categories Icon/tools.png';
 import { Routes, Route, Link } from 'react-router-dom';
+import logo from '../../assets/Img/Logo.jpg'
 
 
 export default function Header() {
@@ -119,9 +120,9 @@ export default function Header() {
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                                 </svg>
                             </div> */}
-                            <div className="header__logo ml-4">
+                            <div className="header__logo">
                                 <Link to="/">
-                                <img src="https://logovectorseek.com/wp-content/uploads/2020/02/demos-logo-vector.png" alt="" className='logo' />
+                                <img src={logo} alt="" className='logo' />
                                 </Link>
                             </div>
                         </div>

@@ -10,7 +10,7 @@
 }
 
 .header__logo {
-	padding: 18px 0;
+	padding: 14px 0;
 }
 
 .canvas__open {
@@ -399,5 +399,5 @@ a {
 }
 
 .logo {
-	max-width: 61px;
+	max-width: 120px;
 }

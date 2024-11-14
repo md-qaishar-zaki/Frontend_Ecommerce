@@ -94,7 +94,7 @@ export default function Home() {
                                 </ul>
                             </nav>
                         </div>
-                        <div className="w-full w-[80%] relative pr-4 pb-4 mt-4 ">
+                        <div className="w-[80%] relative pr-4 pb-4 mt-4 ">
                             <div className="bg-white rounded-md relative mb-12">
                                 <div className="sliders">
                                     <Slider {...settings}>

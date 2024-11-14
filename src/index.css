@@ -4,12 +4,20 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    --primary-colors: #ffe9da;
+    --secondary-colors: #003d48;
+    --title-section-color: #ffffff82;
+    --text-color: #fff;
+    --card-background: #fff;
+}
+
 html,
 body {
     height: 100%;
     font-family: 'Poppins', sans-serif;
     -webkit-font-smoothing: antialiased;
-    background-color: #e6e86b;
+    background-color: var(--primary-colors);
     scroll-behavior: smooth;
 }
 
@@ -96,11 +104,10 @@ ol {
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    border-top: 1px solid #000000;
-    border-bottom: 1px solid #000000;
+    border-top: 1px solid var(--secondary-colors);
+    border-bottom: 1px solid var(--secondary-colors);
     padding: 10px 20px;
-    background: #ffffff82;
-    margin: 1rem 0;
+    background: #ffffff82; 
 }
 
 .section-title h4 {
@@ -142,7 +149,7 @@ ol {
 .text-white span,
 .text-white li,
 .text-white a {
-    color: #fff;
+    color: var(--text-color);
 }
 
 .space-x-2> :not([hidden])~ :not([hidden]) {
@@ -168,8 +175,8 @@ select {
     transition: 0.3s;
     margin-bottom: -45px;
     background: #00000090;
-    color: #fff;
-    border: 2px solid #fff;
+    color: var(--text-color);
+    border: 2px solid var(--text-color);
     backdrop-filter: blur(3px);
 }
 

@@ -17,7 +17,7 @@
 	display: inline-block;
 	font-size: 24px;
 	cursor: pointer;
-	color: #000;
+	color: var(--secondary-colors);
 }
 
 .offcanvas-menu-wrapper.active {
@@ -36,19 +36,20 @@
 }
 
 .offcanvas__menu ul li img {
-	margin-right: 10px;
-    border-radius: 4px;
-    width: 35px;
-    height: 35px;
+	margin-right: 10px; 
+	border-top-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+	width: 35px;
+	height: 35px;
 }
 
 .offcanvas__menu ul li a {
 	font-size: 14px;
-	color: #000;
+	color: var(--secondary-colors);
 	text-decoration: none;
 	display: block;
 	font-weight: 400;
-	padding: 5px 2px 5px 10px;
+	padding: 10px 2px 10px 10px;
 	margin: 0px;
 	text-align: left;
 	display: flex;
@@ -58,8 +59,8 @@
 }
 
 .offcanvas__menu ul li a:hover {
-	background-color: #000;
-	color: #fff;
+	background-color: var(--secondary-colors);
+	color: var(--text-color);
 }
 
 @media only screen and (max-width: 767px) {
@@ -74,7 +75,7 @@
 	height: 40px;
 	border-radius: 4px;
 	background: #ffffffc4;
-	border: 1px solid #000;
+	border: 1px solid var(--secondary-colors);
 	display: flex;
 	overflow: hidden;
 	align-items: center;
@@ -84,13 +85,13 @@
 
 .InputSearch select {
 	margin-right: 6px;
-	border: 1px solid #000;
+	border: 1px solid var(--secondary-colors);
 	border-radius: 4px;
 	height: 32px;
 	font-size: 12px;
 	width: 36%;
 	font-weight: 500;
-	color: #000;
+	color: var(--secondary-colors);
 	padding: 0px 7px;
 }
 
@@ -101,7 +102,7 @@
 	font-style: normal;
 	font-weight: 500;
 	font-size: 14px;
-	color: #547d72;
+	color: var(--secondary-colors);
 	width: 70%;
 }
 
@@ -114,7 +115,7 @@
 	top: 9px;
 	right: 10px;
 	cursor: pointer;
-	color: #fff;
+	color: var(--text-color);
 	width: 20px;
 	height: 20px;
 }
@@ -131,7 +132,7 @@
 	width: 15px;
 	height: 15px;
 	background-color: red;
-	color: #fff;
+	color: var(--text-color);
 	border-radius: 50%;
 	display: block;
 	font-size: 10px;
@@ -145,11 +146,11 @@
 
 .topHeader a {
 	font-size: 14px;
-	color: #fff;
+	color: var(--text-color);
 }
 
 .topHeader {
-	background: #000;
+	background: var(--secondary-colors);
 	padding: 3px 40px;
 }
 
@@ -167,7 +168,7 @@
 }
 
 .searchIcon {
-	background: #000;
+	background: var(--secondary-colors);
 	width: 42px;
 	height: 60px;
 }
@@ -257,7 +258,7 @@ td {
 .headerMenu li {
 	display: block;
 	padding: 5px 18px;
-	color: #000;
+	color: var(--secondary-colors);
 	font-family: "Open Sans", sans-serif;
 	font-size: 12px;
 	font-weight: 500;
@@ -292,7 +293,7 @@ td {
 .header li svg {
 	max-width: 15px;
 	margin-right: 5px;
-	color: #fff;
+	color: var(--text-color);
 }
 
 a {
@@ -307,7 +308,7 @@ a {
 
 .login-btn {
 	background-color: #444;
-	color: #fff;
+	color: var(--text-color);
 	padding: 5px 10px;
 	border: none;
 	cursor: pointer;
@@ -330,7 +331,7 @@ a {
 	position: absolute;
 	top: 100%;
 	left: 0;
-	background-color: #fff;
+	background-color: var(--text-color);
 	color: #333;
 	border-radius: 5px;
 	box-shadow: 0px 5px 7px -3px #00000061;
@@ -344,7 +345,7 @@ a {
 	width: 190px;
 	margin-top: -2px;
 	border-radius: 2px;
-	background: #fff;
+	background: var(--text-color);
 }
 
 /* Style for dropdown links */
@@ -355,11 +356,11 @@ a {
 	color: #333;
 	font-size: 12px;
 	font-weight: 500;
-	border-bottom: 1px dotted #000;
+	border-bottom: 1px dotted var(--secondary-colors);
 }
 
 .dropdown-menu a:hover {
-	color: #000;
+	color: var(--secondary-colors);
 }
 
 /* Style for nested dropdown */

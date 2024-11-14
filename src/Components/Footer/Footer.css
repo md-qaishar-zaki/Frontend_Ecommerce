@@ -198,7 +198,7 @@
 }
 
 .FooterList svg {
-    color: #ab047b;
+    color: var(--secondary-colors);
     width: 30px;
     height: 30px;
 }
@@ -208,5 +208,5 @@
 }
 
 .FooterList div:hover p {
-    color: #ab047b;
+    color: var(--secondary-colors);
 }

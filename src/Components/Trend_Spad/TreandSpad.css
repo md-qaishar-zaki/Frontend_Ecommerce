@@ -29,7 +29,7 @@
     width: 20px;
     height: 4px !important;
     content: ' ' !important;
-    background: #000;
+    background: var(--secondary-colors);
     text-align: center;
     opacity: .25;
     color: black;

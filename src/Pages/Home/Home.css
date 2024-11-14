@@ -1,6 +1,7 @@
 .categories {
 	overflow: hidden;
-	margin-top: 0px; 
+	margin-top: 0px;
+	background: var(--secondary-colors);
 }
 
 .categories__item {
@@ -14,7 +15,7 @@
 }
 
 .categories__item.categories__large__item {
-	height: 280px;
+	height: 400px;
 	margin: unset;
 }
 
@@ -262,6 +263,7 @@
 .slick-slider,
 .slick-list {
 	height: 100%;
+	border-radius: 8px;
 }
 
 /* .title {
@@ -278,7 +280,7 @@
 } */
 
 .categories__item {
-	background: #fff;
+	background: var(--text-color);
 	border-radius: 3px;
 }
 
@@ -287,7 +289,7 @@
 }
 
 .sliders {
-	height: 280px;
+	height: 400px;
 	overflow: hidden;
 }
 
@@ -327,7 +329,7 @@
 }
 
 .category-container {
-	background: #fff;
+	background: var(--text-color);
 }
 
 .categoryList {
@@ -343,7 +345,7 @@
 
 .CompanyLogo {
 	background: #efefef1f;
-	height: 70px;
+	height: 100%;
 	width: 100%;
 	display: flex;
 	align-items: center;
@@ -364,4 +366,19 @@
 
 .selectedCategory {
 	left: -20px !important;
+}
+
+.brandsBar {
+	width: 85%;
+	height: 100px;
+	background: var(--card-background);
+	margin: auto;
+	position: absolute;
+	bottom: -47px;
+	left: 0;
+	right: 0;
+	box-shadow: 3px 1px 10px 1px rgb(0 0 0 / 12%);
+}
+
+.BodyContent { 
 }

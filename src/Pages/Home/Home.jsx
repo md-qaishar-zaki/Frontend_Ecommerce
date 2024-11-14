@@ -75,7 +75,7 @@ export default function Home() {
             <section className="categories">
                 <div className="container-fluid">
                     <div className="flex flex-wrap">
-                        <div ref={sidebarRef} className={`pr-4 pt-4 pl-4 lg:w-1/4 ${isMenuOpen ? 'active' : ''}`}>
+                        <div ref={sidebarRef} className={`pr-4 pt-4 pb-4 pl-4 w-[20%] ${isMenuOpen ? 'active' : ''}`}>
                             <nav className="offcanvas__menu h-full offcanvas-menu-wrapper rounded-md overflow-hidden bg-white">
                                 <ul>
                                     {categoryDetails.map((category) => (
@@ -94,8 +94,8 @@ export default function Home() {
                                 </ul>
                             </nav>
                         </div>
-                        <div className="w-full lg:w-3/4 relative pr-4 mt-4">
-                            <div className="bg-white rounded-md overflow-hidden">
+                        <div className="w-full w-[80%] relative pr-4 pb-4 mt-4 ">
+                            <div className="bg-white rounded-md relative mb-12">
                                 <div className="sliders">
                                     <Slider {...settings}>
                                         {bannerImg.length > 0 &&
@@ -106,7 +106,7 @@ export default function Home() {
                                             ))}
                                     </Slider>
                                 </div>
-                                <div className="flex flex-wrap justify-center">
+                                <div className="flex flex-wrap justify-center brandsBar">
                                     <div className="flex-1 min-w-[100px]">
                                         <div className="CompanyLogo">
                                             <img src="https://www.crompton.co.in/cdn/shop/files/crompton-greaves-logo.webp" alt="" />
@@ -140,25 +140,19 @@ export default function Home() {
                                 </div>
                             </div>
                             {selectedCategory && (
-                                <div className="absolute selectedCategory top-0 left-0 w-9/12 h-full bg-white z-10"
+                                <div className="absolute selectedCategory top-0 left-0 w-52 h-full bg-white z-10"
                                     onMouseLeave={() => setSelectedCategory(null)} >
                                     <div className="content-section" style={{ width: '100%' }}>
-                                        <div className="subcategories-container p-4">
-                                            <div className='flex flex-wrap justify-between'>
-                                                {selectedCategory.sub_categories && selectedCategory.sub_categories.length > 0 ? (
-                                                    selectedCategory.sub_categories.map((subCategory) => (
-                                                        <div key={subCategory.id} className="w-full md:w-1/2 lg:w-1/2 p-1">
-                                                            <div className="h-full bg-white shadow-lg rounded-lg p-4 text-left">
-                                                                <h4 className="text-base font-semibold text-gray-700 mt-2">
-                                                                    {subCategory.title}
-                                                                </h4>
-                                                            </div>
-                                                        </div>
-                                                    ))
-                                                ) : (
-                                                    <p>No subcategories available.</p>
-                                                )}
-                                            </div>
+                                        <div className="offcanvas__menu text-left">
+                                            {selectedCategory.sub_categories && selectedCategory.sub_categories.length > 0 ? (
+                                                selectedCategory.sub_categories.map((subCategory) => (
+                                                    <ul key={subCategory.id}  className='p-4'>
+                                                        <li><a>{subCategory.title}</a></li>
+                                                    </ul>
+                                                ))
+                                            ) : (
+                                                <p>No subcategories available.</p>
+                                            )}
                                         </div>
                                     </div>
                                 </div>

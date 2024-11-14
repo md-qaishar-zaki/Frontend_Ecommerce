@@ -1,5 +1,5 @@
 .product-sidebar .single-widget {
-    background-color: #fff;
+    background-color: var(--text-color);
     padding: 30px;
     border: 1px solid #eee;
     border-radius: 4px;
@@ -116,7 +116,7 @@
 
 .product-grids .product-grid-topbar {
     padding: 15px 20px;
-    background-color: #fff;
+    background-color: var(--text-color);
     border-radius: 4px;
     border: 1px solid #eee;
     padding-right: 15px;
@@ -166,7 +166,7 @@
     -webkit-box-shadow: 0px 0px 20px #00000012;
     box-shadow: 0px 0px 20px #00000012;
     padding: 8px;
-    background: #fff;
+    background: var(--text-color);
 }
 
 .single-product .product-image {
@@ -210,7 +210,7 @@
 
 .single-product .product-info {
     padding: 20px;
-    background-color: #fff;
+    background-color: var(--text-color);
     text-align: left;
 }
 
@@ -251,7 +251,7 @@
     background: #f73232;
     border-radius: 2px;
     font-size: 12px;
-    color: #fff;
+    color: var(--text-color);
     font-weight: bold;
     position: absolute;
     top: 0;
@@ -280,7 +280,7 @@
     background: #0167F3;
     border-radius: 2px;
     font-size: 12px;
-    color: #fff;
+    color: var(--text-color);
     font-weight: bold;
     position: absolute;
     top: 0;
@@ -300,7 +300,7 @@
     font-weight: 600;
     padding: 13px 30px;
     background-color: #0167F3;
-    color: #fff;
+    color: var(--text-color);
     border: none;
     -webkit-transition: 0.2s;
     transition: 0.2s;
@@ -312,7 +312,7 @@
 }
 
 .button .btn:hover {
-    color: #fff;
+    color: var(--text-color);
     background-color: #081828;
     -webkit-box-shadow: 0px 4px 4px #0000000f;
     box-shadow: 0px 4px 4px #0000000f;
@@ -348,7 +348,7 @@ li {
     height: 1em;
     margin-top: .25em;
     vertical-align: top;
-    background-color: #fff;
+    background-color: var(--text-color);
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;

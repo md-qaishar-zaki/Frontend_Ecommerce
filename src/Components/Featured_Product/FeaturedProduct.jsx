@@ -66,7 +66,7 @@ export default function FeaturedProduct() {
 
     return (
         <>
-            <div className="section-title px-4 flex justify-between">
+            <div className="section-title px-4 mb-4 flex justify-between">
                 <h4 className="text-xl font-bold">Feature Product</h4>
                 <Button Name={"View More"} />
             </div>

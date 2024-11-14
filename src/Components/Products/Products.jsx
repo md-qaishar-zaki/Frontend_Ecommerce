@@ -97,7 +97,7 @@ export default function ProductSlider() {
 
                 return (
                     <>
-                        <div className="trend__content">
+                        <div className="trend__content my-4">
                             <div className="section-title flex justify-between">
                                 <h4 className="text-xl font-bold">{category.title}</h4>
                                 <Button Name={"View More"} />

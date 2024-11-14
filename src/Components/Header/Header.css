@@ -286,7 +286,7 @@ td {
 .CategoryFixed {
 	position: fixed;
 	transform: translateY(0);
-	top: 99px;
+	top: 96px;
 	box-shadow: 0px 4px 17px 0px #000000c7;
 }
 

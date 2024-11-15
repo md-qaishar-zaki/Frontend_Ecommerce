@@ -147,14 +147,14 @@ export default function Home() {
                                             {selectedCategory.sub_categories && selectedCategory.sub_categories.length > 0 ? (
                                                 selectedCategory.sub_categories.map((subCategory) => (
                                                     <ul key={subCategory.id}  className='p-4'>
-                                                        <li><a>{subCategory.title}</a></li> 
+                                                        <li><a>{subCategory.title}</a></li>
                                                     </ul>
                                                 ))
                                             ) : (
                                                 <p>No subcategories available.</p>
                                             )}
                                         </div>
-                                    </div> 
+                                    </div>
                                 </div>
                             )}
                         </div>

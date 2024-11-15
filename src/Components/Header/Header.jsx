@@ -195,7 +195,7 @@ export default function Header() {
                                                             <h4 className="text-base font-semibold text-gray-700 mt-2">
                                                                 {subCategory.title}
                                                             </h4>
-                                                            <p className="text-gray-600 mt-2 block" dangerouslySetInnerHTML={{ __html: subCategory.title }}></p>
+                                                            <p className="text-gray-600 mt-2 block" dangerouslySetInnerHTML={{ __html: subCategory.summary }}></p>
                                                             <p className="text-blue-500 hover:text-blue-400 mt-2 block">
                                                                 See more
                                                                 <svg className="inline w-4 h-4 ml-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -227,7 +227,7 @@ export default function Header() {
 
                                     {/* Nested dropdown for subcategory summary */}
                                     <div className="nested-dropdown">
-                                        <a href="" className="subcategory-slug" dangerouslySetInnerHTML={{ __html: subCategory.title }}></a>
+                                        <a href="" className="subcategory-slug" dangerouslySetInnerHTML={{ __html: subCategory.summary }}></a>
                                     </div>
                                 </div>
                             ))}

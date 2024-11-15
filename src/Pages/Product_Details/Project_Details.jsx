@@ -7,6 +7,7 @@ import Returnable from '../../assets/Categories Icon/return.png';
 import Delivery from '../../assets/Categories Icon/fast-delivery.png';
 import Quality from '../../assets/Categories Icon/quality.png';
 import Pay from '../../assets/Categories Icon/indian-rupee.png';
+import FeaturedProduct from '../../Components/Featured_Product/FeaturedProduct.jsx';
 
 export default function Project_Details() {
     window.scrollTo(0, 0);
@@ -17,7 +18,8 @@ export default function Project_Details() {
     const [selectedImage, setSelectedImage] = useState(null);
     const apiUrl = import.meta.env.VITE_API_URL;
     const [value, setValue] = useState(1);
-    console.log(product);
+    const [AddFixed, setAddFixed] = useState(false);
+
     function changeImage(src) {
         setSelectedImage(src);
         document.getElementById('mainImage').src = src;
@@ -43,6 +45,18 @@ export default function Project_Details() {
 
         fetchProduct();
     }, [id]);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if ( window.scrollY > 300) {
+                setAddFixed(true);
+            }
+            
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     if (!product) {
         return <div>Loading...</div>;
@@ -75,20 +89,21 @@ export default function Project_Details() {
     };
 
 
+
     return (
         <div>
             <section className="py-5 pt-2">
-                <div className="container mx-auto">
+                <div className="container mx-auto mt-12">
                     <div className="flex flex-wrap ProductDetails py-5">
                         <aside className="w-full lg:w-5/12 px-4 mb-4 lg:mb-0">
                             <div className="ProductImgSticky flex lg:flex-row">
-                                <div className="flex flex-col">
+                                <div className="ProductIMGListRow flex flex-col">
                                     {product.product[0].photoproduct?.map((photo, index) => (
                                         <div className={`ProductIMGList w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-md cursor-pointer hover:opacity-100 transition duration-300 ${selectedImage === photo.photo_path ? 'border-2 border-blue-500 opacity-100' : ''}`}>
                                             <img
                                                 key={index}
                                                 src={photo.photo_path}
-                                                alt={`${product.product.title} - ${index + 1}`} 
+                                                alt={`${product.product.title} - ${index + 1}`}
                                                 onClick={() => changeImage(photo.photo_path)}
                                             />
                                         </div>
@@ -106,7 +121,7 @@ export default function Project_Details() {
                                     </div>
                                     <ul className="flex flex-wrap">
                                         <li className="w-1/2 p-2">
-                                            <button className="flex items-center justify-center w-full py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded shadow transition duration-300">
+                                            <button className="AddToCartBtn flex items-center justify-center w-full py-2 px-4 font-semibold rounded shadow transition duration-300">
                                                 <svg className="mr-2" width="16" height="16" viewBox="0 0 16 15" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M15.32 2.405H4.887C3 2.405 2.46.805 2.46.805L2.257.21C2.208.085 2.083 0 1.946 0H.336C.1 0-.064.24.024.46l.644 1.945L3.11 9.767c.047.137.175.23.32.23h8.418l-.493 1.958H3.768l.002.003c-.017 0-.033-.003-.05-.003-1.06 0-1.92.86-1.92 1.92s.86 1.92 1.92 1.92c.99 0 1.805-.75 1.91-1.712l5.55.076c.12.922.91 1.636 1.867 1.636 1.04 0 1.885-.844 1.885-1.885 0-.866-.584-1.593-1.38-1.814l2.423-8.832c.12-.433-.206-.86-.655-.86" fill="currentColor"></path>
                                                 </svg>
@@ -130,7 +145,7 @@ export default function Project_Details() {
                                 <h4 className='productTitle'>
                                     {product.product[0].title}
                                 </h4>
-                                <div className="flex items-center space-x-3 mb-3">
+                                <div className="flex items-center space-x-3 mb-3 mt-2">
                                     <div className="flex items-center stars">
                                         {product.stars}
                                         {[...Array(product.stars)].map((_, index) => (
@@ -144,20 +159,27 @@ export default function Project_Details() {
                                     </div>
                                     <span className='rw'><span>4,733 Ratings&nbsp;</span><span class="hG7V+4">&amp;</span><span>&nbsp;552
                                         Reviews</span></span>
-                                    <span className="text-green-500 text-sm">{product.product[0].stock} stock</span>
+                                    <span className="text-white px-2 py-1 rounded text-xs text-sm bg-green-500">{product.product[0].stock} stock</span>
                                 </div>
-                                <div className="flex items-center mb-3">
-                                    <div class="text-sm"><span>Special price</span></div>
-                                </div>
-                                <div class="flex flex-col items-start space-y-2">
-                                    <div class="flex items-center space-x-2">
-                                        <div class="text-lg font-medium text-gray-800 rupes">₹{product.product[0].purchase_price}</div>
-                                        <div class="line-through text-sm text-gray-400 px-1 rupes">₹{product.product[0].price}</div>
+                                <div class="ProdcutLabels flex flex-col items-start space-y-2">
+                                    <div className="flex items-center space-x-2 w-full">
+                                        <label htmlFor="">Sold by:</label>
+                                        <label htmlFor="">Inhouse product</label>
+                                        <img src=".." alt="" />
+                                    </div>
+                                    <div class="flex items-center space-x-2 w-full">
+                                        <label htmlFor="">Price</label>
+                                        <div class="line-through text-sm text-gray-400 rupes">₹{product.product[0].price}</div>
+                                        <div class="text-xl font-bold text-gray-800 rupes pl-2">₹{product.product[0].purchase_price}.00</div>
+                                    </div>
+                                    <div class="flex items-center space-x-2 w-full">
+                                        <label htmlFor="">SKU:</label>
+                                        <div class="text-sm font-medium text-gray-800">{product.product[0].sku}</div>
                                     </div>
                                 </div>
-                                <div className="flex items-center w-100 my-4">
-                                    <span>Quantity:</span>
-                                    <div className="qty-box mx-3">
+                                <div className="ProdcutLabels flex items-center w-100 my-4">
+                                    <label htmlFor="">Quantity:</label>
+                                    <div className="qty-box">
                                         <span className="dec" onClick={onDecrement} onTouchStart={onDecrement}>–</span>
                                         <span className="qty">{value}</span>
                                         <span className="inc" onClick={onIncrement} onTouchStart={onIncrement}>+</span>
@@ -191,12 +213,14 @@ export default function Project_Details() {
                                         </div>
                                     </div>
 
-                                    <div className="w-full p-4 border rounded-lg bg-gray-100">
+                                    <div className=" Description w-full p-4">
                                         <h2 className="text-lg font-semibold">Description</h2>
                                         <p className="mt-2 text-sm text-gray-700">
-                                            <span className="text-sm line-clamp-4" dangerouslySetInnerHTML={{ __html: product.product[0].description }} />
+                                            <span className="text-sm" dangerouslySetInnerHTML={{ __html: product.product[0].description }} />
                                         </p>
-                                        <button className="text-blue-600 mt-2 hover:underline">Read More</button>
+                                        <p className="mt-2 text-sm text-gray-700">
+                                            <span className="text-sm" dangerouslySetInnerHTML={{ __html: product.product[0].meta_description }} />
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -207,7 +231,30 @@ export default function Project_Details() {
                         </main>
                     </div>
                 </div>
+                {AddFixed &&
+                    <div className="addToCardSide">
+                        <ul className="flex flex-wrap">
+                            <li className="w-1/2 p-2">
+                                <button className="AddToCartBtn flex items-center justify-center w-full py-2 px-4 font-semibold rounded shadow transition duration-300">
+                                    <svg className="mr-2" width="16" height="16" viewBox="0 0 16 15" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M15.32 2.405H4.887C3 2.405 2.46.805 2.46.805L2.257.21C2.208.085 2.083 0 1.946 0H.336C.1 0-.064.24.024.46l.644 1.945L3.11 9.767c.047.137.175.23.32.23h8.418l-.493 1.958H3.768l.002.003c-.017 0-.033-.003-.05-.003-1.06 0-1.92.86-1.92 1.92s.86 1.92 1.92 1.92c.99 0 1.805-.75 1.91-1.712l5.55.076c.12.922.91 1.636 1.867 1.636 1.04 0 1.885-.844 1.885-1.885 0-.866-.584-1.593-1.38-1.814l2.423-8.832c.12-.433-.206-.86-.655-.86" fill="currentColor"></path>
+                                    </svg>
+                                    Add to Cart
+                                </button>
+                            </li>
+
+                            <li className="w-1/2 p-2 flex">
+                                <form className="w-full">
+                                    <button className="w-full py-2 px-4 bg-green-500 hover:bg-green-600 text-white font-semibold rounded shadow transition duration-300" type="button">
+                                        Buy Now
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                }
             </section>
+            <FeaturedProduct />
 
             {isModalOpen && (
                 <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">

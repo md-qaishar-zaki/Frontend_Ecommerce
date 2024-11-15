@@ -50,29 +50,16 @@ export default function Header() {
         };
     }, []);
 
-    // useEffect(() => {
-    //     if (OTPModal) {
-    //         document.body.style.overflow = 'hidden';
-    //     }
-    //     else {
-    //         document.body.style.overflow = 'auto';
-    //     }
-    // })
-
     useEffect(() => {
         const handleScroll = () => {
-            // 100 pixels scroll hone par class lagaye
-            if (window.scrollY > 100) {
+            if (window.location.pathname.startsWith('/product/') || window.scrollY > 100) {
                 setIsFixed(true);
             } else {
                 setIsFixed(false);
             }
         };
 
-        // Scroll event listener add karein
         window.addEventListener('scroll', handleScroll);
-
-        // Clean up function mein listener ko remove karein
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
@@ -122,7 +109,7 @@ export default function Header() {
                             </div> */}
                             <div className="header__logo">
                                 <Link to="/">
-                                <img src={logo} alt="" className='logo' />
+                                    <img src={logo} alt="" className='logo' />
                                 </Link>
                             </div>
                         </div>

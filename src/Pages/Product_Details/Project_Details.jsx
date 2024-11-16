@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './Product_Details.css';
 import { useParams } from 'react-router-dom';
 import RatingsReviews from '../../Components/Ratings_&_Reviews/Ratings_&_Reviews.jsx';
@@ -10,7 +10,10 @@ import Pay from '../../assets/Categories Icon/indian-rupee.png';
 import FeaturedProduct from '../../Components/Featured_Product/FeaturedProduct.jsx';
 
 export default function Project_Details() {
-    window.scrollTo(0, 0);
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     const { id } = useParams();
     const [product, setProduct] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -19,6 +22,7 @@ export default function Project_Details() {
     const apiUrl = import.meta.env.VITE_API_URL;
     const [value, setValue] = useState(1);
     const [AddFixed, setAddFixed] = useState(false);
+    const scrollPosition = useRef(0);
 
     function changeImage(src) {
         setSelectedImage(src);
@@ -48,10 +52,13 @@ export default function Project_Details() {
 
     useEffect(() => {
         const handleScroll = () => {
-            if ( window.scrollY > 300) {
+            const currentScrollY = window.scrollY;
+            if (currentScrollY > 550 && scrollPosition.current <= 550) {
                 setAddFixed(true);
+            } else if (currentScrollY <= 550 && scrollPosition.current > 550) {
+                setAddFixed(false);
             }
-            
+            scrollPosition.current = currentScrollY;
         };
 
         window.addEventListener('scroll', handleScroll);

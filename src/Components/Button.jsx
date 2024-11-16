@@ -3,11 +3,11 @@ import '../App.css'
 
 export default function Button({ Name }) {
     return (
-        <button class="buttons">
-            <div class="backdrop">
+        <button className="buttons">
+            <div className="backdrop">
                 <span>{Name}</span>
             </div>
-            <div class="overlay">
+            <div className="overlay">
                 <span>{Name}</span>
             </div>
         </button>

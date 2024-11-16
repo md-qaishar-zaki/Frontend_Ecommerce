@@ -276,7 +276,7 @@
   } 
 
   .addToCardSide {
-    position: fixed;
+    position: absolute;
     top: 50%;
     bottom: 50%;
     display: flex;
@@ -291,6 +291,10 @@
     align-items: center;
     justify-content: center;
     backdrop-filter: blur(5px);
+}
+
+.addToCardSideFixed{
+position: fixed;
 }
 
 .addToCardSide li{

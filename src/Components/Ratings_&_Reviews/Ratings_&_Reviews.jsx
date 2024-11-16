@@ -29,8 +29,8 @@ export default function RatingsReviews() {
                 <div className="product-desc-tab bg-white">
                     <div className="review-paragraph">
                         <div className="leave-review">
-                            <input type="hidden" name="_token" value="T5x2AokuzglvMhxTfCircI62PsHJZ0wryLZeJuge" />
-                            <input type="hidden" name="product_id" value="2244" />
+                            <input type="hidden" name="_token"/>
+                            <input type="hidden" name="product_id"/>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <div className="form-group">
@@ -59,7 +59,7 @@ export default function RatingsReviews() {
                             <div className="grid grid-cols-1 mt-4">
                                 <div className="custom-file">
                                     <input type="file" className="custom-file-input hidden" id="inputGroupFile01" name="image" accept="image/*" />
-                                    <label className="block bg-gray-200 text-gray-700 text-sm rounded p-2 text-center cursor-pointer" for="inputGroupFile01">Choose file</label>
+                                    <label className="block bg-gray-200 text-gray-700 text-sm rounded p-2 text-center cursor-pointer" htmlFor="inputGroupFile01">Choose file</label>
                                 </div>
                             </div>
                             <div className="text-right mt-4">

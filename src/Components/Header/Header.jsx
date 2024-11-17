@@ -6,13 +6,16 @@ import logo from '../../assets/Img/Logo.jpg'
 
 
 export default function Header() {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [categories, setCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [OTPModal, setOTPModal] = useState(false);
     const sidebarRef = useRef(null);
     const apiUrl = import.meta.env.VITE_API_URL;
-    const [isFixed, setIsFixed] = useState(false);
+    const [isFixed, setIsFixed] = useState(() => window.location.pathname !== '/');
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -52,13 +55,10 @@ export default function Header() {
 
     useEffect(() => {
         const handleScroll = () => {
-            if (window.location.pathname.startsWith('/product/') || window.scrollY > 100) {
-                setIsFixed(true);
-            } else {
-                setIsFixed(false);
-            }
+            const isHomePage = window.location.pathname === '/';
+            const shouldFixHeader = !isHomePage || window.scrollY > 350;
+            setIsFixed(shouldFixHeader);
         };
-
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
@@ -130,7 +130,7 @@ export default function Header() {
                                             <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                                         </svg>
                                     </div>
-                                </Link>
+                                </git>
                             </div>
                             <div className="flex w-16 justify-between">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">

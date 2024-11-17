@@ -6,6 +6,7 @@ import Home from './Pages/Home/Home.jsx';
 import Header from './Components/Header/Header.jsx';
 import Footer from './Components/Footer/Footer.jsx';
 import CategoriesProduct from './Pages/Categories-Product-Pages/Categories_Product_Pages.jsx';
+import Checkout from './Pages/checkout/checkout.jsx'
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
@@ -17,7 +18,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<Products SectionTitle="Product List" />} />
         <Route path="/product/:id" element={<ProductDetails />} />        
-        <Route path="CategoriesProduct" element={<CategoriesProduct />} />        
+        <Route path="CategoriesProduct" element={<CategoriesProduct />} />    
+        <Route path="checkout" element={<Checkout />}/>
       </Routes>
       <Footer />
     </Router>

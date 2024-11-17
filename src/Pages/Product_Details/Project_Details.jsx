@@ -100,11 +100,11 @@ export default function Project_Details() {
     return (
         <div>
             <section className="py-5 pt-2">
-                <div className="container mx-auto mt-12">
-                    <div className="flex flex-wrap ProductDetails py-5">
-                        <aside className="w-full lg:w-5/12 px-4 mb-4 lg:mb-0">
-                            <div className="ProductImgSticky flex lg:flex-row">
-                                <div className="ProductIMGListRow flex flex-col">
+                <div className="mx-auto mt-12 container">
+                    <div className="flex flex-wrap py-5 ProductDetails">
+                        <aside className="mb-4 lg:mb-0 px-4 w-full lg:w-5/12">
+                            <div className="flex lg:flex-row ProductImgSticky">
+                                <div className="flex flex-col ProductIMGListRow">
                                     {product.product[0].photoproduct?.map((photo, index) => (
                                         <div className={`ProductIMGList w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-md cursor-pointer hover:opacity-100 transition duration-300 ${selectedImage === photo.photo_path ? 'border-2 border-blue-500 opacity-100' : ''}`}>
                                             <img
@@ -117,18 +117,18 @@ export default function Project_Details() {
                                     ))}
                                 </div>
                                 <div className="d-flex w-full">
-                                    <div className="ProductIMG w-full rounded-lg shadow-md ml-4">
+                                    <div className="shadow-md ml-4 rounded-lg w-full ProductIMG">
                                         <img
                                             id="mainImage"
                                             src={selectedImage}
                                             alt={product.product.title}
                                             onClick={openModal}
-                                            className="cursor-pointer zoom-effect"
+                                            className="zoom-effect cursor-pointer"
                                         />
                                     </div>
                                     <ul className="flex flex-wrap">
-                                        <li className="w-1/2 p-2">
-                                            <button className="AddToCartBtn flex items-center justify-center w-full py-2 px-4 font-semibold rounded shadow transition duration-300">
+                                        <li className="p-2 w-1/2">
+                                            <button className="flex justify-center items-center shadow px-4 py-2 rounded w-full font-semibold transition duration-300 AddToCartBtn">
                                                 <svg className="mr-2" width="16" height="16" viewBox="0 0 16 15" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M15.32 2.405H4.887C3 2.405 2.46.805 2.46.805L2.257.21C2.208.085 2.083 0 1.946 0H.336C.1 0-.064.24.024.46l.644 1.945L3.11 9.767c.047.137.175.23.32.23h8.418l-.493 1.958H3.768l.002.003c-.017 0-.033-.003-.05-.003-1.06 0-1.92.86-1.92 1.92s.86 1.92 1.92 1.92c.99 0 1.805-.75 1.91-1.712l5.55.076c.12.922.91 1.636 1.867 1.636 1.04 0 1.885-.844 1.885-1.885 0-.866-.584-1.593-1.38-1.814l2.423-8.832c.12-.433-.206-.86-.655-.86" fill="currentColor"></path>
                                                 </svg>
@@ -136,9 +136,9 @@ export default function Project_Details() {
                                             </button>
                                         </li>
 
-                                        <li className="w-1/2 p-2 flex">
+                                        <li className="flex p-2 w-1/2">
                                             <form className="w-full">
-                                                <button className="w-full py-2 px-4 bg-green-500 hover:bg-green-600 text-white font-semibold rounded shadow transition duration-300" type="button">
+                                                <button className="bg-green-500 hover:bg-green-600 shadow px-4 py-2 rounded w-full font-semibold text-white transition duration-300" type="button">
                                                     Buy Now
                                                 </button>
                                             </form>
@@ -147,12 +147,12 @@ export default function Project_Details() {
                                 </div>
                             </div>
                         </aside>
-                        <main className="w-full lg:w-7/12 px-4 text-left">
+                        <main className="px-4 w-full lg:w-7/12 text-left">
                             <div>
                                 <h4 className='productTitle'>
                                     {product.product[0].title}
                                 </h4>
-                                <div className="flex items-center space-x-3 mb-3 mt-2">
+                                <div className="flex items-center space-x-3 mt-2 mb-3">
                                     <div className="flex items-center stars">
                                         {product.stars}
                                         {[...Array(product.stars)].map((_, index) => (
@@ -166,9 +166,9 @@ export default function Project_Details() {
                                     </div>
                                     <span className='rw'><span>4,733 Ratings&nbsp;</span><span className="hG7V+4">&amp;</span><span>&nbsp;552
                                         Reviews</span></span>
-                                    <span className="text-white px-2 py-1 rounded text-xs text-sm bg-green-500">{product.product[0].stock} stock</span>
+                                    <span className="bg-green-500 px-2 py-1 rounded text-sm text-white text-xs">{product.product[0].stock} stock</span>
                                 </div>
-                                <div className="ProdcutLabels flex flex-col items-start space-y-2">
+                                <div className="flex flex-col items-start space-y-2 ProdcutLabels">
                                     <div className="flex items-center space-x-2 w-full">
                                         <label htmlFor="">Sold by:</label>
                                         <label htmlFor="">Inhouse product</label>
@@ -176,15 +176,15 @@ export default function Project_Details() {
                                     </div>
                                     <div className="flex items-center space-x-2 w-full">
                                         <label htmlFor="">Price</label>
-                                        <div className="line-through text-sm text-gray-400 rupes">₹{product.product[0].price}</div>
-                                        <div className="text-xl font-bold text-gray-800 rupes pl-2">₹{product.product[0].purchase_price}.00</div>
+                                        <div className="text-gray-400 text-sm line-through rupes">₹{product.product[0].price}</div>
+                                        <div className="pl-2 font-bold text-gray-800 text-xl rupes">₹{product.product[0].purchase_price}.00</div>
                                     </div>
                                     <div className="flex items-center space-x-2 w-full">
                                         <label htmlFor="">SKU:</label>
-                                        <div className="text-sm font-medium text-gray-800">{product.product[0].sku}</div>
+                                        <div className="font-medium text-gray-800 text-sm">{product.product[0].sku}</div>
                                     </div>
                                 </div>
-                                <div className="ProdcutLabels flex items-center w-100 my-4">
+                                <div className="flex items-center my-4 w-100 ProdcutLabels">
                                     <label htmlFor="">Quantity:</label>
                                     <div className="qty-box">
                                         <span className="dec" onClick={onDecrement} onTouchStart={onDecrement}>–</span>
@@ -194,25 +194,25 @@ export default function Project_Details() {
                                 </div>
                                 <div className="space-y-6">
                                     <div className="w-full">
-                                        <div className="text-lg font-semibold mb-2"></div>
+                                        <div className="mb-2 font-semibold text-lg"></div>
                                         <div>
                                             <div className="mt-4">
-                                                <div className="mt-1 flex flex-wrap gap-4">
+                                                <div className="flex flex-wrap gap-4 mt-1">
                                                     <div className="flex flex-col items-center space-x-2 DeliveryDetails">
                                                         <img src={Returnable} alt="7 Days Returnable" width="26" height="26" />
-                                                        <p className="text-sm font-medium">7 Days Returnable</p>
+                                                        <p className="font-medium text-sm">7 Days Returnable</p>
                                                     </div>
                                                     <div className="flex flex-col items-center space-x-2 DeliveryDetails">
                                                         <img src={Pay} alt="Pay on Delivery" width="26" height="26" />
-                                                        <p className="text-sm font-medium">Pay on Delivery</p>
+                                                        <p className="font-medium text-sm">Pay on Delivery</p>
                                                     </div>
                                                     <div className="flex flex-col items-center space-x-2 DeliveryDetails">
                                                         <img src={Quality} alt="100% Quality Assurance" width="26" height="26" />
-                                                        <p className="text-sm font-medium">100% Quality Assurance</p>
+                                                        <p className="font-medium text-sm">100% Quality Assurance</p>
                                                     </div>
                                                     <div className="flex flex-col items-center space-x-2 DeliveryDetails">
                                                         <img src={Delivery} alt="Trusted Delivery" width="26" height="26" />
-                                                        <p className="text-sm font-medium">Trusted Delivery</p>
+                                                        <p className="font-medium text-sm">Trusted Delivery</p>
                                                     </div>
                                                 </div>
 
@@ -220,18 +220,18 @@ export default function Project_Details() {
                                         </div>
                                     </div>
 
-                                    <div className=" Description w-full p-4">
-                                        <h2 className="text-lg font-semibold">Description</h2>
-                                        <p className="mt-2 text-sm text-gray-700">
+                                    <div className="p-4 w-full Description">
+                                        <h2 className="font-semibold text-lg">Description</h2>
+                                        <p className="mt-2 text-gray-700 text-sm">
                                             <span className="text-sm" dangerouslySetInnerHTML={{ __html: product.product[0].description }} />
                                         </p>
-                                        <p className="mt-2 text-sm text-gray-700">
+                                        <p className="mt-2 text-gray-700 text-sm">
                                             <span className="text-sm" dangerouslySetInnerHTML={{ __html: product.product[0].meta_description }} />
                                         </p>
                                     </div>
                                 </div>
                             </div>
-                            <div className="mt-3 mb-3 bg-white rounded overflow-hidden ms-0 mx-3">
+                            <div className="bg-white mx-3 mt-3 mb-3 rounded overflow-hidden ms-0">
                                 <RatingsReviews />
                             </div>
                             {/* <QNA /> */}
@@ -240,8 +240,8 @@ export default function Project_Details() {
                 </div>
                 <div className={`addToCardSide ${AddFixed ? 'addToCardSideFixed' : ''}`} >
                     <ul className="flex flex-wrap">
-                        <li className="w-1/2 p-2">
-                            <button className="AddToCartBtn flex items-center justify-center w-full py-2 px-4 font-semibold rounded shadow transition duration-300">
+                        <li className="p-2 w-1/2">
+                            <button className="flex justify-center items-center shadow px-4 py-2 rounded w-full font-semibold transition duration-300 AddToCartBtn">
                                 <svg className="mr-2" width="16" height="16" viewBox="0 0 16 15" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M15.32 2.405H4.887C3 2.405 2.46.805 2.46.805L2.257.21C2.208.085 2.083 0 1.946 0H.336C.1 0-.064.24.024.46l.644 1.945L3.11 9.767c.047.137.175.23.32.23h8.418l-.493 1.958H3.768l.002.003c-.017 0-.033-.003-.05-.003-1.06 0-1.92.86-1.92 1.92s.86 1.92 1.92 1.92c.99 0 1.805-.75 1.91-1.712l5.55.076c.12.922.91 1.636 1.867 1.636 1.04 0 1.885-.844 1.885-1.885 0-.866-.584-1.593-1.38-1.814l2.423-8.832c.12-.433-.206-.86-.655-.86" fill="currentColor"></path>
                                 </svg>
@@ -249,9 +249,9 @@ export default function Project_Details() {
                             </button>
                         </li>
 
-                        <li className="w-1/2 p-2 flex">
+                        <li className="flex p-2 w-1/2">
                             <form className="w-full">
-                                <button className="w-full py-2 px-4 bg-green-500 hover:bg-green-600 text-white font-semibold rounded shadow transition duration-300" type="button">
+                                <button className="bg-green-500 hover:bg-green-600 shadow px-4 py-2 rounded w-full font-semibold text-white transition duration-300" type="button">
                                     Buy Now
                                 </button>
                             </form>
@@ -262,16 +262,16 @@ export default function Project_Details() {
             <FeaturedProduct />
 
             {isModalOpen && (
-                <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
-                    <div className="ModalImages relative bg-white rounded-lg overflow-hidden w-auto max-w-3xl">
+                <div className="z-50 fixed inset-0 flex justify-center items-center bg-black bg-opacity-75">
+                    <div className="relative bg-white rounded-lg w-auto max-w-3xl overflow-hidden ModalImages">
                         <button
-                            className="absolute w-10 top-2 right-2 text-white bg-red-600 p-2 rounded-full focus:outline-none"
+                            className="top-2 right-2 absolute bg-red-600 p-2 rounded-full w-10 text-white focus:outline-none"
                             onClick={closeModal}
                         >
                             X
                         </button>
                         <button
-                            className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full"
+                            className="top-1/2 left-2 absolute bg-gray-800 p-2 rounded-full text-white transform -translate-y-1/2"
                             onClick={prevImage}
                         >
                             &#10094;
@@ -282,7 +282,7 @@ export default function Project_Details() {
                             className="w-full h-auto"
                         />
                         <button
-                            className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full"
+                            className="top-1/2 right-2 absolute bg-gray-800 p-2 rounded-full text-white transform -translate-y-1/2"
                             onClick={nextImage}
                         >
                             &#10095;

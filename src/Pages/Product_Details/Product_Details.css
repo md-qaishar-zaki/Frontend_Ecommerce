@@ -1,166 +1,164 @@
 .ProductDetails {
-    background: #ffffff;
-    margin: 0px 10px;
-    border-radius: 5px;
-
+  background: #ffffff;
+  margin: 0px 10px;
+  border-radius: 5px;
 }
 
-.AddToCartBtn{
-    background: var(--secondary-colors);
-    color: var(--text-color);
+.AddToCartBtn {
+  background: var(--secondary-colors);
+  color: var(--text-color);
 }
 
 .Price {
-    font-weight: 600;
-    color: rgb(0, 112, 204);
-    font-size: 16px;
+  font-weight: 600;
+  color: rgb(0, 112, 204);
+  font-size: 16px;
 }
 
 .media_box {
-    border: 1px solid #cfc29f !important;
-    border-right: 0;
-    text-align: center;
-    margin-bottom: 10px;
-    padding: 10px 18px;
-    background: #faedcb;
+  border: 1px solid #cfc29f !important;
+  border-right: 0;
+  text-align: center;
+  margin-bottom: 10px;
+  padding: 10px 18px;
+  background: #faedcb;
 }
 
 .ProductIMG {
-    height: 350px;
-    background: var(--text-color);
-    overflow: hidden;
-    border: 1px solid #f0f0f0;
-    display: flex;
-    justify-content: center;
+  height: 350px;
+  background: var(--text-color);
+  overflow: hidden;
+  border: 1px solid #f0f0f0;
+  display: flex;
+  justify-content: center;
 }
 
 .ProductsShortIMG img {
-    width: 90px;
-    height: 75px;
-    background: var(--text-color);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 9px;
+  width: 90px;
+  height: 75px;
+  background: var(--text-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 9px;
 }
 
 .stars svg {
-    color: #ffffff;
-    font-size: 12px;
-    width: 10px;
-    margin: 2px 0 0 2px;
-    height: 10px;
+  color: #ffffff;
+  font-size: 12px;
+  width: 10px;
+  margin: 2px 0 0 2px;
+  height: 10px;
 }
 
 .tabs--style-2 .nav-tabs {
-    border-bottom: 1px solid rgba(0, 0, 0, .125);
-    padding: 0 20px;
-    margin: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  padding: 0 20px;
+  margin: 0;
 }
 
 .product_content p {
-    padding: 5px 0px;
-    border-bottom: 1px solid #e1e0e0;
-    margin: 10px 0px;
+  padding: 5px 0px;
+  border-bottom: 1px solid #e1e0e0;
+  margin: 10px 0px;
 }
 
 .product-desc-tab {
-    margin-top: 5px;
-    border-radius: 5px;
-    overflow: hidden;
+  margin-top: 5px;
+  border-radius: 5px;
+  overflow: hidden;
 }
 
 .ProductIMGList {
-    background: var(--text-color);
-    padding: 0;
-    border-radius: 5px;
-    width: 60px;
-    height: 60px;
-    box-shadow: 0px 1px 3px #0000004f;
-    margin-bottom: 10px;
+  background: var(--text-color);
+  padding: 0;
+  border-radius: 5px;
+  width: 60px;
+  height: 60px;
+  box-shadow: 0px 1px 3px #0000004f;
+  margin-bottom: 10px;
 }
 
 .ProductIMGList img {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .cta-section a {
-    color: #000 !important;
-    font-size: 12px;
-    line-height: 1;
-    font-weight: 600;
-    text-align: center;
+  color: #000 !important;
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 600;
+  text-align: center;
 }
 
 .cta-section a:hover {
-    opacity: 0.8
+  opacity: 0.8;
 }
 
 .card-body p {
-    line-height: 1.1;
+  line-height: 1.1;
 }
 
 .ModalImages {
-    width: 50%;
-    height: 400px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
+  width: 50%;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
 }
 
 .ModalImages img {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .ProductImgSticky {
-    position: sticky !important;
-    top: 80px !important;
+  position: sticky !important;
+  top: 80px !important;
 }
 
 .productTitle {
-    color: #212121;
-    font-size: 20px;
-    font-weight: 600;
-    display: contents;
+  color: #212121;
+  font-size: 20px;
+  font-weight: 600;
+  display: contents;
 }
 
 .stars {
-    line-height: normal;
-    display: inline-block;
-    color: var(--text-color);
-    padding: 2px 4px 2px 6px;
-    border-radius: 3px;
-    font-weight: 500;
-    font-size: 12px;
-    vertical-align: middle;
-    background-color: #388e3c;
+  line-height: normal;
+  display: inline-block;
+  color: var(--text-color);
+  padding: 2px 4px 2px 6px;
+  border-radius: 3px;
+  font-weight: 500;
+  font-size: 12px;
+  vertical-align: middle;
+  background-color: #388e3c;
 }
 
-
 .rw {
-    font-weight: 500;
-    color: #878787;
-    font-size: 14px;
+  font-weight: 500;
+  color: #878787;
+  font-size: 14px;
 }
 
 .img-zoom-container {
-    position: relative;
+  position: relative;
 }
 
 .img-zoom-lens {
-    position: absolute;
-    border: 1px solid #d4d4d4;
-    width: 40px;
-    height: 40px;
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  width: 40px;
+  height: 40px;
 }
 
 .img-zoom-result {
-    border: 1px solid #d4d4d4;
-    width: 300px;
-    height: 300px;
+  border: 1px solid #d4d4d4;
+  width: 300px;
+  height: 300px;
 }
 
 .Specifications h5,
@@ -168,135 +166,135 @@
 .Specifications p,
 .Specifications h4,
 .Specifications td {
-    font-family: 'Poppins';
-    font-weight: 600;
-    color: #414141;
-    margin: 8px 0px;
+  font-family: 'Poppins';
+  font-weight: 600;
+  color: #414141;
+  margin: 8px 0px;
 }
 
 .Specifications h5 {
-    font-size: 20px;
+  font-size: 20px;
 }
 
 .Specifications h6 {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 .Specifications p {
-    font-size: 12px;
+  font-size: 12px;
 }
 
 .Specifications h4 {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 .Specifications td {
-    font-weight: 400 !important;
-    font-size: 14px;
-    padding: 10px;
-    color: #2b2b2b;
-    border: 1px solid #2b2b2b40;
-    border-radius: 2px;
-    overflow: hidden;
+  font-weight: 400 !important;
+  font-size: 14px;
+  padding: 10px;
+  color: #2b2b2b;
+  border: 1px solid #2b2b2b40;
+  border-radius: 2px;
+  overflow: hidden;
 }
 
 .rupes {
-    font-family: Inter, -apple-system, Helvetica, Arial, sans-serif;
+  font-family: Inter, -apple-system, Helvetica, Arial, sans-serif;
 }
 
 .DeliveryDetails {
-    border: 1px solid #003d48;
-    border-radius: 3px;
-    padding: 10px;
-    background: var(--primary-colors);
+  border: 1px solid #003d48;
+  border-radius: 3px;
+  padding: 10px;
+  background: var(--primary-colors);
 }
 
 .DeliveryDetails p {
-    color: #4c5e78;
+  color: #4c5e78;
 }
-.Description{
-    border: 1px solid var(--secondary-colors);
-    border-radius: 8px;
-    box-shadow: 0px 6px 9px -6px var(--secondary-colors);
+.Description {
+  border: 1px solid var(--secondary-colors);
+  border-radius: 8px;
+  box-shadow: 0px 6px 9px -6px var(--secondary-colors);
 }
 .qty-box {
-    border: 1px solid var(--secondary-colors);
-    border-radius: 3px;
-    display: block;
-    height: 40px;
+  border: 1px solid var(--secondary-colors);
+  border-radius: 3px;
+  display: block;
+  height: 40px;
 }
 
 .qty-box span {
-    color: var(--secondary-colors);
-    font-family: sans-serif;
-    float: left;
-    line-height: 39px;
-    text-align: center;
-    width: 40px;
-    -webkit-font-smoothing: antialiased;
+  color: var(--secondary-colors);
+  font-family: sans-serif;
+  float: left;
+  line-height: 39px;
+  text-align: center;
+  width: 40px;
+  -webkit-font-smoothing: antialiased;
 }
 
 .qty-box .dec,
 .qty-box .inc {
-    height: 100%;
+  height: 100%;
 }
 
 .qty-box .dec:hover,
 .qty-box .inc:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
-.ProductIMGListRow{
-    height: 395px;
-    width: 27%;
-    overflow-y: auto;
-    overflow-x: hidden;
+.ProductIMGListRow {
+  height: 395px;
+  width: 27%;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .ProductIMGListRow::-webkit-scrollbar {
-    width: 5px;
-  }
-  
-  .ProductIMGListRow::-webkit-scrollbar-track {
-    background: #f1f1f1; 
-  }
-  
-  .ProductIMGListRow::-webkit-scrollbar-thumb {
-    background: #888; 
-  }
-  
-  .ProductIMGListRow::-webkit-scrollbar-thumb:hover {
-    background: #555; 
-  }
-
-  .ProdcutLabels label{
-    width: 30%;
-    font-size: 14px;
-    font-weight: 500;
-  } 
-
-  .addToCardSide {
-    position: absolute;
-    top: 50%;
-    bottom: 50%;
-    display: flex;
-    right: 5px;
-    z-index: 2;
-    background: #0000003a;
-    border: 1px solid #fff;
-    height: 120px;
-    width: 14%;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    backdrop-filter: blur(5px);
+  width: 5px;
 }
 
-.addToCardSideFixed{
-position: fixed;
+.ProductIMGListRow::-webkit-scrollbar-track {
+  background: #f1f1f1;
 }
 
-.addToCardSide li{
-    width: 100%;
+.ProductIMGListRow::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+.ProductIMGListRow::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.ProdcutLabels label {
+  width: 30%;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.addToCardSide {
+  display: none;
+  position: absolute;
+  top: 50%;
+  bottom: 50%; 
+  right: 5px;
+  z-index: 2;
+  background: #0000003a;
+  border: 1px solid #fff;
+  height: 120px;
+  width: 14%;
+  border-radius: 5px;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(5px);
+}
+
+.addToCardSideFixed {
+  position: fixed;
+  display: flex;
+}
+
+.addToCardSide li {
+  width: 100%;
 }

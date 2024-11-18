@@ -6,17 +6,14 @@ import logo from '../../assets/Img/Logo.jpg'
 import Login from '../../Pages/Login/Login'
 
 export default function Header () {
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [categories, setCategories] = useState([])
   const [selectedCategory, setSelectedCategory] = useState(null)
   const [OTPModal, setOTPModal] = useState(false)
+  const [userStatus, setUserStatus] = useState('Login')
   const sidebarRef = useRef(null)
   const apiUrl = import.meta.env.VITE_API_URL
   const [isFixed, setIsFixed] = useState(() => window.location.pathname !== '/')
-  const [mobile, setMobile] = useState('')
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
@@ -29,22 +26,8 @@ export default function Header () {
   }
 
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    })
-    const fetchCategories = async () => {
-      try {
-        const response = await fetch(`${apiUrl}/api/getcatwithsubandsub`)
-        const data = await response.json()
-        setCategories(data.categories) // Adjust according to your API response structure
-      } catch (error) {
-        console.error('Error fetching categories:', error)
-      }
-    }
-
-    fetchCategories()
-  }, [apiUrl])
+    window.scrollTo(0, 0)
+  }, [])
 
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside)
@@ -52,6 +35,37 @@ export default function Header () {
       document.removeEventListener('mousedown', handleClickOutside)
     }
   }, [])
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch(`${apiUrl}/api/getcatwithsubandsub`)
+        const data = await response.json()
+        setCategories(data.categories)
+      } catch (error) {
+        console.error('Error fetching categories:', error)
+      }
+    }
+
+    const fetchUserStatus = async () => {
+      try {
+        const response = await fetch('https://admin.siyabling.com/api/user', {
+          headers: {
+            Authorization: `${localStorage.getItem('authToken')}`
+          }
+        })
+        if (response.ok) {
+          console.log(response)
+          setUserStatus('Guest User')
+        }
+      } catch (error) {
+        console.error('Error fetching user status:', error)
+      }
+    }
+
+    fetchCategories()
+    fetchUserStatus()
+  }, [apiUrl])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -144,14 +158,13 @@ export default function Header () {
                     d='M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z'
                   />
                 </svg>
-                {mobile ? (
-                  <a>User with mobile: ${mobile}</a>
+                {userStatus ? (
+                  <a>{userStatus}</a>
                 ) : (
                   <a
                     className='top-bar-item text-gray-700'
                     onClick={() => setOTPModal(prev => !prev)}
                   >
-                    {' '}
                     Login
                   </a>
                 )}
@@ -346,13 +359,7 @@ export default function Header () {
           </li>
         ))}
       </ul>
-      {OTPModal && (
-        <Login
-          mobile={mobile}
-          setMobile={setMobile}
-          onClick={() => setOTPModal(prev => !prev)}
-        />
-      )}
+      {OTPModal && <Login onClick={() => setOTPModal(prev => !prev)} />}
     </>
   )
 }

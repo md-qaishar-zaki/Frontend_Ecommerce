@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 
-export default function Login({ mobile, setMobile, onClick }) {
+export default function Login({onClick }) {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [mobile, setMobile] = useState('');
+
 
   const handleInputChange = (e) => {
     const value = e.target.value;
@@ -34,11 +36,14 @@ export default function Login({ mobile, setMobile, onClick }) {
       });
   
       const data = await response.json();
-      setLoading(false); 
-      if (response.ok && data.token) {
-        localStorage.setItem('authToken', data.token);
-        alert('Login successful!');
-      } else { 
+      setLoading(false);
+  
+      if (response.ok && data.token) { 
+        const token = data.token.includes('|') ? data.token.split('|')[1] : data.token; 
+        localStorage.setItem('authToken', token);
+  
+        alert('Login successful!'); 
+      } else {
         console.error('Error message from API:', data.message);
         setError(data.message || 'Login failed.');
       }
@@ -46,7 +51,7 @@ export default function Login({ mobile, setMobile, onClick }) {
       setLoading(false);
       setError('An error occurred. Please try again later.');
     }
-  };
+  };  
   
 
   return (
@@ -81,7 +86,7 @@ export default function Login({ mobile, setMobile, onClick }) {
                     {error && <p className="text-red-500 text-sm">{error}</p>}
                   </div>
                   <div className="relative">
-                    <button
+                    <button 
                       onClick={handleSubmit}
                       disabled={loading}
                       className="bg-[#007c5b] hover:bg-[#005f4b] px-4 py-2 rounded-md text-white transition"

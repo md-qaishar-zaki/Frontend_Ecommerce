@@ -10,7 +10,7 @@ export default function Header () {
   const [categories, setCategories] = useState([])
   const [selectedCategory, setSelectedCategory] = useState(null)
   const [OTPModal, setOTPModal] = useState(false)
-  const [userStatus, setUserStatus] = useState('Login')
+  const [userStatus, setUserStatus] = useState()
   const sidebarRef = useRef(null)
   const apiUrl = import.meta.env.VITE_API_URL
   const [isFixed, setIsFixed] = useState(() => window.location.pathname !== '/')
@@ -54,18 +54,26 @@ export default function Header () {
             Authorization: `${localStorage.getItem('authToken')}`
           }
         })
+
         if (response.ok) {
-          console.log(response)
-          setUserStatus('Guest User')
+          const data = await response.json()
+          if (data.user) { 
+            setUserStatus(data.user.name || 'Logged In User')
+          } else {
+            setUserStatus('Guest User')
+          }
+        } else {
+          setUserStatus(null)
+          localStorage.removeItem('authToken')
         }
       } catch (error) {
         console.error('Error fetching user status:', error)
+        setUserStatus(null)
       }
     }
-
     fetchCategories()
     fetchUserStatus()
-  }, [apiUrl])
+  }, [apiUrl]) 
 
   useEffect(() => {
     const handleScroll = () => {
@@ -78,8 +86,8 @@ export default function Header () {
   }, [])
 
   const handleLogout = () => {
-    localStorage.removeItem('authToken'); 
-    setUserStatus(null);
+    localStorage.removeItem('authToken')
+    setUserStatus(null)
   }
 
   return (

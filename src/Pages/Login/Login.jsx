@@ -41,8 +41,9 @@ export default function Login({onClick }) {
       if (response.ok && data.token) { 
         const token = data.token.includes('|') ? data.token.split('|')[1] : data.token; 
         localStorage.setItem('authToken', token);
-  
-        alert('Login successful!'); 
+        setTimeout(() => {
+          onClick(); 
+        }, 500);
       } else {
         console.error('Error message from API:', data.message);
         setError(data.message || 'Login failed.');

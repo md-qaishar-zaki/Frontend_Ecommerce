@@ -77,6 +77,11 @@ export default function Header () {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  const handleLogout = () => {
+    localStorage.removeItem('authToken'); 
+    setUserStatus(null);
+  }
+
   return (
     <>
       <header className='header'>
@@ -143,7 +148,7 @@ export default function Header () {
                 </svg>
                 <a className='top-bar-item text-gray-700'>Track Order</a>
               </li>
-              <li className='flex items-center'>
+              <li className='flex items-center dropdown userStatus'>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
                   fill='none'
@@ -159,7 +164,16 @@ export default function Header () {
                   />
                 </svg>
                 {userStatus ? (
-                  <a>{userStatus}</a>
+                  <>
+                    <a>{userStatus}</a>
+                    <div className='dropdown-menu'>
+                      <div className='dropdown-item'>
+                        <a className='sub-category-link' onClick={handleLogout}>
+                          Logout
+                        </a>
+                      </div>
+                    </div>
+                  </>
                 ) : (
                   <a
                     className='top-bar-item text-gray-700'

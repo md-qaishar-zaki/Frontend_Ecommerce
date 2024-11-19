@@ -19,7 +19,8 @@ export default function Home() {
             try {
                 const response = await fetch(`${apiUrl}/api/getbannerlist`);
                 const data = await response.json();
-                setBannerImg(data);
+setBannerImg(data)
+
             } catch (error) {
                 console.error('Error fetching banner images:', error);
             }
@@ -76,7 +77,7 @@ export default function Home() {
                 <div className="container-fluid">
                     <div className="flex flex-wrap">
                         <div ref={sidebarRef} className={`pr-4 pt-4 pb-4 pl-4 w-[20%] ${isMenuOpen ? 'active' : ''}`}>
-                            <nav className="offcanvas__menu h-full offcanvas-menu-wrapper rounded-md overflow-hidden bg-white">
+                            <nav className="bg-white rounded-md h-full overflow-hidden offcanvas__menu offcanvas-menu-wrapper">
                                 <ul>
                                     {categoryDetails.map((category) => (
                                         <>
@@ -94,13 +95,13 @@ export default function Home() {
                                 </ul>
                             </nav>
                         </div>
-                        <div className="w-[80%] relative pr-4 pb-4 mt-4 ">
-                            <div className="bg-white rounded-md relative mb-12">
+                        <div className="relative mt-4 pr-4 pb-4 w-[80%]">
+                            <div className="relative bg-white mb-12 rounded-md">
                                 <div className="sliders">
                                     <Slider {...settings}>
                                         {bannerImg.length > 0 &&
                                             bannerImg.map((image, index) => (
-                                                <div key={index} className="h-100 object-cover categories__item categories__large__item bg-cover bg-center">
+                                                <div key={index} className="bg-cover bg-center h-100 categories__item categories__large__item object-cover">
                                                     <img src={`${getFullImageUrl(image.photo)}`} alt="" className='h-100' />
                                                 </div>
                                             ))}
@@ -133,17 +134,17 @@ export default function Home() {
                                         </div>
                                     </div>
                                     <div className="flex-1 min-w-[100px]">
-                                        <div className="CompanyLogo border-none">
+                                        <div className="border-none CompanyLogo">
                                             <img src="https://www.balwaan.com/assets/desktop/images/logo_header.png" alt="" />
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             {selectedCategory && (
-                                <div className="absolute selectedCategory top-0 left-0 w-52 h-full bg-white z-10"
+                                <div className="top-0 left-0 z-10 absolute bg-white w-52 h-full selectedCategory"
                                     onMouseLeave={() => setSelectedCategory(null)} >
                                     <div className="content-section" style={{ width: '100%' }}>
-                                        <div className="offcanvas__menu text-left">
+                                        <div className="text-left offcanvas__menu">
                                             {selectedCategory.sub_categories && selectedCategory.sub_categories.length > 0 ? (
                                                 selectedCategory.sub_categories.map((subCategory) => (
                                                     <ul key={subCategory.id}  className='p-4'>

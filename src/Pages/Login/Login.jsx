@@ -51,6 +51,7 @@ export default function Login({onClick }) {
       setLoading(false);
       setError('An error occurred. Please try again later.');
     }
+    
   };  
   
 

@@ -4,6 +4,7 @@ import icon from '../../assets/Categories Icon/tools.png'
 import { Routes, Route, Link } from 'react-router-dom'
 import logo from '../../assets/Img/Logo.jpg'
 import Login from '../../Pages/Login/Login'
+import axios from "axios";
 
 export default function Header () {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -46,30 +47,28 @@ export default function Header () {
         console.error('Error fetching categories:', error)
       }
     }
-
     const fetchUserStatus = async () => {
-      try {
-        const response = await fetch('https://admin.siyabling.com/api/user', {
-          headers: {
-            Authorization: `${localStorage.getItem('authToken')}`
-          }
-        })
-
-        if (response.ok) {
-          const data = await response.json()
-          if (data.user) { 
+        let config = {
+        method: 'get',
+        maxBodyLength: Infinity,
+        url: 'https://admin.siyabling.com/api/user',
+        headers: {
+          'Authorization':  `Bearer 2hXyW4zcNbPfLBZor2gOGYQ1ThuP88DqYsD98foS63e27e73`
+        }
+      };
+      axios.request(config).then(async (response) => {
+        if (response.status === 200) {
+          const data = await response.data;
+          if (data.user) {
             setUserStatus(data.user.name || 'Logged In User')
           } else {
             setUserStatus('Guest User')
           }
-        } else {
+        }else {
           setUserStatus(null)
           localStorage.removeItem('authToken')
         }
-      } catch (error) {
-        console.error('Error fetching user status:', error)
-        setUserStatus(null)
-      }
+      });
     }
     fetchCategories()
     fetchUserStatus()

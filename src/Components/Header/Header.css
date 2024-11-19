@@ -278,14 +278,13 @@ td {
   transform: translateY(-226%);
   transition: transform 0.2s ease;
   display: flex;
-  justify-content: space-evenly;
   align-items: center;
 }
 
 .CategoryFixed {
   position: fixed;
   transform: translateY(0);
-  top: 96px;
+  top: 127px;
   box-shadow: 0px 4px 17px 0px #000000c7;
 }
 

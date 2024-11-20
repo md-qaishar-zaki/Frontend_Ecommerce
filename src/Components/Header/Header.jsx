@@ -48,27 +48,37 @@ export default function Header () {
       }
     }
     const fetchUserStatus = async () => {
-        let config = {
-        method: 'get',
-        maxBodyLength: Infinity,
-        url: 'https://admin.siyabling.com/api/user',
-        headers: {
-          'Authorization':  `Bearer 2hXyW4zcNbPfLBZor2gOGYQ1ThuP88DqYsD98foS63e27e73`
-        }
-      };
-      axios.request(config).then(async (response) => {
-        if (response.status === 200) {
-          const data = await response.data;
-          if (data.user) {
-            setUserStatus(data.user.name || 'Logged In User')
-          } else {
-            setUserStatus('Guest User')
+      const authToken = localStorage.getItem('authToken');
+      if (authToken) {
+        const config = {
+          method: 'get',
+          maxBodyLength: Infinity,
+          url: `${apiUrl}/api/user`,
+          headers: {
+            'Authorization': `Bearer ${authToken}`
           }
-        }else {
-          setUserStatus(null)
-          localStorage.removeItem('authToken')
-        }
-      });
+        };
+        axios.request(config).then(async (response) => {
+          if (response.status === 200) {
+            const data = await response.data;
+            if (data.user) {
+              setUserStatus(data.user.name || 'Logged In User');
+            } else {
+              setUserStatus('Guest User');
+            }
+          } else {
+            setUserStatus(null);
+            localStorage.removeItem('authToken');
+          }
+        }).catch((error) => {
+          console.error("Error fetching user data:", error);
+          setUserStatus(null);
+          localStorage.removeItem('authToken');
+        });
+      } else {
+        console.warn("No auth token found in localStorage");
+        setUserStatus(null);
+      }
     }
     fetchCategories()
     fetchUserStatus()

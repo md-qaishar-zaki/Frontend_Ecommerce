@@ -93,7 +93,7 @@ export default function Login({onClick }) {
                       disabled={loading}
                       className="bg-[#007c5b] hover:bg-[#005f4b] px-4 py-2 rounded-md text-white transition"
                     >
-                      {loading ? 'Loading...' : 'Send OTP'}
+                      {loading ? 'Loading...' : 'Submit'}
                     </button>
                   </div>
                 </div>

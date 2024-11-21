@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
+import { UserContext } from '../../UserContext.jsx'
 
 export default function Login({onClick }) {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [mobile, setMobile] = useState('');
-
-
+  const { fetchUserStatus  } = useContext(UserContext);
+  const apiUrl = import.meta.env.VITE_API_URL;
   const handleInputChange = (e) => {
     const value = e.target.value;
     if (/^\d{0,10}$/.test(value)) {
@@ -24,7 +25,7 @@ export default function Login({onClick }) {
   
     try {
       setLoading(true);
-      const response = await fetch('https://admin.siyabling.com/api/userlogin', {
+      const response = await fetch(`${apiUrl}/api/userlogin`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -44,6 +45,7 @@ export default function Login({onClick }) {
         setTimeout(() => {
           onClick(); 
         }, 500);
+        fetchUserStatus();
       } else {
         console.error('Error message from API:', data.message);
         setError(data.message || 'Login failed.');

@@ -1,20 +1,21 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef,useContext  } from 'react'
 import './Header.css'
 import icon from '../../assets/Categories Icon/tools.png'
 import { Routes, Route, Link } from 'react-router-dom'
 import logo from '../../assets/Img/Logo.jpg'
 import Login from '../../Pages/Login/Login'
 import axios from "axios";
+import { UserContext } from '../../UserContext.jsx';
 
 export default function Header () {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [categories, setCategories] = useState([])
   const [selectedCategory, setSelectedCategory] = useState(null)
   const [OTPModal, setOTPModal] = useState(false)
-  const [userStatus, setUserStatus] = useState()
   const sidebarRef = useRef(null)
   const apiUrl = import.meta.env.VITE_API_URL
   const [isFixed, setIsFixed] = useState(() => window.location.pathname !== '/')
+  const { userStatus,setUserStatus, loading } = useContext(UserContext);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
@@ -47,41 +48,7 @@ export default function Header () {
         console.error('Error fetching categories:', error)
       }
     }
-    const fetchUserStatus = async () => {
-      const authToken = localStorage.getItem('authToken');
-      if (authToken) {
-        const config = {
-          method: 'get',
-          maxBodyLength: Infinity,
-          url: `${apiUrl}/api/user`,
-          headers: {
-            'Authorization': `Bearer ${authToken}`
-          }
-        };
-        axios.request(config).then(async (response) => {
-          if (response.status === 200) {
-            const data = await response.data;
-            if (data.user) {
-              setUserStatus(data.user.name || 'Logged In User');
-            } else {
-              setUserStatus('Guest User');
-            }
-          } else {
-            setUserStatus(null);
-            localStorage.removeItem('authToken');
-          }
-        }).catch((error) => {
-          console.error("Error fetching user data:", error);
-          setUserStatus(null);
-          localStorage.removeItem('authToken');
-        });
-      } else {
-        console.warn("No auth token found in localStorage");
-        setUserStatus(null);
-      }
-    }
-    fetchCategories()
-    fetchUserStatus()
+    fetchCategories();
   }, [apiUrl]) 
 
   useEffect(() => {
@@ -182,7 +149,7 @@ export default function Header () {
                 </svg>
                 {userStatus ? (
                   <>
-                    <a>{userStatus}</a>
+                    <a>{userStatus.mobile}</a>
                     <div className='dropdown-menu'>
                       <div className='dropdown-item'>
                         <a className='sub-category-link' onClick={handleLogout}>

@@ -13,14 +13,15 @@ export default function Home() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const sidebarRef = useRef(null);
     const [selectedCategory, setSelectedCategory] = useState(null);
+    const [featuredProduct, setFeaturedProduct] = useState([])
 
+    //banner Images
     useEffect(() => {
         const fetchBannerImg = async () => {
             try {
                 const response = await fetch(`${apiUrl}/api/getbannerlist`);
                 const data = await response.json();
-setBannerImg(data)
-
+                setBannerImg(data)
             } catch (error) {
                 console.error('Error fetching banner images:', error);
             }
@@ -29,6 +30,7 @@ setBannerImg(data)
         fetchBannerImg();
     }, []);
 
+    //category list with sub and sub-sub category
     useEffect(() => {
         const fetchCategories = async () => {
             try {
@@ -43,10 +45,12 @@ setBannerImg(data)
         fetchCategories();
     }, []);
 
+    // image path url setting
     const getFullImageUrl = (path) => {
         return path.startsWith('http') ? path : `https://siyabling.com/machintools/public${path}`;
     };
 
+    //slider css
     const settings = {
         dots: false,
         infinite: true,
@@ -58,18 +62,35 @@ setBannerImg(data)
         arrows: false,
     };
 
+    // Menu show and hide
     const handleClickOutside = (event) => {
         if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
             setIsMenuOpen(false);
         }
     };
-
+    // Menu show and hide
     useEffect(() => {
         document.addEventListener('mousedown', handleClickOutside);
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, []);
+
+    // Features Product list fetch
+    useEffect(() => {
+        const fetchFeaturedProduct = async () => {
+            try {
+                const response = await fetch(`${apiUrl}/api/getis_featuredproduct`)
+                const data = await response.json()
+                setFeaturedProduct(data.product)
+            } catch (error) {
+                console.error('Error fetching featured products:', error)
+            }
+        }
+
+        fetchFeaturedProduct()
+    }, [apiUrl])
+
 
     return (
         <>
@@ -78,11 +99,10 @@ setBannerImg(data)
                     <div className="flex flex-wrap">
                         <div ref={sidebarRef} className={`pr-4 pt-4 pb-4 pl-4 w-[20%] ${isMenuOpen ? 'active' : ''}`}>
                             <nav className="bg-white rounded-md h-full overflow-hidden offcanvas__menu offcanvas-menu-wrapper">
-                                <ul>
-                                    {categoryDetails.map((category) => (
-                                        <>
+                                {categoryDetails.map((category,index) => (
+                                <ul key={index}>
                                             <li
-                                                key={category.id}
+
                                                 onMouseEnter={() => setSelectedCategory(category)}>
                                                 <a>
                                                     <img src={category.icon_path} alt="" />
@@ -90,9 +110,10 @@ setBannerImg(data)
                                                 </a>
                                             </li>
                                             {/* <li>View All Category</li> */}
-                                        </>
-                                    ))}
+
+
                                 </ul>
+                                ))}
                             </nav>
                         </div>
                         <div className="relative mt-4 pr-4 pb-4 w-[80%]">
@@ -146,8 +167,8 @@ setBannerImg(data)
                                     <div className="content-section" style={{ width: '100%' }}>
                                         <div className="text-left offcanvas__menu">
                                             {selectedCategory.sub_categories && selectedCategory.sub_categories.length > 0 ? (
-                                                selectedCategory.sub_categories.map((subCategory) => (
-                                                    <ul key={subCategory.id}  className='p-4'>
+                                                selectedCategory.sub_categories.map((subCategory,index) => (
+                                                    <ul key={index}  className='p-4'>
                                                         <li><a>{subCategory.title}</a></li>
                                                     </ul>
                                                 ))
@@ -162,7 +183,9 @@ setBannerImg(data)
                     </div>
                 </div>
             </section>
-            <FeaturedProduct />
+            {featuredProduct.length >= 3
+                ? <FeaturedProduct featuredProduct={featuredProduct} />:null
+            }
             <Products />
         </>
     );

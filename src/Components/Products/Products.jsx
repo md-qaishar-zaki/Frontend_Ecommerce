@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button.jsx";
-import Trend_Spad from "../Trend_Spad/Trend_Spad.jsx";
 import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -32,8 +31,6 @@ export default function ProductSlider() {
         fetchCategories();
     }, []);
 
-
-
     // State for current index of each category
     const [currentIndices, setCurrentIndices] = useState({});
 
@@ -47,7 +44,6 @@ export default function ProductSlider() {
             };
         });
     };
-
 
     const settings = {
         dots: false,
@@ -84,7 +80,7 @@ export default function ProductSlider() {
     };
     return (
         <>
-            {categories.map((category) => {
+            {categories.map((category,index) => {
                 const currentIndex = currentIndices[category.id] || 0;
                 const itemsToShow = 5;
                 const startIndex = currentIndex;
@@ -94,45 +90,46 @@ export default function ProductSlider() {
                 if (!category.products || category.products.length === 0) {
                     return <div key={category.id}></div>;
                 }
-
-                return (
-                    <>
-                        <div className="trend__content my-4">
-                            <div className="section-title flex justify-between">
-                                <h4 className="text-xl font-bold">{category.title}</h4>
-                                <Button Name={"View More"} />
+                if(category.products.length > 2){
+                    return (
+                        <div key={index}>
+                            <div className="trend__content my-4">
+                                <div className="section-title flex justify-between">
+                                    <h4 className="text-xl font-bold">{category.title}</h4>
+                                    <Button Name={"View More"} />
+                                </div>
                             </div>
-                        </div>
-                        <div key={category.id} className="container-fluid m-auto productSlider">
+                            <div className="container-fluid m-auto productSlider">
 
-                            <div className="flex flex-wrap">
-                                <div className="carousel-container w-full">
-                                    <Slider {...settings}>
-                                        {visibleProducts.map((product) => (
-                                            <div className="w-1/5 px-2">
-                                                <div className="product-card" key={product.slug} onClick={() => handleProductClick(product.slug)}>
-                                                    <div className="product-card__image">
-                                                        {/* <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="Red Nike Shoes" /> */}
-                                                        <img src={product.photoproduct[0].photo_path} alt="Red Nike Shoes" />
-                                                    </div>
-                                                    <div className="product-card__info">
-                                                        <h2 className="product-card__title line-clamp-2">{product.title}</h2>
-                                                        {/* <p className="product-card__description line-clamp-1"
+                                <div className="flex flex-wrap">
+                                    <div className="carousel-container w-full">
+                                        <Slider {...settings}>
+                                            {visibleProducts.map((product,index) => (
+                                                <div className="w-1/5 px-2" key={index}>
+                                                    <div className="product-card"  onClick={() => handleProductClick(product.slug)}>
+                                                        <div className="product-card__image">
+                                                            {/* <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="Red Nike Shoes" /> */}
+                                                            <img src={product.photoproduct[0].photo_path} alt="Red Nike Shoes" />
+                                                        </div>
+                                                        <div className="product-card__info">
+                                                            <h2 className="product-card__title line-clamp-2">{product.title}</h2>
+                                                            {/* <p className="product-card__description line-clamp-1"
                                                             dangerouslySetInnerHTML={{ __html: product.description }} /> */}
-                                                        <div className="product-card__price-row">
-                                                            <span className="product-card__price">₹{product.price}.00</span>
-                                                            <button className="product-card__btn">Add to Cart</button>
+                                                            <div className="product-card__price-row">
+                                                                <span className="product-card__price">₹{product.price}.00</span>
+                                                                <button className="product-card__btn">Add to Cart</button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        ))}
-                                    </Slider>
+                                            ))}
+                                        </Slider>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </>
-                );
+                    );
+                }
             })}
         </>
     );

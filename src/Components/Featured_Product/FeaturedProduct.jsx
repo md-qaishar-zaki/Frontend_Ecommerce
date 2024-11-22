@@ -6,25 +6,11 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { useNavigate } from 'react-router-dom'
 
-export default function FeaturedProduct () {
-  const [featuredProduct, setFeaturedProduct] = useState([])
-  const apiUrl = import.meta.env.VITE_API_URL
+export default function FeaturedProduct ({featuredProduct}) {
+
   const navigate = useNavigate()
 
-  useEffect(() => {
-    const fetchFeaturedProduct = async () => {
-      try {
-        const response = await fetch(`${apiUrl}/api/getis_featuredproduct`)
-        const data = await response.json()
-        setFeaturedProduct(data.product)
-      } catch (error) {
-        console.error('Error fetching featured products:', error)
-      }
-    }
-
-    fetchFeaturedProduct()
-  }, [apiUrl])
-
+  // css for slider
   const settings = {
     dots: false,
     infinite: true,
@@ -59,6 +45,7 @@ export default function FeaturedProduct () {
     ]
   }
 
+  // for page navigation
   const handleProductClick = id => {
     navigate(`/product/${id}`) // Navigate to product details page
   }

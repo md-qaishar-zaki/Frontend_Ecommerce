@@ -4,7 +4,7 @@ import icon from '../../assets/Categories Icon/tools.png'
 import { Routes, Route, Link } from 'react-router-dom'
 import logo from '../../assets/Img/Logo.jpg'
 import Login from '../../Pages/Login/Login'
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { UserContext } from '../../UserContext.jsx';
 
 export default function Header () {
@@ -16,11 +16,24 @@ export default function Header () {
   const apiUrl = import.meta.env.VITE_API_URL
   const [isFixed, setIsFixed] = useState(() => window.location.pathname !== '/')
   const { userStatus,setUserStatus, loading } = useContext(UserContext);
-
+  const navigate = useNavigate();
+  const [search, setSearch] = useState('');
+  const [catId, setCatId] = useState('');
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
   }
 
+  const handleSearchlick = (search,catId) => {
+    if (!search && !catId) {
+      alert('Please enter a search term or select a category.');
+      return; // Prevent navigation if both are empty
+    }
+    let path = '/CategoriesProduct';
+    if (search) path += `/${search}`;else path +=`/search`;
+    if (catId) path += `/${catId}`;else  path +=`/`;
+
+    navigate(path);
+  };
   const handleClickOutside = event => {
     if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
       setIsMenuOpen(false)
@@ -186,8 +199,14 @@ export default function Header () {
             </div>
             <div className='flex justify-end items-center w-2/3 lg:w-7/10'>
               <div className='mr-8 InputSearch'>
-                <input type='text' placeholder='Search Products' />
-                <select name='All Categories'>
+                <input type='text' placeholder='Search Products'
+                       value={search}
+                       onChange={(e) => setSearch(e.target.value)}
+                />
+                <select name='All Categories'
+                        value={catId}
+                        onChange={(e) => setCatId(e.target.value)}
+                >
                   <option value=''>All Categories</option>
                   {categories.map(category => (
                     <option key={category.id} value={category.slug}>
@@ -195,7 +214,7 @@ export default function Header () {
                     </option>
                   ))}
                 </select>
-                <Link to='CategoriesProduct'>
+                <div onClick={() => handleSearchlick(search, catId)}>
                   <div className='searchIcon'>
                     <svg
                       xmlns='http://www.w3.org/2000/svg'
@@ -212,7 +231,7 @@ export default function Header () {
                       />
                     </svg>
                   </div>
-                </Link>
+                </div>
               </div>
               <div className='flex justify-between w-16'>
                 <svg

@@ -1,9 +1,19 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import '../Categories-Product-Pages/Categories_Product.css'
+import {useParams} from "react-router-dom";
 
 export default function Categories_Product_Pages() {
   const boxes = Array.from({ length: 11 }, (_, index) => index + 1);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
+  const { search, catId } = useParams();
+  const searchValue = search !== 'null' ? search : null;
+  const catIdValue = catId !== 'null' ? catId : null;
+  const [product, setProduct] = useState(null);
+  const apiUrl = import.meta.env.VITE_API_URL;
+  console.log(searchValue);
   return (
     <div className='bg-white pt-8'>
       <div className="container m-auto px-9 product-grids">

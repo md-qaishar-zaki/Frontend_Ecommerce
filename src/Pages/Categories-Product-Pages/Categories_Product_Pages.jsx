@@ -1,19 +1,30 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import '../Categories-Product-Pages/Categories_Product.css';
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import axios from 'axios';
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
 export default function CategoriesProductPages() {
-  const { search, catId } = useParams();
-  const searchValue = search !== 'null' ? search : '';
-  const catIdValue = catId !== 'null' ? catId : '';
+  const location = useLocation(); 
+  const [searchValue, setSearchValue] = useState('');
+  const [catIdValue, setCatIdValue] = useState('');
   const [products, setProducts] = useState([]);
   const [recentProduct, setRecentProduct] = useState(null);
   const [priceRange, setPriceRange] = useState(0);
   const [categories, setCategories] = useState([]);
   const [brands, setBrands] = useState([]);
+  const [sortOption, setSortOption] = useState('');
+  const [selectedBrand, setSelectedBrand] = useState('');
+  const [selectedBrands, setSelectedBrands] = useState([]);
+
+    useEffect( ()=>{
+      const queryParams = new URLSearchParams(location.search);
+      const search = queryParams.get('search') || '';
+      const catId = queryParams.get('catId') || '';
+      setSearchValue (search || '');
+      setCatIdValue(catId || '');
+    },[location.search])
 
   const fetchProduct = useCallback(async () => {
     try {
@@ -23,6 +34,7 @@ export default function CategoriesProductPages() {
       if (response.status === 200) {
         setProducts(response.data.product.data);        
         setRecentProduct(response.data.recent_products);
+        setBrands(response.data.brands);
         if (response.data.product.data.length === 0) {
           setProducts(recentProduct);
         }
@@ -45,21 +57,89 @@ export default function CategoriesProductPages() {
         console.error('Error fetching categories:', error);
       }
     };
-    const fetchBrands = async () => {
-      try {
-        const response = await axios.get(`${apiUrl}/api/getbrandlist`);
-        setBrands(response.data.brands);
-      } catch (error) {
-        console.error('Error fetching brands:', error);
-      }
-    };
+    // const fetchBrands = async () => {
+    //   try {
+    //     const response = await axios.get(`${apiUrl}/api/getbrandlist`);
+    //     setBrands(response.data.brands);
+    //   } catch (error) {
+    //     console.error('Error fetching brands:', error);
+    //   }
+    // };
 
     fetchCategories();
-    fetchBrands();
+   // fetchBrands();
   }, [fetchProduct]);
 
   const handleSearchChange = (e) => {
     setSearchValue(e.target.value);
+  };
+
+
+
+  const sortedAndFilteredProducts = useMemo(() => {
+    let filtered = [...products];
+    
+    // Combine selected brands from dropdown and checkboxes
+    const allSelectedBrands = new Set(selectedBrands);
+    if (selectedBrand) {
+      allSelectedBrands.add(parseInt(selectedBrand, 10));
+    }
+
+    // Filter by selected brand IDs
+    if (allSelectedBrands.size > 0) {
+      filtered = filtered.filter(product => allSelectedBrands.has(product.brand_id));
+    }
+
+    // Sort products
+    switch (sortOption) {
+      case 'low-high':
+        filtered.sort((a, b) => a.price - b.price);
+        break;
+      case 'high-low':
+        filtered.sort((a, b) => b.price - a.price);
+        break;
+      case 'rating':
+        filtered.sort((a, b) => b.rating - a.rating);
+        break;
+      case 'a-z':
+        filtered.sort((a, b) => a.title.localeCompare(b.title));
+        break;
+      case 'z-a':
+        filtered.sort((a, b) => b.title.localeCompare(a.title));
+        break;
+      default:
+        break;
+    }
+    return filtered;
+  }, [products, sortOption, selectedBrand, selectedBrands]);
+
+  const handleSortChange = (e) => {
+    const selectedSort = e.target.value;
+    setSortOption(selectedSort);
+    const queryParams = new URLSearchParams(location.search);
+    queryParams.set('sort', selectedSort);
+    window.history.replaceState(null, '', `?${queryParams.toString()}`);
+  };
+  const handleBrandCheckboxChange = (e) => {
+    const brandId = parseInt(e.target.value, 10);
+    setSelectedBrands(prevSelectedBrands => {
+      if (prevSelectedBrands.includes(brandId)) {
+        // Remove brand if already selected
+        return prevSelectedBrands.filter(id => id !== brandId);
+      } else {
+        // Add brand if not selected
+        return [...prevSelectedBrands, brandId];
+      }
+      const queryParamsd = new URLSearchParams(location.search);
+      queryParamsd.set('brand', e.target.value);
+      window.history.replaceState(null, '', `?${queryParamsd.toString()}`);
+    });
+  };
+  const handleBrandChange = (e) => {
+    setSelectedBrand(e.target.value);
+    const queryParams = new URLSearchParams(location.search);
+    queryParams.set('brand', e.target.value);
+    window.history.replaceState(null, '', `?${queryParams.toString()}`);
   };
 
   return (
@@ -140,7 +220,13 @@ export default function CategoriesProductPages() {
                 <h3 className="text-lg font-semibold mb-4">Filter by Brand</h3>
                 {brands.map((brand, index) => (
                   <div className="form-check mb-2" key={index}>
-                    <input className="form-check-input" type="checkbox" value={brand.title} id={`brandCheck${index}`} />
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      value={brand.id}
+                      id={`brandCheck${index}`}
+                      onChange={handleBrandCheckboxChange}
+                    />
                     <label className="form-check-label" htmlFor={`brandCheck${index}`}>
                       {brand.title} ({brand.slug})
                     </label>
@@ -156,20 +242,19 @@ export default function CategoriesProductPages() {
                   <div className="w-full md:w-10/12 lg:w-9/12 flex items-center">
                     <div className="product-sorting flex items-center space-x-4">
                       <label htmlFor="sorting" className="text-gray-700 w-96">Sort by:</label>
-                      <select id="sorting" className="block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm text-sm">
-                        <option>Popularity</option>
-                        <option>Low - High Price</option>
-                        <option>High - Low Price</option>
-                        <option>Average Rating</option>
-                        <option>A - Z Order</option>
-                        <option>Z - A Order</option>
+                      <select id="sorting" className="block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm text-sm" onChange={handleSortChange}>
+                        <option value="">Select Sort</option>
+                        <option value="low-high">Low - High Price</option>
+                        <option value="high-low">High - Low Price</option>
+                        <option value="rating">Average Rating</option>
+                        <option value="a-z">A - Z Order</option>
+                        <option value="z-a">Z - A Order</option>
                       </select>
-                      <select id="sorting" className="block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm text-sm">
-                        <option>All Brands</option>
-                        <option>--</option>
-                        <option>--</option>
-                        <option>--</option>
-                        <option>--</option>
+                      <select id="brand-filter" className="block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm text-sm" onChange={handleBrandChange}>
+                        <option value="">All Brands</option>
+                        {brands.map((brand, index) => (
+                          <option key={index} value={brand.id}>{brand.title}</option>
+                        ))}
                       </select>
                       <select id="sorting" className="block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm text-sm">
                         <option>All Sellers</option>
@@ -187,7 +272,7 @@ export default function CategoriesProductPages() {
               <div className="tab-content" id="nav-tabContent">
                 <div className="tab-pane fade show active" id="nav-grid" role="tabpanel" aria-labelledby="nav-grid-tab">
                   <div className="grid grid-cols-12 gap-6">
-                    {products.map((product) => {
+                    {sortedAndFilteredProducts.map((product) => {
                       const firstPhoto = product.photoproduct?.[0];
                       return (
                         <div className="lg:col-span-4 md:col-span-6 col-span-12" key={product.id}>

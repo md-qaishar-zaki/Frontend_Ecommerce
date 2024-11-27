@@ -28,9 +28,9 @@ export default function Header () {
       alert('Please enter a search term or select a category.');
       return; // Prevent navigation if both are empty
     }
-    let path = '/CategoriesProduct';
-    if (search) path += `/${search}`;else path +=`/search`;
-    if (catId) path += `/${catId}`;else  path +=`/`;
+    let path = '/SearchResult';
+    if (search) path += `?search=${search}`;else path +=`?search=''`;
+    if (catId) path += `&catId=${catId}`;else  path +=`&catId=''`;
 
     navigate(path);
   };

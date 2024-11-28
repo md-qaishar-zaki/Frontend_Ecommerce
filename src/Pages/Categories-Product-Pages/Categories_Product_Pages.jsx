@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import '../Categories-Product-Pages/Categories_Product.css';
 import { useLocation } from "react-router-dom";
 import axios from 'axios';
+import debounce from 'lodash.debounce'; // Import debounce from lodash
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -11,20 +12,22 @@ export default function CategoriesProductPages() {
   const [catIdValue, setCatIdValue] = useState('');
   const [products, setProducts] = useState([]);
   const [recentProduct, setRecentProduct] = useState(null);
-  const [priceRange, setPriceRange] = useState(0);
+  const [priceRange, setPriceRange] = useState(10000);
   const [categories, setCategories] = useState([]);
   const [brands, setBrands] = useState([]);
   const [sortOption, setSortOption] = useState('');
   const [selectedBrand, setSelectedBrand] = useState('');
   const [selectedBrands, setSelectedBrands] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [isPriceRangeChanged, setIsPriceRangeChanged] = useState(false);
 
-    useEffect( ()=>{
-      const queryParams = new URLSearchParams(location.search);
-      const search = queryParams.get('search') || '';
-      const catId = queryParams.get('catId') || '';
-      setSearchValue (search || '');
-      setCatIdValue(catId || '');
-    },[location.search])
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const search = queryParams.get('search') || '';
+    const catId = queryParams.get('catId') || '';
+    setSearchValue(search);
+    setCatIdValue(catId);
+  }, [location.search]);
 
   const fetchProduct = useCallback(async () => {
     try {
@@ -32,7 +35,7 @@ export default function CategoriesProductPages() {
         params: { search: searchValue, cat_id: catIdValue }
       });
       if (response.status === 200) {
-        setProducts(response.data.product.data);        
+        setProducts(response.data.product.data);
         setRecentProduct(response.data.recent_products);
         setBrands(response.data.brands);
         if (response.data.product.data.length === 0) {
@@ -57,28 +60,17 @@ export default function CategoriesProductPages() {
         console.error('Error fetching categories:', error);
       }
     };
-    // const fetchBrands = async () => {
-    //   try {
-    //     const response = await axios.get(`${apiUrl}/api/getbrandlist`);
-    //     setBrands(response.data.brands);
-    //   } catch (error) {
-    //     console.error('Error fetching brands:', error);
-    //   }
-    // };
 
     fetchCategories();
-   // fetchBrands();
   }, [fetchProduct]);
 
-  const handleSearchChange = (e) => {
+  const handleSearchChange = debounce((e) => {
     setSearchValue(e.target.value);
-  };
-
-
+  }, 300); // Debounce the search input
 
   const sortedAndFilteredProducts = useMemo(() => {
     let filtered = [...products];
-    
+
     // Combine selected brands from dropdown and checkboxes
     const allSelectedBrands = new Set(selectedBrands);
     if (selectedBrand) {
@@ -88,6 +80,16 @@ export default function CategoriesProductPages() {
     // Filter by selected brand IDs
     if (allSelectedBrands.size > 0) {
       filtered = filtered.filter(product => allSelectedBrands.has(product.brand_id));
+    }
+
+    // Filter by selected category IDs
+    if (selectedCategories.length > 0) {
+      filtered = filtered.filter(product => selectedCategories.includes(product.cat_id));
+    }
+
+    // Filter by price range
+    if (isPriceRangeChanged) {
+      filtered = filtered.filter(product => product.price <= priceRange);
     }
 
     // Sort products
@@ -111,7 +113,7 @@ export default function CategoriesProductPages() {
         break;
     }
     return filtered;
-  }, [products, sortOption, selectedBrand, selectedBrands]);
+  }, [products, sortOption, selectedBrand, selectedBrands, selectedCategories, priceRange, isPriceRangeChanged]);
 
   const handleSortChange = (e) => {
     const selectedSort = e.target.value;
@@ -120,27 +122,94 @@ export default function CategoriesProductPages() {
     queryParams.set('sort', selectedSort);
     window.history.replaceState(null, '', `?${queryParams.toString()}`);
   };
+
+  const handleBrandChange = (e) => {
+    const brandId = parseInt(e.target.value, 10);
+    setSelectedBrand(brandId);
+    setSelectedBrands(brandId ? [brandId] : []); // Update selectedBrands to reflect the dropdown selection
+    const queryParams = new URLSearchParams(location.search);
+    if (brandId) {
+      queryParams.set('brand', brandId);
+    } else {
+      queryParams.delete('brand');
+    }
+    window.history.replaceState(null, '', `?${queryParams.toString()}`);
+  };
+
   const handleBrandCheckboxChange = (e) => {
     const brandId = parseInt(e.target.value, 10);
     setSelectedBrands(prevSelectedBrands => {
+      let updatedBrands;
       if (prevSelectedBrands.includes(brandId)) {
         // Remove brand if already selected
-        return prevSelectedBrands.filter(id => id !== brandId);
+        updatedBrands = prevSelectedBrands.filter(id => id !== brandId);
       } else {
         // Add brand if not selected
-        return [...prevSelectedBrands, brandId];
+        updatedBrands = [...prevSelectedBrands, brandId];
       }
-      const queryParamsd = new URLSearchParams(location.search);
-      queryParamsd.set('brand', e.target.value);
-      window.history.replaceState(null, '', `?${queryParamsd.toString()}`);
+      setSelectedBrand(updatedBrands.length === 1 ? updatedBrands[0] : ''); // Update selectedBrand if only one brand is selected
+
+      // Update URL
+      const queryParams = new URLSearchParams(location.search);
+      if (updatedBrands.length > 0) {
+        queryParams.set('brand', updatedBrands.join(','));
+      } else {
+        queryParams.delete('brand');
+      }
+      window.history.replaceState(null, '', `?${queryParams.toString()}`);
+
+      return updatedBrands;
     });
   };
-  const handleBrandChange = (e) => {
-    setSelectedBrand(e.target.value);
-    const queryParams = new URLSearchParams(location.search);
-    queryParams.set('brand', e.target.value);
-    window.history.replaceState(null, '', `?${queryParams.toString()}`);
+
+  const handleCategoryCheckboxChange = (e) => {
+    const categoryId = parseInt(e.target.value, 10);
+    setSelectedCategories(prevSelectedCategories => {
+      let updatedCategories;
+      if (prevSelectedCategories.includes(categoryId)) {
+        // Remove category if already selected
+        updatedCategories = prevSelectedCategories.filter(id => id !== categoryId);
+      } else {
+        // Add category if not selected
+        updatedCategories = [...prevSelectedCategories, categoryId];
+      }
+
+      // Update URL
+      const queryParams = new URLSearchParams(location.search);
+      if (updatedCategories.length > 0) {
+        queryParams.set('category', updatedCategories.join(','));
+      } else {
+        queryParams.delete('category');
+      }
+      window.history.replaceState(null, '', `?${queryParams.toString()}`);
+
+      return updatedCategories;
+    });
   };
+
+  const handlePriceRangeChange = (e) => {
+    const newPriceRange = e.target.value;
+    setPriceRange(newPriceRange);
+    setIsPriceRangeChanged(true);
+  };
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    if (selectedBrands.length > 0) {
+      queryParams.set('brand', selectedBrands.join(','));
+    } else {
+      queryParams.delete('brand');
+    }
+    window.history.replaceState(null, '', `?${queryParams.toString()}`);
+  }, [selectedBrands]);
+
+  useEffect(() => {
+    if (isPriceRangeChanged) {
+      const queryParams = new URLSearchParams(location.search);
+      queryParams.set('price', priceRange);
+      window.history.replaceState(null, '', `?${queryParams.toString()}`);
+    }
+  }, [priceRange, isPriceRangeChanged]);
 
   return (
     <div className='bg-white pt-8'>
@@ -155,7 +224,7 @@ export default function CategoriesProductPages() {
                     type="text"
                     placeholder="Search Here..."
                     className="flex-grow border border-gray-300 rounded-l px-3 py-2 focus:outline-none"
-                    value={searchValue}
+                    defaultValue={searchValue}
                     onChange={handleSearchChange}
                   />
                   <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-r">
@@ -163,16 +232,23 @@ export default function CategoriesProductPages() {
                   </button>
                 </form>
               </div>
-              <div className="single-widget mb-6">
-                <h3 className="text-lg font-semibold mb-4">All Categories</h3>
-                <ul className="list">
-                  {categories.map((category, index) => (
-                    <li key={index} className="flex justify-between mb-2">
-                      <a href="/" className="text-blue-500 hover:underline">{category.title}</a>
-                      <span className="text-gray-500">({category.count})</span>
-                    </li>
-                  ))}
-                </ul>
+              <div className="single-widget condition">
+                <h3 className="text-lg font-semibold mb-4">Filter by Category</h3>
+                {categories.map((category, index) => (
+                  <div className="form-check mb-2" key={index}>
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      value={category.id}
+                      id={`categoryCheck${index}`}
+                      onChange={handleCategoryCheckboxChange}
+                      checked={selectedCategories.includes(category.id)} // Ensure checkbox reflects the state
+                    />
+                    <label className="form-check-label" htmlFor={`categoryCheck${index}`}>
+                      {category.title} ({category.count})
+                    </label>
+                  </div>
+                ))}
               </div>
               <div className="single-widget range mb-6">
                 <h3 className="text-lg font-semibold mb-4">Price Range</h3>
@@ -184,7 +260,7 @@ export default function CategoriesProductPages() {
                   min="100"
                   max="10000"
                   value={priceRange}
-                  onChange={(e) => setPriceRange(e.target.value)}
+                  onChange={handlePriceRangeChange}
                 />
                 <div className="range-inner flex items-center mt-2">
                   <label className="mr-2">₹</label>
@@ -197,25 +273,6 @@ export default function CategoriesProductPages() {
                   />
                 </div>
               </div>
-              <div className="single-widget condition mb-6">
-                <h3 className="text-lg font-semibold mb-4">Filter by Price</h3>
-                <div className="form-check mb-2">
-                <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault1" />
-                  <label className="form-check-label" htmlFor="flexCheckDefault1">₹50 - ₹100L (208)</label>
-                </div>
-                <div className="form-check mb-2">
-                  <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault2" />
-                  <label className="form-check-label" htmlFor="flexCheckDefault2">₹100L - ₹500 (311)</label>
-                </div>
-                <div className="form-check mb-2">
-                  <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault3" />
-                  <label className="form-check-label" htmlFor="flexCheckDefault3">₹500 - ₹1,000 (485)</label>
-                </div>
-                <div className="form-check mb-2">
-                  <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault4" />
-                  <label className="form-check-label" htmlFor="flexCheckDefault4">₹1,000 - ₹5,000 (213)</label>
-                </div>
-              </div>
               <div className="single-widget condition">
                 <h3 className="text-lg font-semibold mb-4">Filter by Brand</h3>
                 {brands.map((brand, index) => (
@@ -226,6 +283,7 @@ export default function CategoriesProductPages() {
                       value={brand.id}
                       id={`brandCheck${index}`}
                       onChange={handleBrandCheckboxChange}
+                      checked={selectedBrands.includes(brand.id)} // Ensure checkbox reflects the state
                     />
                     <label className="form-check-label" htmlFor={`brandCheck${index}`}>
                       {brand.title} ({brand.slug})
@@ -250,7 +308,7 @@ export default function CategoriesProductPages() {
                         <option value="a-z">A - Z Order</option>
                         <option value="z-a">Z - A Order</option>
                       </select>
-                      <select id="brand-filter" className="block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm text-sm" onChange={handleBrandChange}>
+                      <select id="brand-filter" className="block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm text-sm" onChange={handleBrandChange} value={selectedBrand}>
                         <option value="">All Brands</option>
                         {brands.map((brand, index) => (
                           <option key={index} value={brand.id}>{brand.title}</option>

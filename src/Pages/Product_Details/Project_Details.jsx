@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from 'react';
 import './Product_Details.css';
 import { useParams } from 'react-router-dom';
 import RatingsReviews from '../../Components/Ratings_&_Reviews/Ratings_&_Reviews.jsx';
-import QNA from '../../Components/QNA/QNA.jsx';
 import Returnable from '../../assets/Categories Icon/return.png';
 import Delivery from '../../assets/Categories Icon/fast-delivery.png';
 import Quality from '../../assets/Categories Icon/quality.png';
@@ -23,6 +22,7 @@ export default function Project_Details() {
     const [value, setValue] = useState(1);
     const [AddFixed, setAddFixed] = useState(false);
     const scrollPosition = useRef(0);
+    const [featuredProduct, setFeaturedProduct] = useState([]);
 
     function changeImage(src) {
         setSelectedImage(src);
@@ -49,6 +49,20 @@ export default function Project_Details() {
 
         fetchProduct();
     }, [id]);
+
+    useEffect(() => {
+        const fetchFeaturedProduct = async () => {
+          try {
+            const response = await fetch(`${apiUrl}/api/getis_featuredproduct`);
+            const data = await response.json();
+            setFeaturedProduct(data.product.data);
+          } catch (error) {
+            console.error("Error fetching featured products:", error);
+          }
+        };
+    
+        fetchFeaturedProduct();
+      }, [apiUrl]);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -106,9 +120,8 @@ export default function Project_Details() {
                             <div className="flex lg:flex-row ProductImgSticky">
                                 <div className="flex flex-col ProductIMGListRow">
                                     {product.product[0].photoproduct?.map((photo, index) => (
-                                        <div className={`ProductIMGList w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-md cursor-pointer hover:opacity-100 transition duration-300 ${selectedImage === photo.photo_path ? 'border-2 border-blue-500 opacity-100' : ''}`}>
+                                        <div key={index} className={`ProductIMGList w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-md cursor-pointer hover:opacity-100 transition duration-300 ${selectedImage === photo.photo_path ? 'border-2 border-blue-500 opacity-100' : ''}`}>
                                             <img
-                                                key={index}
                                                 src={photo.photo_path}
                                                 alt={`${product.product.title} - ${index + 1}`}
                                                 onClick={() => changeImage(photo.photo_path)}
@@ -259,7 +272,9 @@ export default function Project_Details() {
                     </ul>
                 </div>
             </section>
-            <FeaturedProduct />
+            {featuredProduct.length >= 3 ? (
+        <FeaturedProduct featuredProduct={featuredProduct} />
+      ) : null}
 
             {isModalOpen && (
                 <div className="z-50 fixed inset-0 flex justify-center items-center bg-black bg-opacity-75">

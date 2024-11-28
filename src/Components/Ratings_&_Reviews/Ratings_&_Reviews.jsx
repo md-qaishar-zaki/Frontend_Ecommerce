@@ -5,6 +5,7 @@ export default function RatingsReviews() {
 
     const [rating, setRating] = useState(0); // stores the selected rating
     const [hoveredRating, setHoveredRating] = useState(0); // stores the hovered rating
+    const [inputValue, setInputValue] = useState('');
 
     const handleStarClick = (value) => {
         setRating(value); // sets the rating on click
@@ -35,7 +36,7 @@ export default function RatingsReviews() {
                                 <div>
                                     <div className="form-group">
                                         <label className="text-xs uppercase text-gray-500">Your name</label>
-                                        <input type="text" name="name" value="" className="form-control w-full border rounded p-2" required="" />
+                                        <input type="text" name="name" value={inputValue} className="form-control w-full border rounded p-2" required="" onChange={(e) => setInputValue(e.target.value)} />
                                     </div>
                                 </div>
                             </div>

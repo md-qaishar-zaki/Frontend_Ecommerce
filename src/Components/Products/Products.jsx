@@ -9,7 +9,7 @@ export default function ProductSlider() {
     const [categories, setCategories] = useState([]);
     const navigate = useNavigate();
     const apiUrl = import.meta.env.VITE_API_URL;
-
+    const [search, setSearch] = useState('');
     const handleProductClick = (productId) => {
         navigate(`/product/${productId}`);
     };
@@ -78,6 +78,15 @@ export default function ProductSlider() {
             },
         ],
     };
+  
+    const handleviewmore = (catId) => {
+        let path = "/SearchResult";
+        if (search) path += `?search=${search}`;
+        else path += `?search=''`;
+        if (catId) path += `&catId=${catId}`;
+        else path += `&catId=''`;    
+        navigate(path);
+      };
     return (
         <>
             {categories.map((category,index) => {
@@ -96,7 +105,7 @@ export default function ProductSlider() {
                             <div className="trend__content my-4">
                                 <div className="section-title flex justify-between">
                                     <h4 className="text-xl font-bold">{category.title}</h4>
-                                    <Button Name={"View More"} />
+                                    <Button Name={"View More"} onClick={() => handleviewmore(category.slug)} />
                                 </div>
                             </div>
                             <div className="container-fluid m-auto productSlider">

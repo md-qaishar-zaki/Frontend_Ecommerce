@@ -86,7 +86,7 @@ export default function Home() {
       try {
         const response = await fetch(`${apiUrl}/api/getis_featuredproduct`);
         const data = await response.json();
-        setFeaturedProduct(data.product);
+        setFeaturedProduct(data.product.data);
       } catch (error) {
         console.error("Error fetching featured products:", error);
       }

@@ -49,12 +49,18 @@ export default function FeaturedProduct ({featuredProduct}) {
   const handleProductClick = id => {
     navigate(`/product/${id}`) // Navigate to product details page
   }
+  const handleviewmore = () => {
+    let path = "/SearchResult/Features";
+    navigate(path); 
+    // Add your logic here
+};
 
   return (
     <>
       <div className='flex justify-between mb-4 px-4 section-title'>
         <h4 className='font-bold text-xl'>Feature Product</h4>
-        <Button Name={'View More'} />
+        <Button Name={'View More'} onClick={handleviewmore} />
+
       </div>
       <div className='m-auto container-fluid productSlider'>
         <div className='w-full carousel-container'>

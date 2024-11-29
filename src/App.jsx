@@ -20,6 +20,9 @@ function App() {
         <Route path="/product/:id" element={<ProductDetails />} />        
         <Route path="SearchResult" element={<CategoriesProduct />} />
         <Route path="SearchResult/Features" element={<CategoriesProduct />} />
+        <Route path="SearchResult/Catid" element={<CategoriesProduct />} />
+        <Route path="SearchResult/SubCatid" element={<CategoriesProduct />} />
+        <Route path="SearchResult/SubsubCatid" element={<CategoriesProduct />} />
         <Route path="checkout" element={<Checkout />}/>
       </Routes>
       <Footer />

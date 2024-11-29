@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Products from "../../Components/Products/Products.jsx";
 import FeaturedProduct from "../../Components/Featured_Product/FeaturedProduct.jsx";
 import Slider from "react-slick";
+import { useNavigate } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Home.css";
@@ -14,7 +15,7 @@ export default function Home() {
   const sidebarRef = useRef(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [featuredProduct, setFeaturedProduct] = useState([]);
- 
+  const navigate = useNavigate();
   const [hoveredSubCategory, setHoveredSubCategory] = useState(null);
  
   //banner Images
@@ -53,6 +54,33 @@ export default function Home() {
       ? path
       : `https://siyabling.com/machintools/public${path}`;
   };
+
+  const handleSearchlick = (search, catId) => {
+    if (!search && !catId) {
+      alert("Please enter a search term or select a category.");
+      return; // Prevent navigation if both are empty
+    }
+    let path = "/SearchResult";
+    if (search) path += `?search=${search}`;
+    else path += `?search=''`;
+    if (catId) path += `&catId=${catId}`;
+    else path += `&catId=''`;
+
+    navigate(path);
+  };
+
+  const handleSearchcatlick = (catid)=>{
+    let path = "/SearchResult/Catid?catId=" + catid;
+    navigate(path);
+  }
+  const handleSearchsubclick = (subcatid)=>{
+    let path = "/SearchResult/SubCatid?catId=" + subcatid;
+    navigate(path);
+  }
+  const handleSearchsubsubclick = (subsubcatid)=>{
+    let path = "/SearchResult/SubsubCatid?catId=" + subsubcatid;
+    navigate(path);
+  }
 
   //slider css
   const settings = {
@@ -110,7 +138,7 @@ export default function Home() {
                 {categoryDetails.map((category, index) => (
                   <ul key={index}>
                     <li onMouseEnter={() => setSelectedCategory(category)}>
-                      <a>
+                      <a onClick={() => handleSearchcatlick( category.id)}>
                         <img src={category.icon_path} alt={category.title} />
                         {category.title}
                       </a>
@@ -212,7 +240,7 @@ export default function Home() {
                           >
                             <ul>
                               <li>
-                                <a>{subCategory.title}</a>
+                                <a onClick={() => handleSearchsubclick(null, subCategory.id)} >{subCategory.title}</a>
                               </li>
                             </ul>
                             {/* Sub-Subcategories Section */}
@@ -229,7 +257,7 @@ export default function Home() {
                                             key={subIndex}
                                             className="mb-2 hover:bg-gray-100 rounded px-2 py-1"
                                         >
-                                            <a className="block">{subSubCategory.title}</a>
+                                            <a onClick={() => handleSearchsubsubclick(null, subSubCategory.id)}  className="block">{subSubCategory.title}</a>
                                         </li>
                                         ))}
                                     </ul>

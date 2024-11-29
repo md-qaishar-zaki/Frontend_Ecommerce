@@ -31,10 +31,17 @@ export default function CategoriesProductPages() {
 
   const fetchProduct = useCallback(async () => {
     try {
-      let prodcutapi = location.pathname === '/SearchResult/Features' 
+
+      let productapi = location.pathname === '/SearchResult/Features' 
           ? 'getis_featuredproduct' 
-          : 'getproductSearch';
-      const response = await axios.get(`${apiUrl}/api/${prodcutapi}`, {
+          : location.pathname === '/SearchResult/Catid'
+          ? 'getCateidProduct'
+          : location.pathname === '/SearchResult/SubCatid'
+          ? 'getSubCateidProduct'
+          : location.pathname === '/SearchResult/SubsubCatid'
+          ? 'getSubSubCateidProduct'
+          :'getproductSearch';
+      const response = await axios.get(`${apiUrl}/api/${productapi}`, {
         params: { search: searchValue, cat_id: catIdValue }
       });
       if (response.status === 200) {

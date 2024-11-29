@@ -105,7 +105,7 @@ export default function ProductSlider() {
                             <div className="trend__content my-4">
                                 <div className="section-title flex justify-between">
                                     <h4 className="text-xl font-bold">{category.title}</h4>
-                                    <Button Name={"View More"} onClick={() => handleviewmore(category.slug)} />
+                                    <Button Name={"View More"} onClick={() => handleviewmore(category.id)} />
                                 </div>
                             </div>
                             <div className="container-fluid m-auto productSlider">

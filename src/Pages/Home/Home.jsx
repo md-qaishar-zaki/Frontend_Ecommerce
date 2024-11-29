@@ -70,15 +70,15 @@ export default function Home() {
   };
 
   const handleSearchcatlick = (catid)=>{
-    let path = "/SearchResult/Catid?catId=" + catid;
+    let path = `/SearchResult/Catid?catId=${catid}`;
     navigate(path);
   }
   const handleSearchsubclick = (subcatid)=>{
-    let path = "/SearchResult/SubCatid?catId=" + subcatid;
+    let path = `/SearchResult/SubCatid?catId=${subcatid}`;
     navigate(path);
   }
   const handleSearchsubsubclick = (subsubcatid)=>{
-    let path = "/SearchResult/SubsubCatid?catId=" + subsubcatid;
+    let path = `/SearchResult/SubsubCatid?catId=${subsubcatid}`;
     navigate(path);
   }
 
@@ -240,7 +240,7 @@ export default function Home() {
                           >
                             <ul>
                               <li>
-                                <a onClick={() => handleSearchsubclick(null, subCategory.id)} >{subCategory.title}</a>
+                                <a onClick={() => handleSearchsubclick(subCategory.id)} >{subCategory.title}</a>
                               </li>
                             </ul>
                             {/* Sub-Subcategories Section */}
@@ -257,7 +257,7 @@ export default function Home() {
                                             key={subIndex}
                                             className="mb-2 hover:bg-gray-100 rounded px-2 py-1"
                                         >
-                                            <a onClick={() => handleSearchsubsubclick(null, subSubCategory.id)}  className="block">{subSubCategory.title}</a>
+                                            <a onClick={() => handleSearchsubsubclick(subSubCategory.id)}  className="block">{subSubCategory.title}</a>
                                         </li>
                                         ))}
                                     </ul>

@@ -32,7 +32,7 @@ export default function CategoriesProductPages() {
 
   const fetchProduct = useCallback(async () => {
     try {
-
+      console.log("Fetching products with searchValue:", searchValue, "and catIdValue:", catIdValue);
       let productapi = location.pathname === '/SearchResult/Features' 
           ? 'getis_featuredproduct' 
           : location.pathname === '/SearchResult/Catid'
@@ -46,23 +46,25 @@ export default function CategoriesProductPages() {
         params: { search: searchValue, cat_id: catIdValue }
       });
       if (response.status === 200) {
-        setProducts(response.data.product.data);
+        const productData = response.data.product.data;
+        setProducts(Array.isArray(productData) ? productData : []);
         setRecentProduct(response.data.recent_products);
         setBrands(response.data.brands);
-        if (response.data.product.data.length === 0) {
-          setProducts(recentProduct);
-        }
       } else {
+        console.log("No products found in response");
         setProducts([]);
         setRecentProduct(null);
       }
     } catch (error) {
       console.error("Error fetching product data:", error);
+      setProducts([]);
     }
-  }, [searchValue, catIdValue]);
+  }, [searchValue, catIdValue, location.pathname]);
 
   useEffect(() => {
-    fetchProduct();
+    if (catIdValue) {
+      fetchProduct();
+    }
     const fetchCategories = async () => {
       try {
         const response = await axios.get(`${apiUrl}/api/getcatwithsubandsub`);
@@ -73,11 +75,7 @@ export default function CategoriesProductPages() {
     };
 
     fetchCategories();
-  }, [fetchProduct]);
-
-  const handleSearchChange = debounce((e) => {
-    setSearchValue(e.target.value);
-  }, 300); // Debounce the search input
+  }, [fetchProduct, catIdValue]);
 
   const sortedAndFilteredProducts = useMemo(() => {
     let filtered = [...products];
@@ -125,6 +123,15 @@ export default function CategoriesProductPages() {
     }
     return filtered;
   }, [products, sortOption, selectedBrand, selectedBrands, selectedCategories, priceRange, isPriceRangeChanged]);
+
+  useEffect(() => {
+    console.log("Products:", products);
+    console.log("Sorted and Filtered Products:", sortedAndFilteredProducts);
+  }, [products, sortedAndFilteredProducts]);
+
+  const handleSearchChange = debounce((e) => {
+    setSearchValue(e.target.value);
+  }, 300); // Debounce the search input
 
   const handleSortChange = (e) => {
     const selectedSort = e.target.value;
@@ -341,48 +348,51 @@ export default function CategoriesProductPages() {
               <div className="tab-content" id="nav-tabContent">
                 <div className="tab-pane fade show active" id="nav-grid" role="tabpanel" aria-labelledby="nav-grid-tab">
                   <div className="grid grid-cols-12 gap-6">
-                    {sortedAndFilteredProducts.map((product) => {
-                      const firstPhoto = product.photoproduct?.[0];
-                      return (
-                        <div className="lg:col-span-4 md:col-span-6 col-span-12" key={product.id}>
-                          <div className="single-product">
-                            {firstPhoto && (
-                              <div className="product-image">
-                                <img src={firstPhoto.photo_path || "https://via.placeholder.com/150"} alt={product.title} />
-                                <div className="button">
-                                  <a href={`/product-details/${product.slug}`} className="btn">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
-                                         stroke="currentColor" className="size-6">
-                                      <path strokeLinecap="round" strokeLinejoin="round"
-                                            d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"></path>
-                                    </svg>
-                                    Add to Cart
-                                  </a>
+                    {sortedAndFilteredProducts.length > 0 ? (
+                      sortedAndFilteredProducts.map((product) => {
+                        const firstPhoto = product.photoproduct?.[0];
+                        return (
+                          <div className="lg:col-span-4 md:col-span-6 col-span-12" key={product.id}>
+                            <div className="single-product">
+                              {firstPhoto && (
+                                <div className="product-image">
+                                  <img src={firstPhoto.photo_path || "https://via.placeholder.com/150"} alt={product.title} />
+                                  <div className="button">
+                                    <a href={`/product/${product.slug}`} className="btn">
+                                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
+                                           stroke="currentColor" className="size-6">
+                                        <path strokeLinecap="round" strokeLinejoin="round"
+                                              d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"></path>
+                                      </svg>
+                                      Add to Cart
+                                    </a>
+                                  </div>
                                 </div>
-                              </div>
-                            )}
-                            <div className="product-info">
-                              <span className="category">{product.cat_id}</span> {/* Replace with actual category name if available */}
-                              <h4 className="title">
-                                <a href={`/product-details/${product.slug}`}>{product.title}</a>
-                              </h4>
-                              <div className="review">
-                                <div className="flex reviewStar">
-                                  {[...Array(5)].map((_, i) => (
-                                    <span key={i} className="star">★</span>
-                                  ))}
+                              )}
+                              <div className="product-info">                               
+                                <h4 className="title">
+                                  <a href={`/product/${product.slug}`}>{product.title}</a>
+                                </h4>
+                                <div className="review">
+                                  <div className="flex reviewStar">
+                                    {[...Array(5)].map((_, i) => (
+                                      <span key={i} className="star">★</span>
+                                    ))}
+                                  </div>
+                                  <li><span>{product.rating || 0} Review(s)</span></li>
                                 </div>
-                                <li><span>{product.rating || 0} Review(s)</span></li>
-                              </div>
-                              <div className="price">
-                                <span>₹{product.price}</span>
-                                {product.discount && <span className="discount-price">₹{product.price - (product.price * product.discount / 100)}</span>}
+                                <div className="price">
+                                  <span>₹{product.price}</span>
+                                  {product.discount && <span className="discount-price">₹{product.price - (product.price * product.discount / 100)}</span>}
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      );
-                    })}
+                        );
+                      })
+                    ) : (
+                      <p>No products found.</p>
+                    )}
                   </div>
                   <div className="flex flex-col w-full">
                     <div className="w-full">

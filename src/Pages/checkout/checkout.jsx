@@ -1,7 +1,46 @@
-import React from 'react'
+import React, { useState, useEffect, useRef, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import './checkout.css'
+import axios from 'axios';
+import { UserContext } from "../../UserContext.jsx";
 
 export default function checkout () {
+  const { userStatus, loading } = useContext(UserContext);
+
+  const apiUrl = import.meta.env.VITE_API_URL;
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    email: '',
+    cardHolder: '',
+    cardNumber: '',
+    expiry: '',
+    cvc: '',
+    billingAddress: '',
+    billingState: '',
+    billingZip: ''
+  });
+  if (!userStatus) {
+    return   navigate("/");;
+  }
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // Validate form data
+    // Integrate with payment gateway
+    try {
+      // Example: await axios.post(`${apiUrl}/process-payment`, formData);
+      // On success, navigate to a success page
+      navigate('/success');
+    } catch (error) {
+      // Handle errors
+      console.error('Payment failed', error);
+    }
+  };
+
   return (
     <div className='bg-white text-left checkout'>
       <div class='flex sm:flex-row flex-col items-center bg-white sm:px-10 py-4 border-b'>
@@ -122,7 +161,7 @@ export default function checkout () {
           <p class='text-gray-400'>
             Complete your order by providing your payment details.
           </p>
-          <div class=''>
+          <form onSubmit={handleSubmit}>
             <label for='email' class='block mt-4 mb-2 font-medium text-sm'>
               Email
             </label>
@@ -131,6 +170,8 @@ export default function checkout () {
                 type='text'
                 id='email'
                 name='email'
+                value={formData.email}
+                onChange={handleInputChange}
                 class='focus:z-10 border-gray-200 shadow-sm px-4 py-3 pl-11 border focus:border-blue-500 rounded-md focus:ring-blue-500 w-full text-sm outline-none'
                 placeholder='your.email@gmail.com'
               />
@@ -162,6 +203,8 @@ export default function checkout () {
                 type='text'
                 id='card-holder'
                 name='card-holder'
+                value={formData.cardHolder}
+                onChange={handleInputChange}
                 class='focus:z-10 border-gray-200 shadow-sm px-4 py-3 pl-11 border focus:border-blue-500 rounded-md focus:ring-blue-500 w-full text-sm uppercase outline-none'
                 placeholder='Your full name here'
               />
@@ -191,6 +234,8 @@ export default function checkout () {
                   type='text'
                   id='card-no'
                   name='card-no'
+                  value={formData.cardNumber}
+                  onChange={handleInputChange}
                   class='focus:z-10 border-gray-200 shadow-sm px-2 py-3 pl-11 border focus:border-blue-500 rounded-md focus:ring-blue-500 w-full text-sm outline-none'
                   placeholder='xxxx-xxxx-xxxx-xxxx'
                 />
@@ -211,12 +256,16 @@ export default function checkout () {
               <input
                 type='text'
                 name='credit-expiry'
+                value={formData.expiry}
+                onChange={handleInputChange}
                 class='focus:z-10 border-gray-200 shadow-sm px-2 py-3 border focus:border-blue-500 rounded-md focus:ring-blue-500 w-full text-sm outline-none'
                 placeholder='MM/YY'
               />
               <input
                 type='text'
                 name='credit-cvc'
+                value={formData.cvc}
+                onChange={handleInputChange}
                 class='focus:z-10 flex-shrink-0 border-gray-200 shadow-sm px-2 py-3 border focus:border-blue-500 rounded-md focus:ring-blue-500 w-1/6 text-sm outline-none'
                 placeholder='CVC'
               />
@@ -233,6 +282,8 @@ export default function checkout () {
                   type='text'
                   id='billing-address'
                   name='billing-address'
+                  value={formData.billingAddress}
+                  onChange={handleInputChange}
                   class='focus:z-10 border-gray-200 shadow-sm px-4 py-3 pl-11 border focus:border-blue-500 rounded-md focus:ring-blue-500 w-full text-sm outline-none'
                   placeholder='Street Address'
                 />
@@ -247,6 +298,8 @@ export default function checkout () {
               <select
                 type='text'
                 name='billing-state'
+                value={formData.billingState}
+                onChange={handleInputChange}
                 class='focus:z-10 border-gray-200 shadow-sm px-4 py-3 border focus:border-blue-500 rounded-md focus:ring-blue-500 w-full text-sm outline-none'
               >
                 <option value='State'>State</option>
@@ -254,6 +307,8 @@ export default function checkout () {
               <input
                 type='text'
                 name='billing-zip'
+                value={formData.billingZip}
+                onChange={handleInputChange}
                 class='focus:z-10 flex-shrink-0 border-gray-200 shadow-sm px-4 py-3 border focus:border-blue-500 rounded-md focus:ring-blue-500 sm:w-1/6 text-sm outline-none'
                 placeholder='ZIP'
               />
@@ -273,10 +328,10 @@ export default function checkout () {
               <p class='font-medium text-gray-900 text-sm'>Total</p>
               <p class='font-semibold text-2xl text-gray-900'>₹408.00</p>
             </div>
-          </div>
-          <button class='bg-gray-900 mt-4 mb-8 px-6 py-3 rounded-md w-full font-medium text-white'>
-            Place Order
-          </button>
+            <button type='submit' className='bg-gray-900 mt-4 mb-8 px-6 py-3 rounded-md w-full font-medium text-white'>
+              Place Order
+            </button>
+          </form>
         </div>
       </div>
     </div>

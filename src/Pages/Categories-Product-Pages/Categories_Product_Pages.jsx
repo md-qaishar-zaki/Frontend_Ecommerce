@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import axios from 'axios';
 import debounce from 'lodash.debounce'; // Import debounce from lodash
 
-const apiUrl = import.meta.env.VITE_API_URL;
+
 
 export default function CategoriesProductPages() {
   const location = useLocation(); 
@@ -20,7 +20,8 @@ export default function CategoriesProductPages() {
   const [selectedBrands, setSelectedBrands] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [isPriceRangeChanged, setIsPriceRangeChanged] = useState(false);
-
+  const apiUrl = import.meta.env.VITE_API_URL;
+  
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     const search = queryParams.get('search') || '';

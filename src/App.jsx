@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { CartProvider } from './CartContext';
 import Products from './Components/Products/Products.jsx';
 import ProductDetails from './Pages/Product_Details/Project_Details';
 import Home from './Pages/Home/Home.jsx';
@@ -12,21 +13,23 @@ import 'slick-carousel/slick/slick-theme.css';
 
 function App() {
   return (
-    <Router>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/products" element={<Products SectionTitle="Product List" />} />
-        <Route path="/product/:id" element={<ProductDetails />} />        
-        <Route path="SearchResult" element={<CategoriesProduct />} />
-        <Route path="SearchResult/Features" element={<CategoriesProduct />} />
-        <Route path="SearchResult/Catid" element={<CategoriesProduct />} />
-        <Route path="SearchResult/SubCatid" element={<CategoriesProduct />} />
-        <Route path="SearchResult/SubsubCatid" element={<CategoriesProduct />} />
-        <Route path="checkout" element={<Checkout />}/>
-      </Routes>
-      <Footer />
-    </Router>
+    <CartProvider>
+      <Router>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/products" element={<Products SectionTitle="Product List" />} />
+          <Route path="/product/:id" element={<ProductDetails />} />        
+          <Route path="SearchResult" element={<CategoriesProduct />} />
+          <Route path="SearchResult/Features" element={<CategoriesProduct />} />
+          <Route path="SearchResult/Catid" element={<CategoriesProduct />} />
+          <Route path="SearchResult/SubCatid" element={<CategoriesProduct />} />
+          <Route path="SearchResult/SubsubCatid" element={<CategoriesProduct />} />
+          <Route path="checkout" element={<Checkout />}/>
+        </Routes>
+        <Footer />
+      </Router>
+    </CartProvider>
   );
 }
 

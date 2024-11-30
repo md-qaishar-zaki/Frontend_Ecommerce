@@ -1,5 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
+
 const apiUrl = import.meta.env.VITE_API_URL;
 
 export const UserContext = createContext();
@@ -7,6 +9,20 @@ export const UserContext = createContext();
 const UserProvider = ({ children }) => {
     const [userStatus, setUserStatus] = useState(null);
     const [loading, setLoading] = useState(true);
+
+    const getUserId = () => {
+        let userId = localStorage.getItem('userId');
+        if (!userId) {
+            userId = uuidv4();
+            localStorage.setItem('userId', userId);
+        }
+        return userId;
+    };
+
+    useEffect(() => {
+        const userId = getUserId();
+        fetchUserStatus();
+    }, []);
 
     const fetchUserStatus = async () => {
         const authToken = localStorage.getItem('authToken');
@@ -32,12 +48,8 @@ const UserProvider = ({ children }) => {
         setLoading(false);
     };
 
-    useEffect(() => {
-        fetchUserStatus();
-    }, []);
-
     return (
-        <UserContext.Provider value={{ userStatus, setUserStatus, loading,fetchUserStatus }}>
+        <UserContext.Provider value={{ userStatus, setUserStatus, loading, fetchUserStatus }}>
             {children}
         </UserContext.Provider>
     );

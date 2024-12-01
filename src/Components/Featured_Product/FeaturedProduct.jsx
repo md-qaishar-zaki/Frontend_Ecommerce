@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import './FeaturedProduct.css'
 import Button from '../Button.jsx'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { useNavigate } from 'react-router-dom'
+import { CartContext } from '../../CartContext';
 
 export default function FeaturedProduct ({featuredProduct}) {
 
   const navigate = useNavigate()
-
+  const { addToCart } = useContext(CartContext);
   // css for slider
   const settings = {
     dots: false,
@@ -89,7 +90,13 @@ export default function FeaturedProduct ({featuredProduct}) {
                           <span className='product-card__price'>
                             ₹{product.price}.00
                           </span>
-                          <button className='product-card__btn'>
+                          <button 
+                            onClick={(event) => {
+                              event.stopPropagation(); // Prevents the click event from bubbling up
+                              addToCart(product.slug);
+                            }}  
+                            className='product-card__btn'
+                          >
                             Add to Cart
                           </button>
                         </div>

@@ -1,12 +1,15 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef,useContext } from 'react';
 import './Product_Details.css';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import RatingsReviews from '../../Components/Ratings_&_Reviews/Ratings_&_Reviews.jsx';
 import Returnable from '../../assets/Categories Icon/return.png';
 import Delivery from '../../assets/Categories Icon/fast-delivery.png';
 import Quality from '../../assets/Categories Icon/quality.png';
 import Pay from '../../assets/Categories Icon/indian-rupee.png';
 import FeaturedProduct from '../../Components/Featured_Product/FeaturedProduct.jsx';
+import { CartContext } from '../../CartContext';
+import { UserContext } from '../../UserContext';
+import Login from '../../Pages/Login/Login';
 
 export default function Project_Details() {
     useEffect(() => {
@@ -23,6 +26,10 @@ export default function Project_Details() {
     const [AddFixed, setAddFixed] = useState(false);
     const scrollPosition = useRef(0);
     const [featuredProduct, setFeaturedProduct] = useState([]);
+    const { addToCart } = useContext(CartContext);
+    const { userStatus } = useContext(UserContext);
+    const navigate = useNavigate();
+    const [OTPModal, setOTPModal] = useState(false);
 
     function changeImage(src) {
         setSelectedImage(src);
@@ -109,7 +116,13 @@ export default function Project_Details() {
         setValue(value + 1);
     };
 
-
+    const handleBuyNow = () => {
+        if (userStatus) {
+            navigate('/checkout');
+        } else {
+            setOTPModal(true);
+        }
+    };
 
     return (
         <div>
@@ -141,7 +154,12 @@ export default function Project_Details() {
                                     </div>
                                     <ul className="flex flex-wrap">
                                         <li className="p-2 w-1/2">
-                                            <button className="flex justify-center items-center shadow px-4 py-2 rounded w-full font-semibold transition duration-300 AddToCartBtn">
+                                            <button  
+                                             onClick={(event) => {
+                                                event.stopPropagation(); // Prevents the click event from bubbling up
+                                                addToCart(product.product[0].slug, value);
+                                              }}  
+                                             className="flex justify-center items-center shadow px-4 py-2 rounded w-full font-semibold transition duration-300 AddToCartBtn">
                                                 <svg className="mr-2" width="16" height="16" viewBox="0 0 16 15" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M15.32 2.405H4.887C3 2.405 2.46.805 2.46.805L2.257.21C2.208.085 2.083 0 1.946 0H.336C.1 0-.064.24.024.46l.644 1.945L3.11 9.767c.047.137.175.23.32.23h8.418l-.493 1.958H3.768l.002.003c-.017 0-.033-.003-.05-.003-1.06 0-1.92.86-1.92 1.92s.86 1.92 1.92 1.92c.99 0 1.805-.75 1.91-1.712l5.55.076c.12.922.91 1.636 1.867 1.636 1.04 0 1.885-.844 1.885-1.885 0-.866-.584-1.593-1.38-1.814l2.423-8.832c.12-.433-.206-.86-.655-.86" fill="currentColor"></path>
                                                 </svg>
@@ -151,7 +169,10 @@ export default function Project_Details() {
 
                                         <li className="flex p-2 w-1/2">
                                             <form className="w-full">
-                                                <button className="bg-green-500 hover:bg-green-600 shadow px-4 py-2 rounded w-full font-semibold text-white transition duration-300" type="button">
+                                                <button 
+                                                    onClick={handleBuyNow}
+                                                    className="bg-green-500 hover:bg-green-600 shadow px-4 py-2 rounded w-full font-semibold text-white transition duration-300" 
+                                                    type="button">
                                                     Buy Now
                                                 </button>
                                             </form>
@@ -254,7 +275,12 @@ export default function Project_Details() {
                 <div className={`addToCardSide ${AddFixed ? 'addToCardSideFixed' : ''}`} >
                     <ul className="flex flex-wrap">
                         <li className="p-2 w-1/2">
-                            <button className="flex justify-center items-center shadow px-4 py-2 rounded w-full font-semibold transition duration-300 AddToCartBtn">
+                            <button 
+                              onClick={(event) => {
+                                event.stopPropagation(); // Prevents the click event from bubbling up
+                                addToCart(product.product[0].slug, value);
+                              }}  
+                            className="flex justify-center items-center shadow px-4 py-2 rounded w-full font-semibold transition duration-300 AddToCartBtn">
                                 <svg className="mr-2" width="16" height="16" viewBox="0 0 16 15" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M15.32 2.405H4.887C3 2.405 2.46.805 2.46.805L2.257.21C2.208.085 2.083 0 1.946 0H.336C.1 0-.064.24.024.46l.644 1.945L3.11 9.767c.047.137.175.23.32.23h8.418l-.493 1.958H3.768l.002.003c-.017 0-.033-.003-.05-.003-1.06 0-1.92.86-1.92 1.92s.86 1.92 1.92 1.92c.99 0 1.805-.75 1.91-1.712l5.55.076c.12.922.91 1.636 1.867 1.636 1.04 0 1.885-.844 1.885-1.885 0-.866-.584-1.593-1.38-1.814l2.423-8.832c.12-.433-.206-.86-.655-.86" fill="currentColor"></path>
                                 </svg>
@@ -264,7 +290,10 @@ export default function Project_Details() {
 
                         <li className="flex p-2 w-1/2">
                             <form className="w-full">
-                                <button className="bg-green-500 hover:bg-green-600 shadow px-4 py-2 rounded w-full font-semibold text-white transition duration-300" type="button">
+                                <button 
+                                    onClick={handleBuyNow}
+                                    className="bg-green-500 hover:bg-green-600 shadow px-4 py-2 rounded w-full font-semibold text-white transition duration-300" 
+                                    type="button">
                                     Buy Now
                                 </button>
                             </form>
@@ -305,6 +334,7 @@ export default function Project_Details() {
                     </div>
                 </div>
             )}
+            {OTPModal && <Login onClick={() => setOTPModal(false)} />}
         </div>
     );
 }

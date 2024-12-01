@@ -32,18 +32,18 @@ export const CartProvider = ({ children }) => {
 
   const normalizeSlug = (slug) => slug.toLowerCase().replace(/\s+/g, '-');
 
-  const addToCart = (productSlug) => {
+  const addToCart = (productSlug, quantity = 1) => {
     const normalizedSlug = normalizeSlug(productSlug);
     setCart((prevCart) => {
       const existingProduct = prevCart.find(item => item.slug === normalizedSlug);
       if (existingProduct) {
-        // Increase the quantity if the product already exists in the cart
+        // Increase the quantity by the specified amount
         return prevCart.map(item =>
-          item.slug === normalizedSlug ? { ...item, quantity: item.quantity + 1 } : item
+          item.slug === normalizedSlug ? { ...item, quantity: item.quantity + quantity } : item
         );
       } else {
-        // Add the product with a quantity of 1 if it's not in the cart
-        return [...prevCart, { slug: normalizedSlug, quantity: 1 }];
+        // Add the product with the specified quantity
+        return [...prevCart, { slug: normalizedSlug, quantity }];
       }
     });
   };

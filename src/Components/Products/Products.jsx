@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button.jsx";
 import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { CartContext } from '../../CartContext';
 
 export default function ProductSlider() {
     const [categories, setCategories] = useState([]);
     const navigate = useNavigate();
     const apiUrl = import.meta.env.VITE_API_URL;
     const [search, setSearch] = useState('');
+    const { addToCart } = useContext(CartContext);
     const handleProductClick = (productId) => {
         navigate(`/product/${productId}`);
     };
@@ -126,7 +128,11 @@ export default function ProductSlider() {
                                                             dangerouslySetInnerHTML={{ __html: product.description }} /> */}
                                                             <div className="product-card__price-row">
                                                                 <span className="product-card__price">₹{product.price}.00</span>
-                                                                <button className="product-card__btn">Add to Cart</button>
+                                                                <button  onClick={(event) => {
+                              event.stopPropagation(); // Prevents the click event from bubbling up
+                              addToCart(product.slug);
+                            }}  
+                            className='product-card__btn' >Add to Cart</button>
                                                             </div>
                                                         </div>
                                                     </div>

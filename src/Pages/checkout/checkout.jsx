@@ -43,12 +43,12 @@ export default function checkout () {
       };
 
       try {
-        const response = await axios.post(`${apiUrl}/api/cart`, cartData, {
+        const response = await axios.post(`${apiUrl}/api/savecart`, cartData, {
           headers: { Authorization: `Bearer ${authToken}` },
         });
 
         if (response.status === 200) {
-          setProducts(response.data);
+          setProducts(response.data.product);
         } else {
           console.error('Failed to send cart data', response);
         }
@@ -174,11 +174,14 @@ export default function checkout () {
               <div key={product.id} className='flex sm:flex-row flex-col bg-white rounded-lg'>
                 <img
                   className='m-2 border rounded-md w-28 h-24 object-center object-cover'
-                  src={product.imageUrl}
-                  alt={product.name}
+                  src={
+                    product.photoproduct?.[0]?.photo_path ||
+                    '/placeholder-image.jpg'
+                  }
+                  alt={product.title || 'Product'}
                 />
                 <div className='flex flex-col px-4 py-4 w-full'>
-                  <span className='font-semibold'>{product.name}</span>
+                  <span className='font-semibold'>{product.title}</span>
                   <span className='float-right text-gray-400'>{product.brand}</span>
                   <p className='font-bold text-lg'>₹{product.price}</p>
                   <div className='flex items-center mt-2'>
